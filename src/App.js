@@ -11,7 +11,8 @@ import logo from './logo.svg';
 import './App.css';
 import AddSupervisor from './components/supervisors/addsupervisor';
 import Reports from './components/reports/reports';
-
+import ReportDetails from './components/reports/reportDetails';
+import LocalSup from './components/supervisors/localsupers'
 function App() {
   return (
     <div className="App">
@@ -24,9 +25,10 @@ function App() {
           <Route path="/boot" exact component={Boot} />
           <Route path="/supervisors/add" exact component={AddSupervisor} />
           <Route path="/reports" exact component={Reports} />
-
+          <Route path="/reports/:id" exact component={ReportDetails} />
           <Route path="/projectform" exact component={InsertProject} />
           <Route path="/updateproject/:id" exact component={UpdateProject} />
+          <Route path="/localsup/:id" exact component={LocalSup} />
 
 
      </Switch>

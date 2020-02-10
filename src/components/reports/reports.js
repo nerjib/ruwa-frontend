@@ -6,13 +6,13 @@ class Reports extends React.Component{
 constructor(props){
     super(props)
     this.state={
-            reports:''
+            reports:'j'
     }
 }
 
 
 componentDidMount(){
-axios.get('http://localhost:5000/api/v1/reports')
+axios.get('http://localhost:5000/api/v1/localreports')
         .then(res => {
             this.setState({
                     reports:res.data
@@ -23,7 +23,7 @@ axios.get('http://localhost:5000/api/v1/reports')
 render() {
     let row =[];
     
-        /*    Object.keys(this.state.reports).map(e=>{row.push(<ReportRow id={this.state.reports[e].id}
+            Object.keys(this.state.reports).map(e=>{row.push(<ReportRow id={this.state.reports[e].id}
                 id={this.state.reports[e].id} id={this.state.reports[e].id} lid={this.state.reports[e].local_id}
                 pid={this.state.reports[e].project_id} reportdate={this.state.reports[e].reportdate}
                 onsit={this.state.reports[e].onsite} compliance={this.state.reports[e].compliance} 
@@ -32,11 +32,9 @@ render() {
             />
 
             )
-            })*/
-            Object.keys(this.state.reports).map(e=>{row.push(
-                <ReportRow 
-                />)
             })
+           
+            
             return(
         <div>
             {row}

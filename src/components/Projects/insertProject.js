@@ -29,7 +29,8 @@ export default class InsertProject extends React.Component{
         title: this.state.title,
         location:this.state.location,
         status:this.state.status,
-        supervisor: this.state.supervisor
+        local_id: this.state.supervisor,
+        lga: this.state.lga
        }
         axios.post('http://localhost:5000/api/v1/projects',obj)
         .then((res)=>{
@@ -43,38 +44,67 @@ export default class InsertProject extends React.Component{
             title: '',
             location: '',
             status: '',
-            supervisor: ''
+            supervisor: '',
+            lga:''
            })
     }
 
     render(){
         return(
             <div style={{}}>
+
               <form>
-                <label>
-                    Title
-                </label>  
+                <br/>
+                  <div className='row'>
+            
+          <div class='col-md-2'>      <label className='text-left text-primary'>      Project Title    </label> </div>  
 
-                    <input name='title' value={this.state.title}
+            <div className='col-md-5'> 
+                <input className='form-control' name='title' value={this.state.title}
                         onChange={this.handleChange} required/>
+                  </div>
+                  </div>
                   <br/>
-                    <label>
-                        Location
-                    </label>  
-
-                    <input name='location' value={this.state.location}
-                        onChange={this.handleChange} required/>
+                  <div className='row'>
+            
+            <div class='col-md-2'>      <label className='text-left text-primary'>      Project Location    </label> </div>  
+  
+              <div className='col-md-5'> 
              
-               <label>
-                        supervisor
-                    </label>  
-
-                    <input name='supervisor' value={this.state.supervisor}
-                        onChange={this.handleChange} required/>
+                    <input className='form-control'  name='location' value={this.state.location}
+                        onChange={this.handleChange} />
+                  </div>
+                  </div>
+                  <br/>
+                  <div className='row'>
+            
+            <div class='col-md-2'>      <label className='text-left text-primary'>      Project Supervisor ID    </label> </div>  
+  
+              <div className='col-md-5'> 
              
+                    <input className='form-control' name='supervisor' value={this.state.supervisor}
+                        onChange={this.handleChange} required/>
+                         </div>
+                  </div>
+                  <br/>
+     <div className='row'>
+            
+            <div class='col-md-2'>      <label className='text-left text-primary'>      Project LGA    </label> </div>  
+  
+              <div className='col-md-5'> 
+             
+             <input className='form-control' name='lga' value={this.state.lga}
+                        onChange={this.handleChange} required/>
+                </div>
+                  </div>
+                  <br/>
+         <div className='col-md-8'> 
+                 <button className='btn btn-default btn-info' onClick={this.onSubmit}>Add Project</button> 
+         </div>
                 </form> 
-                <button onClick={this.onSubmit}>fd</button> 
-            </div>
+
+                </div>
+            
         )
     }
 } 
