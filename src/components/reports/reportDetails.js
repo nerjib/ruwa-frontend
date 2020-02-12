@@ -72,70 +72,122 @@ constructor(props){
         const { params } = this.props.match;
 
         return(
-                        <h6>
             <div className='fluid-container'>
+                <br/><br/>
+                <div><span><h5>KADUNA FIELD OFFICE: WASH WEEKLY PROGRESS REPORT</h5></span></div>
+                <table className='table table-bordered'>
+                    <thead>
+                        
+                        <tr>
+                            <th colSpan="3">
+                                NAME OF PROJECT: KADUNA RUWASSA:
+                            </th>
+                            <th>
+                                REPORT NO
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr className='text-left'>
+                            <td > LGA:</td>
+                            <td >CONTRACTOR:</td>
+                            <td>LOT NO:</td>
+                            <td>DATE:</td>
+                        </tr>
+                        <tr className='text-left'>
+                            <td colSpan="4">
+                                SUMMARY OF PLANNED ACTIVITIES
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colSpan='4'>
+                                Summary of KEY ACTIVITIES
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colSpan='4'>
+                                DETAILS OF ACTIVITIES CARRIED OUT WITH DATES: (attach photographs)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>DATE</td>
+                            <td colSpan="2">ACTIVITY</td>
+                            <td>OUTPUT/OUTCOME</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colSpan="2"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colSpan="2"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colSpan="2"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colSpan="2"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colSpan="2"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colSpan="2"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colSpan="2"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colSpan="2"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colSpan="4" className='text-left'>
+                                CONCLUSION AND RECOMMENDATION:
+                            <br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colSpan="4" className='text-left'>
+                                PLANNED FOLLOW-UP ACTIVITIES FOR NEXT WEEK OTHER COMMENT:
+                                <br/><br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colSpan="4" className='text-left'>
+                                DATE OF SUBMISSION<br/><br/>
+                                PNONE.. EMAIL...
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colSpan="4" className='text-left'>
+                                IS WORK PROGRESSING ACCORDING TI SUBMITED PLAN?<br/><br/>
 
-                                <hr className='col-md-11'/>
-                <div className='row'>
-                    <div className='col-md-7'>Report No: {params.id}</div>
-                    <h6 class='col-md-3 '><span className='text-primary'>Date:</span><span>{' '+this.state.reportdate}</span>  </h6>                
-                </div>  
-                <hr/>
+                                GROUP SUPERVISOR'S COMMENTS AND SIGNATURE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colSpan="4" className='text-left'>
+                              GENERAL SUPERVISOR'S COMMENTS AND SIGNATURE
+                            </td>
+                        </tr>
+                    </tbody>
 
-                <div className='row'>
-                    <h6 class='col-md-4'><span className='text-primary text-left'>Project id:</span><span >{' '+ this.state.project_id}</span></h6>
-                    <h6 class='col-md-4 '><span className='text-primary text-left'>Title:</span><span>{' ' +this.state.ptitle}</span></h6>
-                    <h6 class='col-md-4'><span text-primary>supervisor Id:</span><span className='text-danger'>{' '+this.state.local_id}</span>{' '+this.state.fname+' '+this.state.lname}</h6>
-                    
-
-                </div>
-                <hr/>
-
-                <div className='row'>
-                <h6 class='col-md-4'><span className=' text-primary text-left'>Location:</span><span >{' '+ this.state.plocation}</span></h6>
-                <h6 class='col-md-4 '><span className='text-primary text-left'>LGA:</span><span >{' '+ this.state.plga}</span></h6>
-                <h6 class='col-md-4 '><span className='text-primary text-left'>GPS:</span><span >{' '+ this.state.pgps}</span></h6>
-                </div>
-                <hr/>
-                <div className='row'>
-                <span className='col-md-6'> Was the supervisor present on site when you visit?</span><span>{this.state.onsite}</span>
-                </div>
-                <hr/>
-                <div className='row'>
-                <span className='col-md-6'> Is the contractor complying wuth the contract agreement?</span><span>{this.state.compliance}</span>
-                </div>
-                <hr/>
-
-                <div className='row'>
-               <span className='col-md-3 text-primary '><h6> Remark:</h6></span>
-               <span className='text-left'>{this.state.remark}</span>
-
-               </div>
-                
-                <hr/>
-                <div className='row'>
-               <span className='col-md-3  text-primary'><h6> Submited on:</h6></span>
-               <span className='text-left'>{this.state.date}</span>
-
-               </div>
-
-
-            <div className='responsive-image'>
-                <img src='' alt='project img-1'/>
-            
-            </div>
-            <div className='responsive-image'>
-                <img src='' alt='project img-2'/>
-            
-            </div>
-            <div className='responsive-image'>
-                <img src='' alt='project img-3'/>
-            
-            </div>
-
-            </div>
-            </h6>
-            
+                </table>
+            </div>            
         )
     }
 }

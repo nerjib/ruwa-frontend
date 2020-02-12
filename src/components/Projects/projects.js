@@ -12,21 +12,30 @@ constructor(props){
     }
 }
 
-componentDidMount(){
+onLoad(){
     axios.get('http://localhost:5000/api/v1/projects')
-        .then(res =>{
-            this.setState({projects: res.data})
-        })
-        .catch(function(error){
-             alert(error)
-        })
+    .then(res =>{
+        this.setState({projects: res.data})
+    })
+    .catch(function(error){
+         alert(error)
+    })
 
+}
+
+componentDidMount(){
+setInterval(()=>this.onLoad(),1000)
     
 }
 render(){
     return(
         <div>
-            <div><Link to='/projectform'><button>Add Project</button></Link></div>
+            <div className='row'>
+                <div className='col-md-6'>
+            <div  ><Link to='/projectform'><button className='btn btn-default btn-info'>Add Project</button></Link></div>
+            <div  ><Link to='/'><button className='btn btn-default btn-info'>Home</button></Link></div>
+            </div>
+            </div>
             <ProjectTable projects={this.state.projects}/>
         </div>
     )

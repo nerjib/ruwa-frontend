@@ -40,7 +40,7 @@ class AddSupervisor extends React.Component{
         .then((res)=>{
           //  alert(res.data)
         this.props.history.push('/supervisors')
-
+        
         }).catch((error)=>{
             alert(error)
         })
@@ -81,7 +81,7 @@ class AddSupervisor extends React.Component{
                 </label>  
                 </div>
                     <div className='col-md-5'>
-                    <input name='fname'  class="form-control" value={this.state.oname}
+                    <input name='oname'  class="form-control" value={this.state.oname}
                         onChange={this.handleChange} placeholder='Other Name' />
                         </div>
                   </div>

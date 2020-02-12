@@ -7,21 +7,26 @@ import { Link, Route, Redirect, withRouter } from 'react-router-dom';
     }
 
    goToProjects=()=>{
-        this.props.history.push('/projects')
+       this.props.onProjects()
+    // this.props.history.push('/projects')
     }
    goToSupervisors=()=>{
-        this.props.history.push('/supervisors')
+        this.props.onSupervisors()
     }
    goToReports=()=>{
-        this.props.history.push('/reports')
+        this.props.onReports()
     }
    goToAnalytics=()=>{
-        this.props.history.push('/')
+        this.props.onAnalytics()
+    }
+    goToHome=()=>{
+        this.props.onHome()
     }
     
   render(){
     return(
         <div >
+        <button onClick={this.goToHome} className='btn btn-defult btn-block'><h5 className='text-center text-primary'>Home</h5></button>
         <button onClick={this.goToProjects} className='btn btn-defult btn-block'><h5 className='text-center text-primary'>Projects</h5></button>
         <button onClick={this.goToSupervisors} className='btn btn-defult btn-block'><h5 className='text-center text-primary'>Supervisors</h5></button>
         <button onClick={this.goToSupervisors} className='btn btn-defult btn-block'><h5 className='text-center text-primary'>Contractors</h5></button>

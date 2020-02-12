@@ -13,6 +13,7 @@ import AddSupervisor from './components/supervisors/addsupervisor';
 import Reports from './components/reports/reports';
 import ReportDetails from './components/reports/reportDetails';
 import LocalSup from './components/supervisors/localsupers'
+import Analytics from './components/analytics/'
 function App() {
   return (
     <div className="App">
@@ -29,7 +30,7 @@ function App() {
           <Route path="/projectform" exact component={InsertProject} />
           <Route path="/updateproject/:id" exact component={UpdateProject} />
           <Route path="/localsup/:id" exact component={LocalSup} />
-
+          <Route path='/analytics' exact component={Analytics} />
 
      </Switch>
 

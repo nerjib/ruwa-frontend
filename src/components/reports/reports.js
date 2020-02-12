@@ -12,14 +12,19 @@ constructor(props){
 
 
 componentDidMount(){
+   this.intervalID= setInterval(
 axios.get('http://localhost:5000/api/v1/localreports')
         .then(res => {
             this.setState({
                     reports:res.data
             })
         }).catch( errors=>{console.log(errors.message)})
+        ,1000)
 }
-
+componentWillMount(){
+    clearInterval(this.intervalID)
+}
+ 
 render() {
     let row =[];
     

@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import SupervisorsTable from './supervisorsTable';
+import { withRouter } from 'react-router-dom';
 
 let row=[];
 
-export default class Supervisors extends React.Component{
+ class Supervisors extends React.Component{
     constructor(props){
         super(props);
 
@@ -49,3 +50,5 @@ export default class Supervisors extends React.Component{
         )
     }
 }
+
+export default withRouter(Supervisors)
