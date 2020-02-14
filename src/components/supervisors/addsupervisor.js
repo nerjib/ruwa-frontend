@@ -33,7 +33,8 @@ class AddSupervisor extends React.Component{
         oname: this.state.oname,
         phone: this.state.phone,
         email: this.state.email,
-        role: this.state.role
+        role: this.state.role,
+        lga:this.state.role
         }
 
         axios.post('http://localhost:5000/api/v1/users',obj)
@@ -61,7 +62,7 @@ class AddSupervisor extends React.Component{
                         onChange={this.handleChange} placeholder='First Name' required/>
                         </div>
                   </div>
-                    
+                    <br/>
                   <div className='row'>
                       <div className='col-md-3'>
                 <label className='text-primary'>
@@ -73,7 +74,7 @@ class AddSupervisor extends React.Component{
                         onChange={this.handleChange} placeholder='Last Name' required/>
                         </div>
                   </div>
-
+                  <br/>
                   <div className='row'>
                       <div className='col-md-3'>
                 <label className='text-primary'>
@@ -85,7 +86,7 @@ class AddSupervisor extends React.Component{
                         onChange={this.handleChange} placeholder='Other Name' />
                         </div>
                   </div>
-
+                  <br/>
                   <div className='row'>
                       <div className='col-md-3'>
                 <label className='text-primary text-left'>
@@ -97,7 +98,7 @@ class AddSupervisor extends React.Component{
                         onChange={this.handleChange} placeholder='0801234567' required/>
                         </div>
                   </div>
-
+                  <br/>
                   <div className='row'>
                       <div className='col-md-3'>
                 <label className='text-primary text-left'>
@@ -109,7 +110,7 @@ class AddSupervisor extends React.Component{
                         onChange={this.handleChange} placeholder='xyz@gmail.com' required/>
                         </div>
                   </div>
-
+                  <br/>
                   <div class="row">
                       <div className='col-md-3'>
                         <label className='text-primary text-left'>Role</label>
@@ -121,7 +122,42 @@ class AddSupervisor extends React.Component{
         <label><input type="radio" value='Local Supervisor' onChange={this.handleChange} name="role"/> Local Supervisor </label>
       </div>
     </div>
-
+    <div class="row">
+                      <div className='col-md-3'>
+                        <label className='text-primary text-left'>LGA</label>
+                      </div>
+      <div class="col-md-3">
+      
+      <select className='form-control' id='lga' name='lga' onChange={this.handleChange}>
+                <option >...select</option>
+                <option value='Birnin Gwari'> Birnin Gwari</option>
+                    <option value='Chikun'>Chikun</option>
+                    <option value ='Giwa'>Giwa</option>
+                    <option value ='Igabi'>Igabi</option>
+                    <option value='Ikara'> Ikara</option>
+                    <option value ='Jaba'>Jaba</option>
+                    <option value ='Jemaa'>Jema'a</option>
+                    <option value='Kachia'>Kachia</option>
+                    <option value ='Kaduna North'>Kaduna North</option>
+                    <option value ='Kaduna South'>Kaduna South</option>
+                    <option value='Kagarko'> Kagarko</option>
+                    <option value ='kajuru'>Kajuru</option>
+                    <option value ='Kaura'>Kaura</option>
+                    <option value='Kauru'>Kauru</option>
+                    <option value ='Kubau'>Kubau</option>
+                    <option value ='Kudan'>Kudan</option>
+                    <option value='Lere'>Lere</option>
+                    <option value ='Makarfi'>Makarfi</option>
+                    <option value ='Sabon Gari'>Sabon Gari</option>
+                    <option value='Sanga'>Sanga</option>
+                    <option value ='Soba'>Soba</option>
+                    <option value ='Zangon Kataf'>Zangon Kataf</option>
+                    <option value='Zaria'> Zaria</option>
+                
+                    </select> 
+      </div>
+      </div>
+    <br/>
     <button onClick={this.onSubmit}>Add</button> 
 
                 </form> 

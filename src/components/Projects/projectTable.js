@@ -22,16 +22,23 @@ export default class Supervisors extends React.Component{
     })
         return(
             <div>
-                 <div style={{background:'gray'}}>
-                <tr>
-                <td style={{width:'200px', padding:'0px 5px 0px 20px'}}>Project ID</td>
-                    <td style={{width:'200px', padding:'0px 5px 0px 20px', margin:'0px 5px 5px 20px'}}>title</td>
-                <td style={{width:'200px', padding:'0px 5px 5px 20px'}}>location</td>
-                <td style={{width:'200px', padding:'0px 5px 5px 20px'}}>status</td>
-                <td style={{width:'200px', padding:'0px 5px 5px 20px'}}>Supervisor ID</td></tr>
+                 
+                <table className='table'>
+                    <thead>
+                        <tr>
+                            <th>Project ID</th>
+                            <th>Title</th>
+                            <th>location</th>
+                            <th>Status</th>
+                            <th>Supervisor</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {row}
 
-                </div>
-                                {row}
+                    </tbody>
+                </table>
 
                
             </div>

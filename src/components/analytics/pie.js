@@ -11,11 +11,11 @@ class MyPie extends React.Component{
 data={{
                     labels: ['sanitation','Hand pump','Motorized Solar', 'Community borehole'],
                     datasets: [{
-                        data:[2,9,6,5],
+                        data:[this.props.sanitations,this.props.forcelift,this.props.solarpump,this.props.communitypump],
                         backgroundColor:['red','blue','yellow','green']
                     }]
                 }}
-                    height='40%'
+                    height='70%'
                 />
                 
             </div>

@@ -24,17 +24,17 @@ onLoad(){
 }
 
 componentDidMount(){
-setInterval(()=>this.onLoad(),1000)
-    
+this.inTerval=setInterval(()=>this.onLoad(),1000)
+    }
+componentWillUnmount(){
+    clearInterval(this.inTerval);
 }
 render(){
     return(
         <div>
             <div className='row'>
-                <div className='col-md-6'>
-            <div  ><Link to='/projectform'><button className='btn btn-default btn-info'>Add Project</button></Link></div>
-            <div  ><Link to='/'><button className='btn btn-default btn-info'>Home</button></Link></div>
-            </div>
+             <div className='col-md-1'  ><Link to='/projectform'><button className='btn btn-default btn-info'>Add Project</button></Link></div>
+            <div className='col-md-2' ><Link to='/'><button className='btn btn-default btn-info'>Home</button></Link></div>
             </div>
             <ProjectTable projects={this.state.projects}/>
         </div>

@@ -23,14 +23,13 @@ componentDidMount(){
             pidlga: res.data[0].lga,
             pidloc: res.data[0].location,
 
-
           })  
         }).catch(error=>{console.log(error.message)})
         
-        axios.get('http://localhost:5000/api/v1/users/'+this.props.lid)
+        axios.get('http://localhost:5000/api/v1/users/'+this.props.uid)
         .then(res=>{
           this.setState({
-            lidName: res.data[0].first_name,
+            lidName: Object.keys(res.data).map(e=>res.data[e].first_name),
             lidlastName:res.data[0].last_name
           })  
         }).catch(error=>{console.log(error.message)})
@@ -43,22 +42,17 @@ goToDetails =(id)=>{
 
 render() {
     return (
-<div>
-    <br/>
+
    <tr>
-    <td  style={{width:10}}>{this.props.id}</td>
-   <td style={{width:200}}>{this.state.pidName}</td>
-   <td style={{width:200}}>{this.state.pidloc}</td>
-   <td style={{width:200}}>{this.state.pidlga}</td>
-   <td style={{width:200}}>{this.state.lidlastName+' '+this.state.lidName}</td>
-   <td style={{width:100}}>{this.props.reportdate}</td>
-   <td style={{width:100}}><button className='btn btn-default btn-info' 
+    <td >{this.props.id}</td>
+   <td >{this.state.pidName}</td>
+   <td >{this.state.pidloc}</td>
+   <td >{this.state.pidlga}</td>
+   <td >{this.state.lidlastName+' '+this.state.lidName}</td>
+   <td >{this.props.reportdate}</td>
+   <td ><button className='btn btn-default btn-info' 
    onClick={()=>{this.goToDetails(this.props.id)}}>View</button></td>
    </tr>
-   <br/>
-
-
- </div>
     )
 }
 }

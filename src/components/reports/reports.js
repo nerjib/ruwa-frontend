@@ -10,30 +10,31 @@ constructor(props){
     }
 }
 
+onLoad(){
+   
+        axios.get('http://localhost:5000/api/v1/reports')
+                .then(res => {
+                    this.setState({
+                            reports:res.data
+                    })
+                }).catch( errors=>{console.log(errors.message)})
+ 
+}
 
 componentDidMount(){
-   this.intervalID= setInterval(
-axios.get('http://localhost:5000/api/v1/localreports')
-        .then(res => {
-            this.setState({
-                    reports:res.data
-            })
-        }).catch( errors=>{console.log(errors.message)})
-        ,1000)
+    this.inTerval=setInterval(()=>this.onLoad(),1000)
 }
 componentWillMount(){
-    clearInterval(this.intervalID)
+    clearInterval(this.inTerval)
 }
  
 render() {
     let row =[];
     
             Object.keys(this.state.reports).map(e=>{row.push(<ReportRow id={this.state.reports[e].id}
-                id={this.state.reports[e].id} id={this.state.reports[e].id} lid={this.state.reports[e].local_id}
-                pid={this.state.reports[e].project_id} reportdate={this.state.reports[e].reportdate}
-                onsit={this.state.reports[e].onsite} compliance={this.state.reports[e].compliance} 
-                ourl1={this.state.reports[e].photourl1} url2={this.state.reports[e].photourl2}
-                urrl3={this.state.reports[e].photourl3} remark={this.state.reports[e].remark}
+                uid={this.state.reports[e].uid}
+                pid={this.state.reports[e].pid} reportdate={this.state.reports[e].date}
+               
             />
 
             )
@@ -42,7 +43,22 @@ render() {
             
             return(
         <div>
-            {row}
+            <table className='table'>
+                <thead>
+                    <tr>
+                        <th>Report Id</th>
+                        <th>Title</th>
+                        <th>LGA</th>
+                        <th>Contractor</th>
+                        <th>Supervisor</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {row}
+                </tbody>
+            </table>
+            
         </div>
     )
 }

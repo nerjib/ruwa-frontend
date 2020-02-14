@@ -3,6 +3,7 @@ import axios from 'axios';
 import  MyPie  from './pie';
 import { withRouter } from 'react-router-dom';
 import now from 'performance-now';
+import ProPie from './proPie'
 
 class Analytics extends React.Component{
     constructor(props){
@@ -14,7 +15,11 @@ class Analytics extends React.Component{
             ongoingProjects:'',
             abandonedProjects:'',
             completedProject:'',
-            allReport:''
+            allReport:'',
+            sanitations:'',
+            communitypump:'',
+            solarpump:'',
+            forcelift:'',
         }
     }
 
@@ -71,7 +76,39 @@ onLoad(){
         .catch(error=>{
              alert(error)
         })
-}
+
+axios.get('http://localhost:5000/api/v1/analytics/forcelift')
+        .then(res =>{
+            this.setState({forcelift: res.data[0].count})
+        })
+        .catch(error=>{
+             alert(error)
+        })
+
+        axios.get('http://localhost:5000/api/v1/analytics/communitypump')
+        .then(res =>{
+            this.setState({communitypump: res.data[0].count})
+        })
+        .catch(error=>{
+             alert(error)
+        })
+
+        axios.get('http://localhost:5000/api/v1/analytics/solarpump')
+        .then(res =>{
+            this.setState({solarpump: res.data[0].count})
+        })
+        .catch(error=>{
+             alert(error)
+        })
+        axios.get('http://localhost:5000/api/v1/analytics/sanitations')
+        .then(res =>{
+            this.setState({sanitations: res.data[0].count})
+        })
+        .catch(error=>{
+             alert(error)
+        })
+
+    }
 
     componentDidMount(){
 
@@ -96,7 +133,8 @@ componentWillUnmount(){
       
       <div  className="fluid-container">
           <br/>
-          {this.state.time2}
+        <div><h2>{this.state.time2}</h2>  </div> 
+        <hr/>
           <div className='row'>
             <div className='col-md-6'>
                 <span className='col-md-3 text-left' >Total Projects:</span><span >{this.state.totalProjects}</span>
@@ -109,20 +147,26 @@ componentWillUnmount(){
           <hr/>
           <div className='row'>
             <div className='col-md-6'>
-                <span className='col-md-3 text-left' >Ongoing Projects:</span><span >3</span>
+                <span className='col-md-3 text-left' >Ongoing Projects:</span><span >{this.state.ongoingProjects}</span>
             </div>
             <div className='col-md-3'>
-                <span className='col-md-3 text-left' >Abandoned Projects:</span><span >3</span>
+                <span className='col-md-3 text-left' >Abandoned Projects:</span><span >{this.state.abandonedProjects}</span>
             </div>
           </div>
           <br/>
           <hr/>
-            <div>
-                charts to be placed here
+          <div className='row'>
+            <div className='col-md-6'>
+                Overall Projects
+                <div id="piechart" ></div>
+                <MyPie forcelift={this.state.forcelift} communitypump={this.state.communitypump} 
+                    solarpump={this.state.solarpump} sanitations={this.state.sanitations}/>    
+            </div>
+            <div className='col-md-6'>
+                Catego
                 <div id="piechart"></div>
-                <MyPie/>
-
-                
+                <ProPie ongoing={this.state.ongoingProjects} abandoned={this.state.abandonedProjects} completed={this.state.completedProjects}/>    
+            </div>
 
             </div>
             <hr/>

@@ -15,7 +15,8 @@ export default class UpdateProject extends React.Component{
         finish: '',
         wardheadphone: null,
         gps: "",
-        contractor_id: ""
+        contractor_id: "",
+        lot:''
         }
     }
 
@@ -36,7 +37,8 @@ componentDidMount(){
             gps: res.data[0].gps,
             contractor_id:res.data[0].contractor_id,
             started:res.data[0].started,
-            finish:res.data[0].finish
+            finish:res.data[0].finish,
+            lot:res.data[0].lot
 
         })
     }).then(error=>{console.log(error)})
@@ -109,9 +111,34 @@ change=()=>{
   
               <div className='col-md-5'> 
              
-             <input className='form-control' name='lga' value={this.state.lga}
-                        onChange={this.handleChange} required/>
-                </div>
+              <select className='form-control' id='lga' name='lga' onChange={this.handleChange}>
+                <option >...select</option>
+                <option value='Birnin Gwari'> Birnin Gwari</option>
+                    <option value='Chikun'>Chikun</option>
+                    <option value ='Giwa'>Giwa</option>
+                    <option value ='Igabi'>Igabi</option>
+                    <option value='Ikara'> Ikara</option>
+                    <option value ='Jaba'>Jaba</option>
+                    <option value ='Jemaa'>Jema'a</option>
+                    <option value='Kachia'>Kachia</option>
+                    <option value ='Kaduna North'>Kaduna North</option>
+                    <option value ='Kaduna South'>Kaduna South</option>
+                    <option value='Kagarko'> Kagarko</option>
+                    <option value ='kajuru'>Kajuru</option>
+                    <option value ='Kaura'>Kaura</option>
+                    <option value='Kauru'>Kauru</option>
+                    <option value ='Kubau'>Kubau</option>
+                    <option value ='Kudan'>Kudan</option>
+                    <option value='Lere'>Lere</option>
+                    <option value ='Makarfi'>Makarfi</option>
+                    <option value ='Sabon Gari'>Sabon Gari</option>
+                    <option value='Sanga'>Sanga</option>
+                    <option value ='Soba'>Soba</option>
+                    <option value ='Zangon Kataf'>Zangon Kataf</option>
+                    <option value='Zaria'> Zaria</option>
+                
+                    </select> 
+                  </div>
                   </div>
                   <br/>
 
@@ -131,6 +158,14 @@ change=()=>{
           <div class='col-md-2'> <label className='text-left text-primary'> State Project Supervisor Id </label> </div>  
             <div className='col-md-5'> 
                 <input className='form-control' name='state_id' value={this.state.state_id}
+                        onChange={this.handleChange}/>
+                  </div>
+                  </div>
+                  <br/>
+                  <div className='row'>            
+          <div class='col-md-2'> <label className='text-left text-primary'> LOT </label> </div>  
+            <div className='col-md-5'> 
+                <input className='form-control' name='lot' value={this.state.lot}
                         onChange={this.handleChange}/>
                   </div>
                   </div>
@@ -187,6 +222,9 @@ change=()=>{
       </div>
       <div class="col-md-3">
         <label><input type="radio"  value='ongoing' onChange={this.handleChange} name="status"/> Ongoing </label>
+      </div>
+      <div class="col-md-3">
+        <label><input type="radio"  value='abandoned' onChange={this.handleChange} name="status"/> Abandoned </label>
       </div>
 
       </div>
