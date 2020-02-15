@@ -23,8 +23,8 @@ export default class UpdateProject extends React.Component{
 componentDidMount(){
     const { params } = this.props.match;
 
-   // alert(params.id)
-    axios.get('http://localhost:5000/api/v1/projects/'+params.id)
+   // console.log(params.id)
+    axios.get('https://ruwasa.herokuapp.com/api/v1/projects/'+params.id)
     .then(res=>{
         this.setState({
             title: res.data[0].title,
@@ -70,8 +70,8 @@ const obj = {
             finish:this.state.finish
 }
 const {params}=this.props.match;
-axios.put('http://localhost:5000/api/v1/projects/'+params.id, obj)
-.catch((error)=>{alert(error)});
+axios.put('https://ruwasa.herokuapp.com/api/v1/projects/'+params.id, obj)
+.catch((error)=>{console.log(error)});
 this.props.history.push('/projects')
 
 }

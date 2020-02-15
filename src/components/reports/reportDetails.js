@@ -34,7 +34,7 @@ constructor(props){
     componentDidMount(){
         const { params } = this.props.match;
 
-        axios.get('http://localhost:5000/api/v1/reports/'+params.id)
+        axios.get('https://ruwasa.herokuapp.com/api/v1/reports/'+params.id)
             .then(res=>{
               this.setState({
                 rid: res.data[0].id,
@@ -49,14 +49,14 @@ constructor(props){
                 compliance:res.data[0].compliance,
               })
 
-              axios.get('http://localhost:5000/api/v1/reports/activity/'+params.id)
+              axios.get('https://ruwasa.herokuapp.com/api/v1/reports/activity/'+params.id)
             .then(res=>{
               this.setState({
                Activity: res.data
               })
-            }).catch(error=>{alert(error)})
+            }).catch(error=>{console.log(error)})
 
-              axios.get('http://localhost:5000/api/v1/projects/'+this.state.pid)
+              axios.get('https://ruwasa.herokuapp.com/api/v1/projects/'+this.state.pid)
               .then(res=>{
                 this.setState({
                   ptitle:res.data[0].title,
@@ -66,7 +66,7 @@ constructor(props){
                 })
             })  
 
-            axios.get('http://localhost:5000/api/v1/users/'+this.state.uid)
+            axios.get('https://ruwasa.herokuapp.com/api/v1/users/'+this.state.uid)
               .then(res=>{
                 this.setState({
                   fname:res.data[0].first_name,
@@ -95,7 +95,7 @@ constructor(props){
         return(
             <div className='fluid-container'>
                 <div className='col-md-7'>
-                <Pdf targetRef={ref} filename='Repor.pdf' x={.5} y={.5}>
+                <Pdf targetRef={ref} filename={this.state.pid+'_'+this.state.ptitle+'_'+this.state.plga+'_'+this.state.summaryfrom+'_'+this.state.summaryto} x={.5} y={.5}>
                     {({toPdf})=><button className='btn btn-default btn-info' onClick={toPdf}>Download Report</button>}
                 </Pdf>
                 </div>
@@ -182,9 +182,7 @@ constructor(props){
                 </table>
               
                 </div>
-                <div>
-                jj
-                </div>
+               
               
             </div>            
         )

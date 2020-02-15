@@ -13,12 +13,12 @@ constructor(props){
 }
 
 onLoad(){
-    axios.get('http://localhost:5000/api/v1/projects')
+    axios.get('https://ruwasa.herokuapp.com/api/v1/projects')
     .then(res =>{
         this.setState({projects: res.data})
     })
     .catch(function(error){
-         alert(error)
+         console.log(error)
     })
 
 }

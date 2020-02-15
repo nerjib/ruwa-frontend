@@ -37,13 +37,13 @@ class AddSupervisor extends React.Component{
         lga:this.state.role
         }
 
-        axios.post('http://localhost:5000/api/v1/users',obj)
+        axios.post('https://ruwasa.herokuapp.com/api/v1/users',obj)
         .then((res)=>{
-          //  alert(res.data)
+          //  console.log(res.data)
         this.props.history.push('/supervisors')
         
         }).catch((error)=>{
-            alert(error)
+            console.log(error)
         })
     }
 

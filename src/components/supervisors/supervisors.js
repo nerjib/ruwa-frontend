@@ -14,13 +14,13 @@ let row=[];
         }
     }
     componentDidMount(){
-        axios.get('http://localhost:5000/api/v1/users')
+        axios.get('https://ruwasa.herokuapp.com/api/v1/users')
             .then((res) =>{
 
                 this.setState({supervisors: res.data})
             })
             .catch(function(error){
-                 alert(error)
+                 console.log(error)
             })
     }
 

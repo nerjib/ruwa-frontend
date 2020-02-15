@@ -89,12 +89,12 @@ handleHome=()=>{
 }
 componentDidMount(){
 
-    axios.get('http://localhost:5000/api/v1/users')
+    axios.get('https://ruwasa.herokuapp.com/api/v1/users')
         .then(res =>{
             this.setState({supervisors: res.data})
         })
         .catch(function(error){
-             alert(error)
+             console.log(error)
         })
 }
 render(){
@@ -104,7 +104,7 @@ render(){
             <div className='row'>
         {//--menu--
         }
-                <div className='col-md-2'>
+                <div className='col-md-2' >
                 
                 <Menu onHome={this.handleHome} onProjects={this.handleProjects} onReports={this.handleReports} onSupervisors={this.handleSupervisors} onAnalytics={this.handleAnalyticts} />
                 </div>

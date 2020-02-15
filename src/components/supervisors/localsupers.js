@@ -12,13 +12,13 @@ constructor(props){
     }
 }
 componentDidMount(){
-axios.get('http://192.168.43.252:5000/api/v1/projects/localsupervisors/1')
+axios.get('https://ruwasa.herokuapp.com/api/v1/projects/localsupervisors/1')
 .then((res)=>{
     this.setState({
         data: res.data
     })
-    alert(res)
-}).catch(error=>{alert(error)})
+    console.log(res)
+}).catch(error=>{console.log(error)})
 
 }
 render(){

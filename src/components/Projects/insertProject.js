@@ -33,7 +33,7 @@ export default class InsertProject extends React.Component{
         type:this.state.type,
         lot:this.state.lot
        }
-        axios.post('http://localhost:5000/api/v1/projects',obj)
+        axios.post('https://ruwasa.herokuapp.com/api/v1/projects',obj)
         .then((res)=>{
         this.props.history.push('/projects')
 

@@ -37,75 +37,75 @@ class Analytics extends React.Component{
 
 onLoad(){
 
-    axios.get('http://localhost:5000/api/v1/analytics/ongoing')
+    axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/ongoing')
         .then(res =>{
             this.setState({ongoingProjects: res.data[0].count})
         })
         .catch(error=>{
-             alert(error)
+             console.log(error)
         })
 
-        axios.get('http://localhost:5000/api/v1/analytics')
+        axios.get('https://ruwasa.herokuapp.com/api/v1/analytics')
         .then(res =>{
             this.setState({totalProjects: res.data[0].count})
         })
         .catch(error=>{
-             alert(error)
+             console.log(error)
         })
 
    
-        axios.get('http://localhost:5000/api/v1/analytics/abandoned')
+        axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/abandoned')
         .then(res =>{
             this.setState({abandonedProjects: res.data[0].count})
         })
         .catch(error=>{
-             alert(error)
+             console.log(error)
         })
-        axios.get('http://localhost:5000/api/v1/analytics/completed')
+        axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/completed')
         .then(res =>{
             this.setState({completedProjects: res.data[0].count})
         })
         .catch(error=>{
-             alert(error)
+             console.log(error)
         })
 
-        axios.get('http://localhost:5000/api/v1/analytics/reports')
+        axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/reports')
         .then(res =>{
             this.setState({allReport: res.data[0].count})
         })
         .catch(error=>{
-             alert(error)
+             console.log(error)
         })
 
-axios.get('http://localhost:5000/api/v1/analytics/forcelift')
+axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/forcelift')
         .then(res =>{
             this.setState({forcelift: res.data[0].count})
         })
         .catch(error=>{
-             alert(error)
+             console.log(error)
         })
 
-        axios.get('http://localhost:5000/api/v1/analytics/communitypump')
+        axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/communitypump')
         .then(res =>{
             this.setState({communitypump: res.data[0].count})
         })
         .catch(error=>{
-             alert(error)
+             console.log(error)
         })
 
-        axios.get('http://localhost:5000/api/v1/analytics/solarpump')
+        axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/solarpump')
         .then(res =>{
             this.setState({solarpump: res.data[0].count})
         })
         .catch(error=>{
-             alert(error)
+             console.log(error)
         })
-        axios.get('http://localhost:5000/api/v1/analytics/sanitations')
+        axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/sanitations')
         .then(res =>{
             this.setState({sanitations: res.data[0].count})
         })
         .catch(error=>{
-             alert(error)
+             console.log(error)
         })
 
     }
@@ -176,7 +176,7 @@ componentWillUnmount(){
                 <div className='col-md-2'><h5>Hand Boreholes:</h5></div>
                 <div className='col-md-3'><h5>Motorized Pump Boreholes:</h5></div>
                 <div className='col-md-3'><h5>Community Boreholes:</h5></div>
-                <div className='col-md-2'><h5>Total:</h5></div>
+                <div className='col-md-2'><h5>Total:</h5>{this.state.allReport}</div>
 
 
             </div>
@@ -187,10 +187,10 @@ componentWillUnmount(){
                     <span><h5>Total no Reports Received</h5></span>
                 
                 <div className='col-md-12'>
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Sanitation:</h6><h6 className='text-right col-md-3' >41</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift Boreholes:</h6><h6 className='text-right col-md-3' >41</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >41</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >41</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Sanitation:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
                 </div>
 
         
@@ -200,11 +200,11 @@ componentWillUnmount(){
                 <div className='col-md-4'>
                     <span><h5 className='text-info'>Reports Received this month</h5></span>
                     <div className='col-md-12'>
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Sanitation:</h6><h6 className='text-right col-md-3' >41</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift Boreholes:</h6><h6 className='text-right col-md-3' >41</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >41</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >41</h6></div>              
-                    <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >41</h5></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Sanitation:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
+                    <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >xx</h5></div>              
 
                 </div>
 
@@ -212,11 +212,11 @@ componentWillUnmount(){
                 <div className='col-md-4'>
                     <span><h5 className='text-info'>Reports Received this week</h5></span>
                     <div className='col-md-12'>
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Sanitation:</h6><h6 className='text-right col-md-3' >41</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift Boreholes:</h6><h6 className='text-right col-md-3' >41</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >41</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >41</h6></div>              
-                    <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >41</h5></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Sanitation:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
+                    <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >xx</h5></div>              
 
                 </div>
                 </div>
@@ -224,11 +224,11 @@ componentWillUnmount(){
                 <div className='col-md-4'>
                     <span><h5 className='text-info'>Reports Received Today</h5></span>
                     <div className='col-md-12'>
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Sanitation:</h6><h6 className='text-right col-md-3' >41</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift Boreholes:</h6><h6 className='text-right col-md-3' >41</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >41</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >41</h6></div>              
-                    <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >41</h5></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Sanitation:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
+                    <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >xx</h5></div>              
 
                 </div>
                 </div>

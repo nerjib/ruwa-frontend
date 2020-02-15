@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import ReportRow from './reportRow'
+import ReportRow from './reportRow';
 
 class Reports extends React.Component{
 constructor(props){
@@ -12,7 +12,7 @@ constructor(props){
 
 onLoad(){
    
-        axios.get('http://localhost:5000/api/v1/reports')
+        axios.get('https://ruwasa.herokuapp.com/api/v1/reports')
                 .then(res => {
                     this.setState({
                             reports:res.data
@@ -31,7 +31,7 @@ componentWillMount(){
 render() {
     let row =[];
     
-            Object.keys(this.state.reports).map(e=>{row.push(<ReportRow id={this.state.reports[e].id}
+            Object.keys(this.state.reports).map(e=>{ row.push(<ReportRow id={this.state.reports[e].id}
                 uid={this.state.reports[e].uid}
                 pid={this.state.reports[e].pid} reportdate={this.state.reports[e].date}
                

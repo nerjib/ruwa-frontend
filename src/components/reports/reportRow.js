@@ -16,7 +16,8 @@ import { withRouter } from 'react-router-dom'
     }
 
 componentDidMount(){
-    axios.get('http://localhost:5000/api/v1/projects/'+this.props.pid)
+  //preventDefault()
+   axios.get('https://ruwasa.herokuapp.com/api/v1/projects/'+this.props.pid)
         .then(res=>{
           this.setState({
             pidName: res.data[0].title,
@@ -26,7 +27,7 @@ componentDidMount(){
           })  
         }).catch(error=>{console.log(error.message)})
         
-        axios.get('http://localhost:5000/api/v1/users/'+this.props.uid)
+        axios.get('https://ruwasa.herokuapp.com/api/v1/users/'+this.props.uid)
         .then(res=>{
           this.setState({
             lidName: Object.keys(res.data).map(e=>res.data[e].first_name),
