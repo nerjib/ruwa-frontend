@@ -163,7 +163,7 @@ componentWillUnmount(){
                     solarpump={this.state.solarpump} sanitations={this.state.sanitations}/>    
             </div>
             <div className='col-md-6'>
-                Catego
+                Status of Projects
                 <div id="piechart"></div>
                 <ProPie ongoing={this.state.ongoingProjects} abandoned={this.state.abandonedProjects} completed={this.state.completedProjects}/>    
             </div>            
