@@ -4,6 +4,7 @@ import  MyPie  from './pie';
 import { withRouter } from 'react-router-dom';
 import now from 'performance-now';
 import ProPie from './proPie'
+import Barcharts from './barcharts'
 
 class Analytics extends React.Component{
     constructor(props){
@@ -32,6 +33,7 @@ class Analytics extends React.Component{
     tick2(){
         this.setState({
             time2: new Date().toLocaleString()
+
         })
     }
 
@@ -133,7 +135,6 @@ componentWillUnmount(){
       
       <div  className="fluid-container">
           <br/>
-        <div><h2>{this.state.time2}</h2>  </div> 
         <hr/>
           <div className='row'>
             <div className='col-md-6'>
@@ -144,7 +145,6 @@ componentWillUnmount(){
             </div>
           </div>
          <br/>
-          <hr/>
           <div className='row'>
             <div className='col-md-6'>
                 <span className='col-md-3 text-left' >Ongoing Projects:</span><span >{this.state.ongoingProjects}</span>
@@ -166,10 +166,14 @@ componentWillUnmount(){
                 Catego
                 <div id="piechart"></div>
                 <ProPie ongoing={this.state.ongoingProjects} abandoned={this.state.abandonedProjects} completed={this.state.completedProjects}/>    
-            </div>
-
+            </div>            
             </div>
             <hr/>
+
+            <div>
+                <Barcharts ongoing={this.state.ongoingProjects} allreports={this.state.allReport}/>
+            </div>
+
             <div><h3 className='text-primary'>Reports Received</h3></div>
             <div className='row'>
                 <div className='col-md-2'><h5>Sanitation:</h5></div>

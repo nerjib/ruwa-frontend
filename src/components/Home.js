@@ -4,6 +4,8 @@ import Supervisors from './supervisors/supervisors'
 import Projects from './Projects/projects'
 import { Link, Route, Redirect } from 'react-router-dom';
 import wassh from '../img/wassh1.jpg'
+import ruwasa from '../img/ruwasa.jpg'
+
 import Menu from './menu'
 import Reports from './reports/reports'
 import Analytics from './analytics'
@@ -14,11 +16,13 @@ constructor(props){
         projects:'',
         supervisors:'',
         display:'none',
-        welcome:'',
+        welcome:'none',
         supervisorView:'none',
         reportView:'none',
         contractorView:'none',
-        analyticsView:'none'
+        analyticsView:'',
+        title:'ANALYTICS',
+        time:''
 
     }
 }
@@ -33,7 +37,8 @@ handleProjects=()=>{
         supervisorView: this.state.display='none',
         reportView: this.state.display='none',
         contractorView: this.state.display='none',
-        analyticsView: this.state.display='none'
+        analyticsView: this.state.display='none',
+        title: 'PROJECTS'
     })
 }
 
@@ -44,7 +49,8 @@ handleSupervisors=()=>{
         supervisorView: this.state.display='',
         reportView: this.state.display='none',
         contractorView: this.state.display='none',
-        analyticsView: this.state.display='none'
+        analyticsView: this.state.display='none',
+        title:'SUPERVISORS'
     })
 }
 handleReports=()=>{
@@ -54,7 +60,8 @@ handleReports=()=>{
         supervisorView: this.state.display='none',
         reportView: this.state.display='',
         contractorView: this.state.display='none',
-        analyticsView: this.state.display='none'
+        analyticsView: this.state.display='none',
+        title:'Reports'
     })
 }
 handleContractors=()=>{
@@ -64,7 +71,8 @@ handleContractors=()=>{
         supervisorView: this.state.display='none',
         reportView: this.state.display='none',
         contractorView: this.state.display='',
-        analyticsView: this.state.display='none'
+        analyticsView: this.state.display='none',
+        title:'CONTRACTORS'
     })
 }
 handleAnalyticts=()=>{
@@ -74,7 +82,8 @@ handleAnalyticts=()=>{
         supervisorView: this.state.display='none',
         reportView: this.state.display='none',
         contractorView: this.state.display='none',
-        analyticsView: this.state.display=''
+        analyticsView: this.state.display='',
+        title:'ANALYTICS'
     })
 }
 handleHome=()=>{
@@ -84,10 +93,20 @@ handleHome=()=>{
         supervisorView: this.state.display='none',
         reportView: this.state.display='none',
         contractorView: this.state.display='none',
-        analyticsView: this.state.display='none'
+        analyticsView: this.state.display='none',
+        title:'ABOUT'
+    })
+}
+
+tick2(){
+    this.setState({
+        time: new Date().toLocaleString()
+
     })
 }
 componentDidMount(){
+    this.inInterval2= setInterval( ()=>this.tick2(), 1000);
+
 
     axios.get('https://ruwasa.herokuapp.com/api/v1/users')
         .then(res =>{
@@ -97,22 +116,34 @@ componentDidMount(){
              console.log(error)
         })
 }
+componentWillUnmount(){
+    clearInterval(this.inInterval2)
+}
 render(){
     return(
-        <div className='fluid-container'>
-            <div ><h2 className='text-primary text-center'>Title</h2></div>    
+        <div className='fluid-container' >
+            <div className='row'>
+         <div className='col-md-2'>   <img className='  responsive-image' style={{width:'70%'}}
+                                                        src={ruwasa}
+
+                    alt='Logo'
+                                    />
+                                    </div>
+            <div  className='col-md-9'><h2 className=' text-primary text-center'>{this.state.title}</h2></div> 
+            </div> 
+           
+  
             <div className='row'>
         {//--menu--
         }
                 <div className='col-md-2' >
-                
+                <div className='block' style={{backgroundColor:'#00a9f9', height:50, alignItems:'center'}}><h3 className='text-center'>Dashboard</h3></div>
                 <Menu onHome={this.handleHome} onProjects={this.handleProjects} onReports={this.handleReports} onSupervisors={this.handleSupervisors} onAnalytics={this.handleAnalyticts} />
                 </div>
-        {// content body
-
-        }
+       
                 <div className='col-md-10'>
                 <hr/>
+                <div><h2>{this.state.time}</h2></div>
                         <span >
                             <div style={{display:this.state.welcome}}>
                            <h6 className='text-block text-justify'> The goal of the WASH programme is to contribute to an 

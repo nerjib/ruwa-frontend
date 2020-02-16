@@ -15,7 +15,7 @@ data={{
                         backgroundColor:['red','blue','yellow','green']
                     }]
                 }}
-                    height='70%'
+                    height='100%'
                 />
                 
             </div>

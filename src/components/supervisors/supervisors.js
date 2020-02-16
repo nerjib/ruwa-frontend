@@ -43,7 +43,7 @@ let row=[];
                 </div>
                 <div className="row" >
                 <div className='col-md-2'>    <button onClick={this.goToAdd} className="btn btn-info">Add supervisor</button></div>
-                <div e='col-md-2'>    <button className="btn btn-info">Remove supervisor</button></div>
+                <div e='col-md-2'>    <button className="btn btn-info">Drop supervisor</button></div>
 
                 </div>
             </div>
