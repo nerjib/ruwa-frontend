@@ -27,6 +27,7 @@ constructor(props){
         oname: '',
         email: '',
         Activity:'',
+        gps:''
     }
 }
 
@@ -41,12 +42,14 @@ constructor(props){
                 pid: res.data[0].pid,
                 uid: res.data[0].uid,
                 summary: res.data[0].summary,
-                summaryfrom:res.data[0].summary,
+                summaryfrom:res.data[0].summaryfrom,
                 summaryto:res.data[0].summaryto,
                 conclusion:res.data[0].conclusion,
                 followup:res.data[0].followup,
                 date:res.data[0].date,
                 compliance:res.data[0].compliance,
+                gps:res.data[0].gps,
+
               })
 
               axios.get('https://ruwasa.herokuapp.com/api/v1/reports/activity/'+params.id)
@@ -121,7 +124,7 @@ constructor(props){
                             <td > LGA: {(this.state.plga).toUpperCase()}</td>
                             <td >CONTRACTOR:</td>
                             <td>LOT NO:</td>
-                            <td>DATE: {this.state.date}</td>
+                            <td>DATE: {this.state.date}<br/>GPS: {this.state.gps}</td>
                         </tr>
                         <tr className='text-left'>
                             <td colSpan="4">
