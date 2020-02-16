@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "nerjib.github.io/ruwasa-frontend/static/css/main.8ab6f918.chunk.css",
-    "main.js": "nerjib.github.io/ruwasa-frontend/static/js/main.4ee390c0.chunk.js",
-    "main.js.map": "nerjib.github.io/ruwasa-frontend/static/js/main.4ee390c0.chunk.js.map",
-    "runtime-main.js": "nerjib.github.io/ruwasa-frontend/static/js/runtime-main.9cf74055.js",
-    "runtime-main.js.map": "nerjib.github.io/ruwasa-frontend/static/js/runtime-main.9cf74055.js.map",
-    "static/js/2.dd1e677c.chunk.js": "nerjib.github.io/ruwasa-frontend/static/js/2.dd1e677c.chunk.js",
-    "static/js/2.dd1e677c.chunk.js.map": "nerjib.github.io/ruwasa-frontend/static/js/2.dd1e677c.chunk.js.map",
-    "index.html": "nerjib.github.io/ruwasa-frontend/index.html",
-    "precache-manifest.f1f0a1983d0970f5d4579abbf8100123.js": "nerjib.github.io/ruwasa-frontend/precache-manifest.f1f0a1983d0970f5d4579abbf8100123.js",
-    "service-worker.js": "nerjib.github.io/ruwasa-frontend/service-worker.js",
-    "static/css/main.8ab6f918.chunk.css.map": "nerjib.github.io/ruwasa-frontend/static/css/main.8ab6f918.chunk.css.map",
-    "static/js/2.dd1e677c.chunk.js.LICENSE.txt": "nerjib.github.io/ruwasa-frontend/static/js/2.dd1e677c.chunk.js.LICENSE.txt",
-    "static/media/logo.svg": "nerjib.github.io/ruwasa-frontend/static/media/logo.ee7cd8ed.svg",
-    "static/media/wassh1.jpg": "nerjib.github.io/ruwasa-frontend/static/media/wassh1.4888c157.jpg"
+    "main.css": "/ruwasa-frontend/static/css/main.8ab6f918.chunk.css",
+    "main.js": "/ruwasa-frontend/static/js/main.c0b48269.chunk.js",
+    "main.js.map": "/ruwasa-frontend/static/js/main.c0b48269.chunk.js.map",
+    "runtime-main.js": "/ruwasa-frontend/static/js/runtime-main.77fe379a.js",
+    "runtime-main.js.map": "/ruwasa-frontend/static/js/runtime-main.77fe379a.js.map",
+    "static/js/2.e066db17.chunk.js": "/ruwasa-frontend/static/js/2.e066db17.chunk.js",
+    "static/js/2.e066db17.chunk.js.map": "/ruwasa-frontend/static/js/2.e066db17.chunk.js.map",
+    "index.html": "/ruwasa-frontend/index.html",
+    "precache-manifest.32bb7fdc024ae61e94fc7b491229d2bf.js": "/ruwasa-frontend/precache-manifest.32bb7fdc024ae61e94fc7b491229d2bf.js",
+    "service-worker.js": "/ruwasa-frontend/service-worker.js",
+    "static/css/main.8ab6f918.chunk.css.map": "/ruwasa-frontend/static/css/main.8ab6f918.chunk.css.map",
+    "static/js/2.e066db17.chunk.js.LICENSE.txt": "/ruwasa-frontend/static/js/2.e066db17.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/ruwasa-frontend/static/media/logo.ee7cd8ed.svg",
+    "static/media/wassh1.jpg": "/ruwasa-frontend/static/media/wassh1.4888c157.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.9cf74055.js",
-    "static/js/2.dd1e677c.chunk.js",
+    "static/js/runtime-main.77fe379a.js",
+    "static/js/2.e066db17.chunk.js",
     "static/css/main.8ab6f918.chunk.css",
-    "static/js/main.4ee390c0.chunk.js"
+    "static/js/main.c0b48269.chunk.js"
   ]
 }
