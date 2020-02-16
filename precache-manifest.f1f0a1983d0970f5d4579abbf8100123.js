@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "437ed71cae5a8ea4d14c1700f90723c8",
+    "revision": "3450b9ab26574be69be24df5511fcd3c",
     "url": "nerjib.github.io/ruwasa-frontend/index.html"
   },
   {
-    "revision": "e572b03827586baee1d4",
+    "revision": "021628d577cc41bace5a",
     "url": "nerjib.github.io/ruwasa-frontend/static/css/main.8ab6f918.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "nerjib.github.io/ruwasa-frontend/static/js/2.dd1e677c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e572b03827586baee1d4",
-    "url": "nerjib.github.io/ruwasa-frontend/static/js/main.25e9b57e.chunk.js"
+    "revision": "021628d577cc41bace5a",
+    "url": "nerjib.github.io/ruwasa-frontend/static/js/main.4ee390c0.chunk.js"
   },
   {
     "revision": "e533bac3e7092db399e7",

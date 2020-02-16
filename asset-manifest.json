@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "nerjib.github.io/ruwasa-frontend/static/css/main.8ab6f918.chunk.css",
-    "main.js": "nerjib.github.io/ruwasa-frontend/static/js/main.25e9b57e.chunk.js",
-    "main.js.map": "nerjib.github.io/ruwasa-frontend/static/js/main.25e9b57e.chunk.js.map",
+    "main.js": "nerjib.github.io/ruwasa-frontend/static/js/main.4ee390c0.chunk.js",
+    "main.js.map": "nerjib.github.io/ruwasa-frontend/static/js/main.4ee390c0.chunk.js.map",
     "runtime-main.js": "nerjib.github.io/ruwasa-frontend/static/js/runtime-main.9cf74055.js",
     "runtime-main.js.map": "nerjib.github.io/ruwasa-frontend/static/js/runtime-main.9cf74055.js.map",
     "static/js/2.dd1e677c.chunk.js": "nerjib.github.io/ruwasa-frontend/static/js/2.dd1e677c.chunk.js",
     "static/js/2.dd1e677c.chunk.js.map": "nerjib.github.io/ruwasa-frontend/static/js/2.dd1e677c.chunk.js.map",
     "index.html": "nerjib.github.io/ruwasa-frontend/index.html",
-    "precache-manifest.b2f4fac7987d11dfd5715985b26e5aec.js": "nerjib.github.io/ruwasa-frontend/precache-manifest.b2f4fac7987d11dfd5715985b26e5aec.js",
+    "precache-manifest.f1f0a1983d0970f5d4579abbf8100123.js": "nerjib.github.io/ruwasa-frontend/precache-manifest.f1f0a1983d0970f5d4579abbf8100123.js",
     "service-worker.js": "nerjib.github.io/ruwasa-frontend/service-worker.js",
     "static/css/main.8ab6f918.chunk.css.map": "nerjib.github.io/ruwasa-frontend/static/css/main.8ab6f918.chunk.css.map",
     "static/js/2.dd1e677c.chunk.js.LICENSE.txt": "nerjib.github.io/ruwasa-frontend/static/js/2.dd1e677c.chunk.js.LICENSE.txt",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.9cf74055.js",
     "static/js/2.dd1e677c.chunk.js",
     "static/css/main.8ab6f918.chunk.css",
-    "static/js/main.25e9b57e.chunk.js"
+    "static/js/main.4ee390c0.chunk.js"
   ]
 }
