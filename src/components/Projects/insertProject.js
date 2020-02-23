@@ -10,7 +10,9 @@ export default class InsertProject extends React.Component{
             title:'',
             location:'',
             status: 'ongoing',
-            supervisor:''          
+            supervisor:'',
+            supervisorName:'',
+            phase: ''        
 
         }
     }
@@ -20,6 +22,25 @@ export default class InsertProject extends React.Component{
         this.setState({
             [name]: value
         });
+        if (name=='supervisor'){
+            this.checkSupervisor(value)
+        }
+    }
+
+    checkSupervisor(id){
+        axios.get('/api/v1/users/'+id)
+        .then(req=>{
+            if(req.data[0])(
+            this.setState({
+                supervisorName: req.data[0].first_name +" "+ req.data[0].last_name
+            })
+            )
+            else{
+                this.setState({
+                    supervisorName: 'Not found' 
+                })
+            }
+        })
     }
 
     onSubmit=(e)=>{
@@ -31,9 +52,10 @@ export default class InsertProject extends React.Component{
         local_id: this.state.supervisor,
         lga: this.state.lga,
         type:this.state.type,
-        lot:this.state.lot
+        lot:this.state.lot,
+        phase:this.state.phase
        }
-        axios.post('https://ruwasa.herokuapp.com/api/v1/projects',obj)
+        axios.post('/api/v1/projects',obj)
         .then((res)=>{
         this.props.history.push('/projects')
 
@@ -49,6 +71,7 @@ export default class InsertProject extends React.Component{
             type:'',
             lot:'',
            })
+    this.props.history.push('/projects')
     }
 
     render(){
@@ -81,14 +104,26 @@ export default class InsertProject extends React.Component{
                   </div>
                   </div>
                   <br/>
+                  <div className='row'>            
+          <div class='col-md-2'>      <label className='text-left text-primary'>     Phase   </label> </div>  
+
+            <div className='col-md-5'> 
+                <input className='form-control' name='phase' value={this.state.phase}
+                        onChange={this.handleChange} required/>
+                  </div>
+                  </div>
+                  <br/>
                   <div className='row'>
             
-            <div class='col-md-2'>      <label className='text-left text-primary'>      Project Supervisor ID    </label> </div>  
+            <div class='col-md-2'>      <label className='text-left text-primary'>      Project Supervisor ID    </label>
+             </div>  
   
               <div className='col-md-5'> 
              
                     <input className='form-control' name='supervisor' value={this.state.supervisor}
                         onChange={this.handleChange} required/>
+                                     <div><label>{this.state.supervisorName}</label></div>   
+
                          </div>
                   </div>
                   <br/><div className='row'>            

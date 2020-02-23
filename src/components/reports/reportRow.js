@@ -17,20 +17,20 @@ import { withRouter } from 'react-router-dom'
 
 componentDidMount(){
   //preventDefault()
-   axios.get('https://ruwasa.herokuapp.com/api/v1/projects/'+this.props.pid)
+   axios.get('/api/v1/projects/'+this.props.pid)
         .then(res=>{
           this.setState({
             pidName: res.data[0].title,
-            pidlga: res.data[0].lga,
+           pidlga: res.data[0].lga,
             pidloc: res.data[0].location,
 
           })  
         }).catch(error=>{console.log(error.message)})
         
-        axios.get('https://ruwasa.herokuapp.com/api/v1/users/'+this.props.uid)
+        axios.get('/api/v1/users/'+this.props.uid)
         .then(res=>{
           this.setState({
-            lidName: Object.keys(res.data).map(e=>res.data[e].first_name),
+            lidName: res.data.map(e=>res.data[e].first_name),
             lidlastName:res.data[0].last_name
           })  
         }).catch(error=>{console.log(error.message)})

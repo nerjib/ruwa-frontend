@@ -27,7 +27,9 @@ constructor(props){
         oname: '',
         email: '',
         Activity:'',
-        gps:''
+        gps:'',
+        contractor_id:'',
+        companyname:''
     }
 }
 
@@ -35,7 +37,7 @@ constructor(props){
     componentDidMount(){
         const { params } = this.props.match;
 
-        axios.get('https://ruwasa.herokuapp.com/api/v1/reports/'+params.id)
+        axios.get('/api/v1/reports/'+params.id)
             .then(res=>{
               this.setState({
                 rid: res.data[0].id,
@@ -52,24 +54,25 @@ constructor(props){
 
               })
 
-              axios.get('https://ruwasa.herokuapp.com/api/v1/reports/activity/'+params.id)
+              axios.get('/api/v1/reports/activity/'+params.id)
             .then(res=>{
               this.setState({
                Activity: res.data
               })
             }).catch(error=>{console.log(error)})
 
-              axios.get('https://ruwasa.herokuapp.com/api/v1/projects/'+this.state.pid)
+              axios.get('/api/v1/projects/'+this.state.pid)
               .then(res=>{
                 this.setState({
                   ptitle:res.data[0].title,
                   plocation: res.data[0].location,
                   plga: res.data[0].lga,
-                  pgps: res.data[0].gps
+                  pgps: res.data[0].gps,
+                  contractor_id: res.data[0].contractor_id
                 })
             })  
 
-            axios.get('https://ruwasa.herokuapp.com/api/v1/users/'+this.state.uid)
+            axios.get('/api/v1/users/'+this.state.uid)
               .then(res=>{
                 this.setState({
                   fname:res.data[0].first_name,
@@ -79,6 +82,14 @@ constructor(props){
                   email: res.data[0].email,                 
                 })
             })  
+
+            axios.get('/api/v1/users/'+this.state.contractor_id)
+            .then(res=>{
+              this.setState({
+                companyname:res.data[0].company,
+                           
+              })
+          })  
   
 
             })
@@ -102,7 +113,7 @@ constructor(props){
                     {({toPdf})=><button className='btn btn-default btn-info' onClick={toPdf}>Download Report</button>}
                 </Pdf>
                 </div>
-            
+                <div className='row'>
                 <div className='fluid-container col-md-7' ref={ref}>
                 <br/><br/>
                 <div ><span><h5>KADUNA FIELD OFFICE: WASH WEEKLY PROGRESS REPORT</h5></span></div>
@@ -122,7 +133,7 @@ constructor(props){
                         <tbody>
                         <tr className='text-left'>
                             <td > LGA: {(this.state.plga).toUpperCase()}</td>
-                            <td >CONTRACTOR:</td>
+                            <td >CONTRACTOR: {this.state.companyname}</td>
                             <td>LOT NO:</td>
                             <td>DATE: {this.state.date}<br/>GPS: {this.state.gps}</td>
                         </tr>
@@ -185,8 +196,14 @@ constructor(props){
                 </table>
               
                 </div>
-               
-              
+             
+              </div>
+              <div>
+                   { Object.keys(this.state.Activity).map(e=>
+                    <img style={{width:400, heigth:400}} src={this.state.Activity[e].imgurl}/>
+                )   
+                }
+                     </div>
             </div>            
         )
     }

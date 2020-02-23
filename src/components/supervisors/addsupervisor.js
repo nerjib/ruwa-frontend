@@ -11,7 +11,9 @@ class AddSupervisor extends React.Component{
             fname:'',
             lname:'',
             oname: '',
-            role:''
+            role:'',
+            lga:'',
+            active:'active'
 
         }
     }
@@ -34,10 +36,11 @@ class AddSupervisor extends React.Component{
         phone: this.state.phone,
         email: this.state.email,
         role: this.state.role,
-        lga:this.state.role
+        lga:this.state.lga,
+        active: this.state.active,
         }
 
-        axios.post('https://ruwasa.herokuapp.com/api/v1/users',obj)
+        axios.post('/api/v1/users',obj)
         .then((res)=>{
           //  console.log(res.data)
         this.props.history.push('/supervisors')
@@ -45,6 +48,8 @@ class AddSupervisor extends React.Component{
         }).catch((error)=>{
             console.log(error)
         })
+        this.props.history.push('/supervisors')
+
     }
 
     render(){

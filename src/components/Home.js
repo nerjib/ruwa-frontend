@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Supervisors from './supervisors/supervisors'
 import Projects from './Projects/projects'
+import Contractors from './contractors/contractors'
 import { Link, Route, Redirect } from 'react-router-dom';
 import wassh from '../img/wassh1.jpg'
 import ruwasa from '../img/ruwasa.jpg'
@@ -19,7 +20,7 @@ constructor(props){
         welcome:'none',
         supervisorView:'none',
         reportView:'none',
-        contractorView:'none',
+        contractorsView:'none',
         analyticsView:'',
         title:'ANALYTICS',
         time:''
@@ -70,7 +71,7 @@ handleContractors=()=>{
         welcome: this.state.display='none',
         supervisorView: this.state.display='none',
         reportView: this.state.display='none',
-        contractorView: this.state.display='',
+        contractorsView: this.state.display='',
         analyticsView: this.state.display='none',
         title:'CONTRACTORS'
     })
@@ -108,7 +109,7 @@ componentDidMount(){
     this.inInterval2= setInterval( ()=>this.tick2(), 1000);
 
 
-    axios.get('https://ruwasa.herokuapp.com/api/v1/users')
+    axios.get('/api/v1/users')
         .then(res =>{
             this.setState({supervisors: res.data})
         })
@@ -138,12 +139,12 @@ render(){
         }
                 <div className='col-md-2' >
                 <div className='block' style={{backgroundColor:'#00a9f9', height:50, alignItems:'center'}}><h3 className='text-center'>Dashboard</h3></div>
-                <Menu onHome={this.handleHome} onProjects={this.handleProjects} onReports={this.handleReports} onSupervisors={this.handleSupervisors} onAnalytics={this.handleAnalyticts} />
+                <Menu onContractors={this.handleContractors} onHome={this.handleHome} onProjects={this.handleProjects} onReports={this.handleReports} onSupervisors={this.handleSupervisors} onAnalytics={this.handleAnalyticts} />
                 </div>
        
                 <div className='col-md-10'>
                 <hr/>
-                <div><h2>{this.state.time}</h2></div>
+                <div><h2>{(this.state.time)}</h2></div>
                         <span >
                             <div style={{display:this.state.welcome}}>
                            <h6 className='text-block text-justify'> The goal of the WASH programme is to contribute to an 
@@ -201,6 +202,9 @@ render(){
                             </div>
                             <div style={{display: this.state.analyticsView}}>
                             <Analytics />                            
+                            </div>
+                            <div style={{display: this.state.contractorsView}}>
+                            <Contractors />                            
                             </div>
                 </div>
 

@@ -16,7 +16,12 @@ export default class UpdateProject extends React.Component{
         wardheadphone: null,
         gps: "",
         contractor_id: "",
-        lot:''
+        lot:'',
+        compartment:'',
+        compartmentdisplay:'none',
+        facility:'',
+        pstatus:'',
+        CompanyName:''
         }
     }
 
@@ -24,8 +29,11 @@ componentDidMount(){
     const { params } = this.props.match;
 
    // console.log(params.id)
-    axios.get('https://ruwasa.herokuapp.com/api/v1/projects/'+params.id)
+    axios.get('/api/v1/projects/'+params.id)
     .then(res=>{
+      if(res.data[0].title==='Sanitation'){
+        this.setState({compartmentdisplay:''})
+      }
         this.setState({
             title: res.data[0].title,
             location:res.data[0].location,
@@ -38,10 +46,17 @@ componentDidMount(){
             contractor_id:res.data[0].contractor_id,
             started:res.data[0].started,
             finish:res.data[0].finish,
-            lot:res.data[0].lot
-
+            lot:res.data[0].lot,
+            localIdname:'',
+            stateIdname: '',
+            compartment: res.data[0].compartment,
+            ward:res.data[0].ward,
+            facility:res.data[0].facility,
+            community:res.data[0].community,
+            pstatus:res.data[0].pstatus
         })
     }).then(error=>{console.log(error)})
+
 }
 
 handleChange=(e)=>{
@@ -52,7 +67,65 @@ this.setState({
     [name]: value,
 
 })
+if (name=='local_id'){
+  this.gotoCheckLocal(value)
 }
+else if(name=='state_id'){
+  this.gototCheckState(value)
+}
+else if (name=='contractor_id'){
+  this.checkcontractor(value);
+}
+}
+
+gotoCheckLocal(id){
+  axios.get('/api/v1/users/'+id)
+  .then(req=>{
+      if(req.data[0])(
+      this.setState({
+          localIdname: req.data[0].first_name +" "+ req.data[0].last_name
+      })
+      )
+      else{
+          this.setState({
+              localIdname: 'is not Found' 
+          })
+      }
+  })
+}
+
+gototCheckState(id){
+  axios.get('/api/v1/users/'+id)
+  .then(req=>{
+      if(req.data[0])(
+      this.setState({
+          stateIdname: req.data[0].first_name +" "+ req.data[0].last_name
+      })
+      )
+      else{
+          this.setState({
+              stateIdname: 'Not found' 
+          })
+      }
+  })
+}
+
+checkcontractor(id){
+  axios.get('/api/v1/contractors/'+id)
+  .then(req=>{
+      if(req.data[0])(
+      this.setState({
+          CompanyName: req.data[0].company
+      })
+      )
+      else{
+          this.setState({
+              CompanyName: 'Not found' 
+          })
+      }
+  })
+}
+
 onUpdate=(e)=>{
 e.preventDefault();
 
@@ -67,10 +140,17 @@ const obj = {
             gps: this.state.gps,
             contractor_id:this.state.contractor_id,
             started:this.state.started,
-            finish:this.state.finish
+            finish:this.state.finish,
+            ward: this.state.ward,
+            facility: this.state.facility,
+            community: this.state.community,
+            compartment:this.state.compartment,
+           lot: this.state.lot,
+           pstatus: this.state.pstatus
+
 }
 const {params}=this.props.match;
-axios.put('https://ruwasa.herokuapp.com/api/v1/projects/'+params.id, obj)
+axios.put('/api/v1/projects/'+params.id, obj)
 .catch((error)=>{console.log(error)});
 this.props.history.push('/projects')
 
@@ -81,33 +161,32 @@ change=()=>{
 
     render() {
         return(
-            <div>
+                <div>
                 Update
                 <form>
                 <br/>
                   <div className='row'>            
-          <div class='col-md-2'> <label className='text-left text-primary'> Project Title </label> </div>  
+          <div class='col-md-2'> <label className='text-left text-primary'>Type </label> </div>  
             <div className='col-md-5'> 
                 <input className='form-control' name='title' value={this.state.title}
-                        onChange={this.handleChange} required/>
-                  </div>
-                  </div>
-                  <br/>
-                  <div className='row'>
-            
-            <div class='col-md-2'>      <label className='text-left text-primary'>      Project Location    </label> </div>  
-  
-              <div className='col-md-5'> 
-             
-                    <input className='form-control'  name='location' value={this.state.location}
-                        onChange={this.handleChange} />
-                  </div>
-                  </div>
-                  <br/>
+                         required/>
 
+                  </div>
+                  </div>
+                  <br/>
+                  <div className='row' style={{display:this.state.compartmentdisplay}}>            
+          <div class='col-md-2'> <label className='text-left text-primary'>Compartment</label> </div>  
+            <div className='col-md-5'> 
+                <input className='form-control' name='compartment' onChange={this.handleChange} value={this.state.compartment}
+                         required/>
+                         
+                  </div>
+                  </div>
+                  <br/>
+                 
                   <div className='row'>
             
-            <div class='col-md-2'>      <label className='text-left text-primary'>      Project LGA    </label> </div>  
+            <div class='col-md-2'>      <label className='text-left text-primary'>      LGA    </label> </div>  
   
               <div className='col-md-5'> 
              
@@ -141,6 +220,31 @@ change=()=>{
                   </div>
                   </div>
                   <br/>
+                  <div className='row'>            
+          <div class='col-md-2'> <label className='text-left text-primary'> Ward </label> </div>  
+            <div className='col-md-5'> 
+                <input className='form-control' name='ward' value={this.state.ward}
+                        onChange={this.handleChange} required/>
+                  </div>
+                  </div>
+                  <br/>
+                  <div className='row'>            
+          <div class='col-md-2'> <label className='text-left text-primary'>Community Name </label> </div>  
+            <div className='col-md-5'> 
+                <input className='form-control' name='community' value={this.state.community}
+                        onChange={this.handleChange} required/>
+                  </div>
+                  </div>
+                  <br/>
+
+                  <div className='row'>            
+          <div class='col-md-2'> <label className='text-left text-primary'> Facility Name </label> </div>  
+            <div className='col-md-5'> 
+                <input className='form-control' name='facility' value={this.state.facility}
+                        onChange={this.handleChange} required/>
+                  </div>
+                  </div>
+                  <br/>
 
                   <div className='row'>
             
@@ -148,13 +252,16 @@ change=()=>{
   
               <div className='col-md-5'> 
              
-                    <input className='form-control' name='local_id' value={this.state.local_id}
+                    <input className='form-control' name='local_id' value={this.state.local_id} 
                         onChange={this.handleChange} />
+                        <div>{this.state.localIdname}</div>
                          </div>
                   </div>
                   <br/>
 
-                  <div className='row'>            
+                  <div className='row'>    
+                  <div>Pstatus:{this.state.pstatus}</div>
+        
           <div class='col-md-2'> <label className='text-left text-primary'> State Project Supervisor Id </label> </div>  
             <div className='col-md-5'> 
                 <input className='form-control' name='state_id' value={this.state.state_id}
@@ -172,10 +279,13 @@ change=()=>{
                   <br/>
 
                   <div className='row'>            
-          <div class='col-md-2'> <label className='text-left text-primary'> Contractor ID </label> </div>  
+          <div class='col-md-2'> <label className='text-left text-primary'> Contractor ID </label>
+             
+           </div>  
             <div className='col-md-5'> 
                 <input className='form-control' name='contractor_id' value={this.state.contractor_id}
                         onChange={this.handleChange} />
+                           <div>{this.state.CompanyName}</div>
                   </div>
                   </div>
                   <br/>
@@ -193,7 +303,7 @@ change=()=>{
           <div class='col-md-2'> <label className='text-left text-primary'> GPS Coordinate </label> </div>  
             <div className='col-md-5'> 
                 <input className='form-control' name='gps' value={this.state.gps}
-                        onChange={this.handleChange} />
+                        onChange={this.handleChange} placeholder='latitude,longitude' />
                   </div>
                   </div>
                   <br/>
@@ -201,7 +311,7 @@ change=()=>{
                   <div className='row'>            
           <div class='col-md-2'> <label className='text-left text-primary'> Project Starting Date </label> </div>  
             <div className='col-md-5'> 
-                <input className='form-control' name='started' value={this.state.started}
+                <input className='form-control' name='started' value={(this.state.started).substring(0,10)}
                         onChange={this.handleChange} />
                   </div>
                   </div>

@@ -39,7 +39,7 @@ class Analytics extends React.Component{
 
 onLoad(){
 
-    axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/ongoing')
+    axios.get('/api/v1/analytics/ongoing')
         .then(res =>{
             this.setState({ongoingProjects: res.data[0].count})
         })
@@ -47,7 +47,7 @@ onLoad(){
              console.log(error)
         })
 
-        axios.get('https://ruwasa.herokuapp.com/api/v1/analytics')
+        axios.get('/api/v1/analytics')
         .then(res =>{
             this.setState({totalProjects: res.data[0].count})
         })
@@ -56,14 +56,14 @@ onLoad(){
         })
 
    
-        axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/abandoned')
+        axios.get('/api/v1/analytics/abandoned')
         .then(res =>{
             this.setState({abandonedProjects: res.data[0].count})
         })
         .catch(error=>{
              console.log(error)
         })
-        axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/completed')
+        axios.get('/api/v1/analytics/completed')
         .then(res =>{
             this.setState({completedProjects: res.data[0].count})
         })
@@ -71,7 +71,7 @@ onLoad(){
              console.log(error)
         })
 
-        axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/reports')
+        axios.get('/api/v1/analytics/reports')
         .then(res =>{
             this.setState({allReport: res.data[0].count})
         })
@@ -79,7 +79,7 @@ onLoad(){
              console.log(error)
         })
 
-axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/forcelift')
+axios.get('/api/v1/analytics/forcelift')
         .then(res =>{
             this.setState({forcelift: res.data[0].count})
         })
@@ -87,7 +87,7 @@ axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/forcelift')
              console.log(error)
         })
 
-        axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/communitypump')
+        axios.get('/api/v1/analytics/communitypump')
         .then(res =>{
             this.setState({communitypump: res.data[0].count})
         })
@@ -95,14 +95,14 @@ axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/forcelift')
              console.log(error)
         })
 
-        axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/solarpump')
+        axios.get('/api/v1/analytics/solarpump')
         .then(res =>{
             this.setState({solarpump: res.data[0].count})
         })
         .catch(error=>{
              console.log(error)
         })
-        axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/sanitations')
+        axios.get('/api/v1/analytics/sanitations')
         .then(res =>{
             this.setState({sanitations: res.data[0].count})
         })
@@ -116,7 +116,7 @@ axios.get('https://ruwasa.herokuapp.com/api/v1/analytics/forcelift')
 
   this.inInterval= setInterval( ()=>this.tick(),5000);
   this.inInterval2= setInterval( ()=>this.tick2(), 1000);
-        this.inInterval3 = setInterval( ()=>this.onLoad(), 1000)
+        this.inInterval3 = setInterval( ()=>this.onLoad(), 60000)
 
 }
 

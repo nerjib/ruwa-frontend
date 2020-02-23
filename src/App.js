@@ -14,6 +14,9 @@ import Reports from './components/reports/reports';
 import ReportDetails from './components/reports/reportDetails';
 import LocalSup from './components/supervisors/localsupers'
 import Analytics from './components/analytics/'
+import Contractors from './components/contractors/contractors'
+import AddContractor from './components/contractors/addcontractor';
+import Paginat from './components/Projects/pagination'
 function App() {
   return (
     <div className="App">
@@ -31,6 +34,9 @@ function App() {
           <Route path="/updateproject/:id" exact component={UpdateProject} />
           <Route path="/localsup/:id" exact component={LocalSup} />
           <Route path='/analytics' exact component={Analytics} />
+          <Route path='/contractors' exact component={Contractors} />
+          <Route path='/contractors/add' exact component={AddContractor} />
+          <Route path='/paginat' exact component={Paginat} />
 
      </Switch>
 

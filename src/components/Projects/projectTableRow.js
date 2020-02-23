@@ -15,7 +15,7 @@ class ProjectTableRow extends React.Component{
                     <tr>       
                         <td>{this.props.id}</td>
                         <td>{this.props.title}</td>
-                        <td>{this.props.loc +', '+this.props.lga}</td>
+                        <td>{this.props.community +', '+this.props.lga}</td>
                         <td>{this.props.status}</td>
                         <td>{this.props.lid}</td>
                         <td>
