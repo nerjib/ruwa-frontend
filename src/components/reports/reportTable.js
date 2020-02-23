@@ -9,7 +9,7 @@ class ReportTable extends React.Component{
 
         this.state={
             currentPage: 2,
-        projectPerPage: 300,
+        projectPerPage: 30,
         title:''
   
         }

@@ -1,7 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
-import { Object } from 'core-js'
 
 class ReportTableRow extends React.Component{
     constructor(props){
@@ -38,7 +37,7 @@ componentDidMount(){
 
 }
 componentWillMount(){
-    clearInterval(this.inTerval)
+   // clearInterval(this.inTerval)
 }
     render(){
 
