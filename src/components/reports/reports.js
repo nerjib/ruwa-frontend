@@ -9,7 +9,7 @@ constructor(props){
             reports:'',
             displayAll:'none',
             currentPage: 1,
-            reportsPerPage: 3
+            reportsPerPage: 15
     }
 }
 

@@ -8,7 +8,7 @@ class ReportTable extends React.Component{
         super(props);
 
         this.state={
-            currentPage: 2,
+            currentPage: 1,
         projectPerPage: 30,
         title:''
   
@@ -60,7 +60,7 @@ let row=[];
     })
         return (
             <div>
-                {pageNumbers}
+             {pageNumbers}
                 <tbody>
       {row}
               </tbody>

@@ -37,7 +37,7 @@ handleProjects=()=>{
         welcome: this.state.display='none',
         supervisorView: this.state.display='none',
         reportView: this.state.display='none',
-        contractorView: this.state.display='none',
+        contractorsView: this.state.display='none',
         analyticsView: this.state.display='none',
         title: 'PROJECTS'
     })
@@ -49,7 +49,7 @@ handleSupervisors=()=>{
         welcome: this.state.display='none',
         supervisorView: this.state.display='',
         reportView: this.state.display='none',
-        contractorView: this.state.display='none',
+        contractorsView: this.state.display='none',
         analyticsView: this.state.display='none',
         title:'SUPERVISORS'
     })
@@ -60,7 +60,7 @@ handleReports=()=>{
         welcome: this.state.display='none',
         supervisorView: this.state.display='none',
         reportView: this.state.display='',
-        contractorView: this.state.display='none',
+        contractorsView: this.state.display='none',
         analyticsView: this.state.display='none',
         title:'Reports'
     })
@@ -82,7 +82,7 @@ handleAnalyticts=()=>{
         welcome: this.state.display='none',
         supervisorView: this.state.display='none',
         reportView: this.state.display='none',
-        contractorView: this.state.display='none',
+        contractorsView: this.state.display='none',
         analyticsView: this.state.display='',
         title:'ANALYTICS'
     })
@@ -93,7 +93,7 @@ handleHome=()=>{
         welcome: this.state.display='',
         supervisorView: this.state.display='none',
         reportView: this.state.display='none',
-        contractorView: this.state.display='none',
+        contractorsView: this.state.display='none',
         analyticsView: this.state.display='none',
         title:'ABOUT'
     })
