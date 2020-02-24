@@ -13,6 +13,8 @@ import Analytics from './analytics'
 export default class Home extends React.Component{
 constructor(props){
     super(props)
+    const access = localStorage.getItem('login');
+
     this.state={
         projects:'',
         supervisors:'',
@@ -23,9 +25,15 @@ constructor(props){
         contractorsView:'none',
         analyticsView:'',
         title:'ANALYTICS',
-        time:''
+        time:'',
+        login: access,
 
     }
+
+    if(access !== 'pass'){
+        this.setState({login: 'stop'})
+      }
+      
 }
 
 onDisplay=()=>{
@@ -106,6 +114,8 @@ tick2(){
     })
 }
 componentDidMount(){
+
+
     this.inInterval2= setInterval( ()=>this.tick2(), 1000);
 
 
@@ -121,6 +131,10 @@ componentWillUnmount(){
     clearInterval(this.inInterval2)
 }
 render(){
+  if (this.state.login !== 'pass'){
+        return <Redirect to='/'></Redirect>
+       };
+  //     alert(this.state.login)
     return(
         <div className='fluid-container' >
             <div className='row'>

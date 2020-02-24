@@ -16,13 +16,18 @@ import LocalSup from './components/supervisors/localsupers'
 import Analytics from './components/analytics/'
 import Contractors from './components/contractors/contractors'
 import AddContractor from './components/contractors/addcontractor';
-import Paginat from './components/Projects/pagination'
+import Paginat from './components/Projects/pagination';
+import Login from './Login'
+import SignOut from './signout';
 function App() {
   return (
     <div className="App">
 
      <Switch>
-        <Route path="/" exact component={(Home)} />
+        <Route path="/home" exact component={(Home)} />
+        <Route path="/" exact component={(Login)} />
+        <Route path="/signout" exact component={(SignOut)} />
+
           <Route path="/projects" exact component={Projects} />
           <Route path="/supervisors" exact component={Supervisors} />
           <Route path="/switch" exact component={ThemeSwitcher} />

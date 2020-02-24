@@ -97,7 +97,8 @@ currentProjects.map(e=>{row.push(
                 <tbody >
                 {row}
                 </tbody>
-               <ReportTable reports={this.state.reports}/>
+              {// <ReportTable reports={this.state.reports}/>
+              }
 {//style={{display:this.state.displayAll}}
             }
             </table>
