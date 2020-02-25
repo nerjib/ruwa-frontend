@@ -122,7 +122,7 @@ componentDidMount(){
     this.inInterval2= setInterval( ()=>this.tick2(), 1000);
 
 
-    axios.get('/api/v1/users')
+    axios.get('https://ruwassa.herokuapp.com/api/v1/users')
         .then(res =>{
             this.setState({supervisors: res.data})
         })

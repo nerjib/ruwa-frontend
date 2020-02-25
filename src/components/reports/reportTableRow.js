@@ -17,7 +17,7 @@ class ReportTableRow extends React.Component{
 
     onLoad(){
    
-        axios.get('/api/v1/projects/'+this.props.pid)
+        axios.get('https://ruwassa.herokuapp.com/api/v1/projects/'+this.props.pid)
                 .then(res => {
                     this.setState({
                             ptitle:res.data[0]
@@ -28,7 +28,7 @@ class ReportTableRow extends React.Component{
 
 componentDidMount(){
  //this.inTerval=this.onLoad()
- axios.get('/api/v1/projects/'+this.props.pid)
+ axios.get('https://ruwassa.herokuapp.com/api/v1/projects/'+this.props.pid)
  .then(res => {
      this.setState({
              ptitle: res.data[0].title

@@ -15,7 +15,7 @@ constructor(props){
 
 onLoad(){
    
-        axios.get('/api/v1/reports')
+        axios.get('https://ruwassa.herokuapp.com/api/v1/reports')
                 .then(res => {
                     this.setState({
                             reports:res.data
@@ -25,7 +25,7 @@ onLoad(){
 }
 
 componentDidMount(){
-    this.inTerval=setInterval(()=>this.onLoad(),1000)
+    this.inTerval=setInterval(()=>this.onLoad(),60000)
 }
 componentWillMount(){
     clearInterval(this.inTerval)

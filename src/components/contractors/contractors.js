@@ -14,7 +14,7 @@ import { withRouter } from 'react-router-dom';
         }
     }
     componentDidMount(){
-        axios.get('/api/v1/contractors')
+        axios.get('https://ruwassa.herokuapp.com/api/v1/contractors')
             .then((res) =>{
 
                 this.setState({contractors: res.data})
