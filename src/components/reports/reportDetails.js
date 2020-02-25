@@ -99,7 +99,7 @@ constructor(props){
         const { params } = this.props.match;
         let row=[];
         Object.keys(this.state.Activity).map(e=>{row.push(<ActivityRow activity={this.state.Activity[e].activity}
-                        date={this.state.Activity[e].date} outcome={this.state.Activity[e].outcome}/>)})
+                        date={new Date(this.state.Activity[e].date).getDate()} outcome={this.state.Activity[e].outcome}/>)})
         
             const options={
                 orientation: 'landscape',
@@ -108,87 +108,90 @@ constructor(props){
             }
         return(
             <div className='fluid-container'>
+            
                 <div className='col-md-7'>
                 <Pdf targetRef={ref} filename={this.state.pid+'_'+this.state.ptitle+'_'+this.state.plga+'_'+this.state.summaryfrom+'_'+this.state.summaryto} x={.5} y={.5}>
                     {({toPdf})=><button className='btn btn-default btn-info' onClick={toPdf}>Download Report</button>}
                 </Pdf>
                 </div>
                 <div className='row'>
+                <div className='col-md-3'></div>
+
                 <div className='fluid-container col-md-7' ref={ref}>
                 <br/><br/>
-                <div ><span><h5>KADUNA FIELD OFFICE: WASH WEEKLY PROGRESS REPORT</h5></span></div>
+                <div ><span><h5><strong>KADUNA FIELD OFFICE: WASH WEEKLY PROGRESS REPORT</strong></h5></span></div>
                 <table className='table table-bordered ' style={{border: '1px inset black'}}>
                     <thead>
                         
                         <tr>
                             <th colSpan="3">
-                                NAME OF PROJECT: KADUNA RUWASSA: {(this.state.ptitle).toUpperCase()}
+                            <strong> NAME OF PROJECT:</strong>KADUNA RUWASSA: {(this.state.ptitle).toUpperCase()}
                             </th>
                             <th>
-                                REPORT NO: {this.state.rid}
+                            <strong> REPORT NO:</strong> {this.state.rid}
                             </th>
                         </tr>
                         </thead>
                         
                         <tbody>
                         <tr className='text-left'>
-                            <td > LGA: {(this.state.plga).toUpperCase()}</td>
-                            <td >CONTRACTOR: {this.state.companyname}</td>
-                            <td>LOT NO:</td>
-                            <td>DATE: {this.state.date}<br/>GPS: {this.state.gps}</td>
+                            <td ><strong>LGA:</strong> {(this.state.plga).toUpperCase()}</td>
+                            <td ><strong>CONTRACTOR:</strong> {this.state.companyname}</td>
+                            <td><strong>LOT NO:</strong></td>
+                            <td><strong>DATE:</strong> {new Date(this.state.date).getDate()+'-'+new Date(this.state.date).getMonth()+'-'+new Date(this.state.date).getFullYear()}<br/>GPS: {this.state.gps}</td>
                         </tr>
                         <tr className='text-left'>
                             <td colSpan="4">
-                                SUMMARY OF PLANNED ACTIVITIES: {this.state.summary}
+                            <strong>  SUMMARY OF PLANNED ACTIVITIES:</strong> {this.state.summary}
                             </td>
                         </tr>
                         <tr>
                             <td colSpan='4'>
-                                Summary of KEY ACTIVITIES
+                            <strong>   Summary of KEY ACTIVITIES</strong>
                             </td>
                         </tr>
                         <tr>
                             <td colSpan='4'>
-                                DETAILS OF ACTIVITIES CARRIED OUT WITH DATES: (attach photographs)
+                            <strong> DETAILS OF ACTIVITIES CARRIED OUT WITH DATES: (attach photographs)</strong>
                             </td>
                         </tr>
                         <tr>
-                            <td>DATE</td>
-                            <td colSpan="2">ACTIVITY</td>
-                            <td>OUTPUT/OUTCOME</td>
+                            <td><strong>DATE</strong></td>
+                            <td colSpan="2"><strong>ACTIVITY</strong></td>
+                            <td><strong>OUTPUT/OUTCOME</strong></td>
                         </tr>
                         {row}
         
                         <tr>
                             <td colSpan="4" className='text-left'>
-                                CONCLUSION AND RECOMMENDATION: {this.state.conclusion}
+                            <strong>  CONCLUSION AND RECOMMENDATION:</strong> {this.state.conclusion}
                             <br/>
                             </td>
                         </tr>
                         <tr>
-                            <td colSpan="4" className='text-left'>
-                                PLANNED FOLLOW-UP ACTIVITIES FOR NEXT WEEK OTHER COMMENT: {this.state.followup}
+                            <td colSpan="4" className='text-left'><strong>
+                            <strong>PLANNED FOLLOW-UP ACTIVITIES FOR NEXT WEEK OTHER COMMENT:</strong></strong> {this.state.followup}
                                 <br/><br/>
                             </td>
                         </tr>
                         <tr>
                             <td colSpan="4" className='text-left'>
-                                {this.state.fname+' '+this.state.lname+' '+this.state.oname}<br/>
+                             <strong>Name of Supervisor:</strong>   {this.state.fname+' '+this.state.lname+' '+this.state.oname}<br/>
                                <br/>
-                                DATE OF SUBMISSION: {this.state.date}<br/><br/>
-                                PNONE: {this.state.phone}  EMAIL: {this.state.email}
+                               <strong>DATE OF SUBMISSION:</strong> {new Date(this.state.date).getDate() +'-'+ new Date(this.state.date).getMonth()+' '+new Date(this.state.date).getFullYear()}<br/><br/>
+                               <strong>PNONE:</strong> {this.state.phone}  <strong>EMAIL:</strong> {this.state.email}
                             </td>
                         </tr>
                         <tr>
                             <td colSpan="4" className='text-left'>
-                                IS WORK PROGRESSING ACCORDING TI SUBMITED PLAN? {(this.state.compliance).toUpperCase()}<br/><br/>
+                            <strong> IS WORK PROGRESSING ACCORDING TI SUBMITED PLAN?</strong> {(this.state.compliance).toUpperCase()}<br/><br/>
 
-                                GROUP SUPERVISOR'S COMMENTS AND SIGNATURE
+                            <strong>  GROUP SUPERVISOR'S COMMENTS AND SIGNATURE</strong>
                             </td>
                         </tr>
                         <tr>
                             <td colSpan="4" className='text-left'>
-                              GENERAL SUPERVISOR'S COMMENTS AND SIGNATURE: 
+                            <strong> GENERAL SUPERVISOR'S COMMENTS AND SIGNATURE:</strong> 
                             </td>
                         </tr>
                     </tbody>
@@ -198,9 +201,10 @@ constructor(props){
                 </div>
              
               </div>
-              <div>
+              <div className='row'>
+                  <div className='col-md-3'></div>
                    { Object.keys(this.state.Activity).map(e=>
-                    <img style={{width:400, heigth:400}} src={this.state.Activity[e].imgurl}/>
+                   <div className='col-md-4' style={{margin:10}}> <img style={{width:400, heigth:400}} src={this.state.Activity[e].imgurl}/></div>
                 )   
                 }
                      </div>

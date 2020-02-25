@@ -155,7 +155,7 @@ render(){
         {//--menu--
         }
                 <div className='col-md-2' >
-                <div className='block' style={{backgroundColor:'#00a9f9', height:50, alignItems:'center'}}><h3 className='text-center'>Dashboard</h3></div>
+                <div className='block' style={{backgroundColor:'#00a9f9', height:50, alignItems:'center', display:'block'}}><h3 className='text-center'>Dashboard</h3></div>
                 <Menu onSignOut={this.handleSignOut} onContractors={this.handleContractors} onHome={this.handleHome} onProjects={this.handleProjects} onReports={this.handleReports} onSupervisors={this.handleSupervisors} onAnalytics={this.handleAnalyticts} />
                 </div>
        
