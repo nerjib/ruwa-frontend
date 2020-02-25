@@ -35,8 +35,8 @@ export default class SupervisorsTable extends React.Component{
         }
     
 
-    currentProjects.map(e=>{row.push(
-        <SupervisorsTableRow id={this.props.supervisors[e].id} fname={this.props.supervisors[e].first_name} 
+    currentProjects.map((e,i)=>{row.push(
+        <SupervisorsTableRow sn={i+1} id={this.props.supervisors[e].id} fname={this.props.supervisors[e].first_name} 
             email={this.props.supervisors[e].email}  phone={this.props.supervisors[e].phone}  lname={this.props.supervisors[e].last_name}
             oname={this.props.supervisors[e].other_name}  role={this.props.supervisors[e].first_name}
             />)
@@ -49,6 +49,7 @@ export default class SupervisorsTable extends React.Component{
                     <table className='table'>
                         <thead>
                             <tr>
+                                <th>SN</th>
                                 <th>Supervisor Id</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>

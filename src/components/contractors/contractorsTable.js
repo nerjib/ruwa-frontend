@@ -15,8 +15,8 @@ export default class ContractorsTable extends React.Component{
     render(){
         let row=[];
 
-        Object.keys(this.props.contractors).map(e=>{row.push(
-            <ContractorsTableRow id={this.props.contractors[e].id} company={this.props.contractors[e].company} 
+        Object.keys(this.props.contractors).map((e,i)=>{row.push(
+            <ContractorsTableRow sn={i+1} id={this.props.contractors[e].id} company={this.props.contractors[e].company} 
             email={this.props.contractors[e].email}  phone={this.props.contractors[e].phone}  lname={this.props.contractors[e].last_name}
             address={this.props.contractors[e].address}
             />)
@@ -25,7 +25,7 @@ export default class ContractorsTable extends React.Component{
                 <div>
                     <table className='table'>
                         <thead>
-                            <tr>
+                            <tr><th>SN</th>
                                 <th>Contractors Id</th>
                                 <th>Company</th>
                                 <th>Address</th>

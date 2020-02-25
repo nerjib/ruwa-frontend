@@ -106,6 +106,9 @@ handleHome=()=>{
         title:'ABOUT'
     })
 }
+handleSignOut=()=> alert('hh')
+    
+
 
 tick2(){
     this.setState({
@@ -153,7 +156,7 @@ render(){
         }
                 <div className='col-md-2' >
                 <div className='block' style={{backgroundColor:'#00a9f9', height:50, alignItems:'center'}}><h3 className='text-center'>Dashboard</h3></div>
-                <Menu onContractors={this.handleContractors} onHome={this.handleHome} onProjects={this.handleProjects} onReports={this.handleReports} onSupervisors={this.handleSupervisors} onAnalytics={this.handleAnalyticts} />
+                <Menu onSignOut={this.handleSignOut} onContractors={this.handleContractors} onHome={this.handleHome} onProjects={this.handleProjects} onReports={this.handleReports} onSupervisors={this.handleSupervisors} onAnalytics={this.handleAnalyticts} />
                 </div>
        
                 <div className='col-md-10'>

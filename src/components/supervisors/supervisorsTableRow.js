@@ -9,7 +9,9 @@ export default class SupervisorTableRow extends React.Component{
     render(){
         return(
             
-                    <tr><td >{this.props.id}</td>
+                    <tr>
+                        <td>{this.props.sn}</td>
+                        <td >{this.props.id}</td>
                         <td>{this.props.lname}</td>
                         <td >{this.props.fname}</td>
                         <td >{this.props.oname}</td>

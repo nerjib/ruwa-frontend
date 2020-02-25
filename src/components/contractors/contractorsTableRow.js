@@ -9,7 +9,9 @@ export default class ContractorsTableRow extends React.Component{
     render(){
         return(
             
-                    <tr><td >{this.props.id}</td>
+                    <tr>
+                        <td>{this.props.sn}</td>
+                        <td >{this.props.id}</td>
                         <td>{this.props.company}</td>
                         <td >{this.props.address}</td>
                         <td >{this.props.phone}</td>

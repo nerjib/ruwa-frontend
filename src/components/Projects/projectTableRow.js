@@ -13,6 +13,7 @@ class ProjectTableRow extends React.Component{
         return(
             
                     <tr>       
+                        <td>{this.props.sn+1}</td>
                         <td>{this.props.id}</td>
                         <td>{this.props.title}</td>
                         <td>{this.props.community +', '+this.props.lga}</td>

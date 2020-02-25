@@ -9,7 +9,7 @@ constructor(props){
             reports:'',
             displayAll:'none',
             currentPage: 1,
-            reportsPerPage: 15
+            reportsPerPage: 100
     }
 }
 
@@ -53,10 +53,11 @@ render() {
     }
 
 
-currentProjects.map(e=>{row.push(
-   <ReportRow id={this.state.reports[e].id}
+currentProjects.map((e,i)=>{row.push(
+   <ReportRow sn={i+1} id={this.state.reports[e].id}
         uid={this.state.reports[e].uid}
-        pid={this.state.reports[e].pid} reportdate={this.state.reports[e].date}
+        pid={this.state.reports[e].pid} reportdate={new Date(this.state.reports[e].date).getDate()+'-'+new Date(this.state.reports[e].date).getMonth()
+                        +'-'+new Date(this.state.reports[e].date).getFullYear()}
        
     />
 
@@ -82,6 +83,7 @@ currentProjects.map(e=>{row.push(
                 <thead>
                     <tr><th>S/N</th>
                         <th>RID</th>
+                        <th>Title</th>
                         <th>LGA</th>
                         <th>Council Ward</th>
                         <th>COMM. NAME</th>
@@ -92,6 +94,7 @@ currentProjects.map(e=>{row.push(
                         <th>CONTRACTOR</th>
                        <th>STATE SUPERVISOR</th> 
                        <th>LGA SUPERVISOR</th>
+                       <th>Date Submitted</th>
                     </tr>
                 </thead>
                 <tbody >
