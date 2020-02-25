@@ -42,10 +42,9 @@ render(){
     
     return(
         <div>
-    
-            <div className='row'>
+           <div className='row'>
              <div className='col-md-1'  ><Link to='/projectform'><button className='btn btn-default btn-info'>Add Project</button></Link></div>
-            <div className='col-md-2' ><Link to='/'><button className='btn btn-default btn-info'>Home</button></Link></div>
+            <div className='col-md-2' ><Link to='/home'><button className='btn btn-default btn-info'>Home</button></Link></div>
             </div>
             <ProjectTable projects={this.state.projects} />
         </div>

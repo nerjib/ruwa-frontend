@@ -21,6 +21,10 @@ class Analytics extends React.Component{
             communitypump:'',
             solarpump:'',
             forcelift:'',
+            SanitationsOnlyReports:'',
+            SolarOnlyReports:'',
+            CommunityOnlyReports:'',
+            ForceliftOnlyReports:'',
         }
     }
 
@@ -110,13 +114,46 @@ axios.get('/api/v1/analytics/forcelift')
              console.log(error)
         })
 
+        
+        axios.get('/api/v1/analytics/reports/sanitations')
+        .then(res =>{
+            this.setState({SanitationsOnlyReports: res.data[0].count})
+        })
+        .catch(error=>{
+             console.log(error)
+        })
+
+        
+        axios.get('/api/v1/analytics/reports/forcelift')
+        .then(res =>{
+            this.setState({ForceliftOnlyReports: res.data[0].count})
+        })
+        .catch(error=>{
+             console.log(error)
+        })
+
+        axios.get('/api/v1/analytics/reports/communityboreholes')
+        .then(res =>{
+            this.setState({CommunityOnlyReports: res.data[0].count})
+        })
+        .catch(error=>{
+             console.log(error)
+        })
+
+        axios.get('/api/v1/analytics/reports/solarborehole')
+        .then(res =>{
+            this.setState({SolarOnlyReports: res.data[0].count})
+        })
+        .catch(error=>{
+             console.log(error)
+        })
     }
 
     componentDidMount(){
 
   this.inInterval= setInterval( ()=>this.tick(),5000);
   this.inInterval2= setInterval( ()=>this.tick2(), 1000);
-        this.inInterval3 = setInterval( ()=>this.onLoad(), 60000)
+        this.inInterval3 = setInterval( ()=>this.onLoad(), 1000)
 
 }
 
@@ -176,11 +213,11 @@ componentWillUnmount(){
 
             <div><h3 className='text-primary'>Reports Received</h3></div>
             <div className='row'>
-                <div className='col-md-2'><h5>Sanitation:</h5></div>
-                <div className='col-md-2'><h5>Hand Boreholes:</h5></div>
-                <div className='col-md-3'><h5>Motorized Pump Boreholes:</h5></div>
-                <div className='col-md-3'><h5>Community Boreholes:</h5></div>
-                <div className='col-md-2'><h5>Total:</h5>{this.state.allReport}</div>
+                <div className='col-md-2'><h5>Sanitation:<h5 className='text-danger'>{this.state.SanitationsOnlyReports}</h5></h5></div>
+                <div className='col-md-2'><h5>Hand Boreholes:<h5 className='text-danger'>{this.state.ForceliftOnlyReports}</h5></h5></div>
+                <div className='col-md-3'><h5>Motorized Pump Boreholes:<h5 className='text-danger'>{this.state.SolarOnlyReports}</h5></h5></div>
+                <div className='col-md-3'><h5>Community Boreholes:<h5 className='text-danger'>{this.state.CommunityOnlyReports}</h5></h5></div>
+                <div className='col-md-2'><h5>Total:</h5><h5 className='text-danger'>{this.state.allReport}</h5></div>
 
 
             </div>
@@ -204,10 +241,10 @@ componentWillUnmount(){
                 <div className='col-md-4'>
                     <span><h5 className='text-info'>Reports Received this month</h5></span>
                     <div className='col-md-12'>
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Sanitation:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Sanitation:</h6><h6 className='text-right col-md-3' >{this.state.SanitationsOnlyReports}</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.ForceliftOnlyReports}</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.CommunityOnlyReports}</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.SolarOnlyReports}</h6></div>              
                     <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >xx</h5></div>              
 
                 </div>

@@ -29,7 +29,7 @@ import { withRouter } from 'react-router-dom';
       this.props.history.push('/contractors/add')
     }
     goToHome=()=>{
-        this.props.history.push('/')
+        this.props.history.push('/home')
     }
 
     render(){
@@ -43,7 +43,6 @@ import { withRouter } from 'react-router-dom';
                 <div className="row" >
                 <div className='col-md-2'>    <button onClick={this.goToAdd} className="btn btn-info">Add Contractor</button></div>
                 <div e='col-md-2'>    <button className="btn btn-info">Drop Contractor</button></div>
-
                 </div>
             </div>
         )
