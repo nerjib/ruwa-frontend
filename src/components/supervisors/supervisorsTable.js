@@ -10,7 +10,7 @@ export default class SupervisorsTable extends React.Component{
         this.state={
             supervisors:'',
             currentPage: 1,
-            supervisorsPerPage: 3
+            supervisorsPerPage: 100
         }
     }
 

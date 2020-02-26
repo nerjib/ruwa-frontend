@@ -8,7 +8,7 @@ export default class Supervisors extends React.Component{
 
         this.state={
             currentPage: 1,
-        projectPerPage: 3
+        projectPerPage: 100
   
         }
     }

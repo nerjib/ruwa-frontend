@@ -26,6 +26,7 @@ onLoad(){
 
 componentDidMount(){
     this.inTerval=setInterval(()=>this.onLoad(),60000)
+    this.onLoad();
 }
 componentWillMount(){
     clearInterval(this.inTerval)

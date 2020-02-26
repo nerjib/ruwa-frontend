@@ -141,7 +141,7 @@ render(){
     return(
         <div className='fluid-container' >
             <div className='row'>
-         <div className='col-md-2'>   <img className='  responsive-image' style={{width:'70%'}}
+         <div className='col-md-2'  >    <img className='  responsive-image' style={{width:'70%'}}
                                                         src={ruwasa}
 
                     alt='Logo'
@@ -154,12 +154,12 @@ render(){
             <div className='row'>
         {//--menu--
         }
-                <div className='col-md-2' >
+                <div className='col-md-2'  >
                 <div className='block' style={{backgroundColor:'#00a9f9', height:50, alignItems:'center', display:'block'}}><h3 className='text-center'>Dashboard</h3></div>
-                <Menu onSignOut={this.handleSignOut} onContractors={this.handleContractors} onHome={this.handleHome} onProjects={this.handleProjects} onReports={this.handleReports} onSupervisors={this.handleSupervisors} onAnalytics={this.handleAnalyticts} />
+                <Menu  onSignOut={this.handleSignOut} onContractors={this.handleContractors} onHome={this.handleHome} onProjects={this.handleProjects} onReports={this.handleReports} onSupervisors={this.handleSupervisors} onAnalytics={this.handleAnalyticts} />
                 </div>
        
-                <div className='col-md-10'>
+                <div className='col-md-10' >
                 <hr/>
                 <div><h2>{(this.state.time)}</h2></div>
                         <span >
