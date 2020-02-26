@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/ruwasa-frontend/precache-manifest.d72f26b7f99a327ea02ce4d12fcfe96f.js"
+  "/ruwasa-frontend/precache-manifest.37d118cbbbf682edfd9a144c4fe4c9f5.js"
 );
 
 self.addEventListener('message', (event) => {

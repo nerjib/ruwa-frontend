@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e23af1e93b951d9557e34931a2d7d64b",
+    "revision": "f88b570829fe617a420e6df010ce90dc",
     "url": "/ruwasa-frontend/index.html"
   },
   {
-    "revision": "025fb91836fce69bd74f",
+    "revision": "d7f880de3f35deeaa4dd",
     "url": "/ruwasa-frontend/static/css/main.8ab6f918.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ruwasa-frontend/static/js/2.f3aaed88.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "025fb91836fce69bd74f",
-    "url": "/ruwasa-frontend/static/js/main.0caeae3e.chunk.js"
+    "revision": "d7f880de3f35deeaa4dd",
+    "url": "/ruwasa-frontend/static/js/main.10257a41.chunk.js"
   },
   {
     "revision": "7a9adf6dffd1bb270439",
