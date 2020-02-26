@@ -21,7 +21,9 @@ export default class UpdateProject extends React.Component{
         compartmentdisplay:'none',
         facility:'',
         pstatus:'',
-        CompanyName:''
+        CompanyName:'',
+        localIdname:'',
+        stateIdname:'',
         }
     }
 
@@ -82,8 +84,8 @@ gotoCheckLocal(id){
   axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+id)
   .then(req=>{
       if(req.data[0])(
-      this.setState({
-          localIdname: req.data[0].first_name +" "+ req.data[0].last_name
+      this.setState(prevState=>{
+        return prevState.localIdname= req.data[0].first_name +" "+ req.data[0].last_name
       })
       )
       else{
@@ -266,6 +268,7 @@ change=()=>{
             <div className='col-md-5'> 
                 <input className='form-control' name='state_id' value={this.state.state_id}
                         onChange={this.handleChange}/>
+                         <div>{this.state.stateIdname}</div>
                   </div>
                   </div>
                   <br/>
