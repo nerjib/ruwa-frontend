@@ -57,7 +57,7 @@ render() {
 currentProjects.map((e,i)=>{row.push(
    <ReportRow sn={i+1} id={this.state.reports[e].id}
         uid={this.state.reports[e].uid}
-        pid={this.state.reports[e].pid} reportdate={new Date(this.state.reports[e].date).getDate()+'-'+new Date(this.state.reports[e].date).getMonth()
+        pid={this.state.reports[e].pid} reportdate={new Date(this.state.reports[e].date).getDate()+'-'+(new Date(this.state.reports[e].date).getMonth()+1)
                         +'-'+new Date(this.state.reports[e].date).getFullYear()}
        
     />

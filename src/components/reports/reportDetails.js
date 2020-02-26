@@ -138,7 +138,7 @@ constructor(props){
                             <td ><strong>LGA:</strong> {(this.state.plga).toUpperCase()}</td>
                             <td ><strong>CONTRACTOR:</strong> {this.state.companyname}</td>
                             <td><strong>LOT NO:</strong></td>
-                            <td><strong>DATE:</strong> {new Date(this.state.date).getDate()+'-'+new Date(this.state.date).getMonth()+'-'+new Date(this.state.date).getFullYear()}<br/>GPS: {this.state.gps}</td>
+                            <td><strong>DATE:</strong> {new Date(this.state.date).getDate()+'-'+(new Date(this.state.date).getMonth()+1)+'-'+new Date(this.state.date).getFullYear()}<br/>GPS: {this.state.gps}</td>
                         </tr>
                         <tr className='text-left'>
                             <td colSpan="4">
@@ -178,7 +178,7 @@ constructor(props){
                             <td colSpan="4" className='text-left'>
                              <strong>Name of Supervisor:</strong>   {this.state.fname+' '+this.state.lname+' '+this.state.oname}<br/>
                                <br/>
-                               <strong>DATE OF SUBMISSION:</strong> {new Date(this.state.date).getDate() +'-'+ new Date(this.state.date).getMonth()+' '+new Date(this.state.date).getFullYear()}<br/><br/>
+                               <strong>DATE OF SUBMISSION:</strong> {new Date(this.state.date).getDate() +'-'+ (new Date(this.state.date).getMonth()+1)+' '+new Date(this.state.date).getFullYear()}<br/><br/>
                                <strong>PNONE:</strong> {this.state.phone}  <strong>EMAIL:</strong> {this.state.email}
                             </td>
                         </tr>
