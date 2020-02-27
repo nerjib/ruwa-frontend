@@ -30,7 +30,7 @@ export default class Login extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    axios.get('https://ruwassa.herokuapp.com/api/v1/users/signin/'+this.state.email)
+    axios.get('/api/v1/users/signin/'+this.state.email)
     .then(res => {
       //  alert(res.data[0].phone)
         

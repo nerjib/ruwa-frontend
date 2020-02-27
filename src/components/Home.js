@@ -122,7 +122,7 @@ componentDidMount(){
     this.inInterval2= setInterval( ()=>this.tick2(), 1000);
 
 
-    axios.get('https://ruwassa.herokuapp.com/api/v1/users')
+    axios.get('/api/v1/users')
         .then(res =>{
             this.setState({supervisors: res.data})
         })
@@ -140,21 +140,21 @@ render(){
   //     alert(this.state.login)
     return(
         <div className='fluid-container' >
-            <div className='row'>
+            <div className='row' style={{ backgroundColor:'hsl(180, 90%, 35%)', width:'100%'}}>
          <div className='col-md-2'  >    <img className='  responsive-image' style={{width:'70%'}}
                                                         src={ruwasa}
 
                     alt='Logo'
                                     />
                                     </div>
-            <div  className='col-md-9'><h2 className=' text-primary text-center'>{this.state.title}</h2></div> 
+            <div  className='col-md-9'><h2 style={{color:'#ffffff'}} className=' text-center'>{this.state.title}</h2></div> 
             </div> 
            
   
-            <div className='row'>
+            <div className='row' >
         {//--menu--
         }
-                <div className='col-md-2'  >
+                <div className='col-md-2' style={{backgroundColor:'#00a9f9'}}  >
                 <div className='block' style={{backgroundColor:'#00a9f9', height:50, alignItems:'center', display:'block'}}><h3 className='text-center'>Dashboard</h3></div>
                 <Menu  onSignOut={this.handleSignOut} onContractors={this.handleContractors} onHome={this.handleHome} onProjects={this.handleProjects} onReports={this.handleReports} onSupervisors={this.handleSupervisors} onAnalytics={this.handleAnalyticts} />
                 </div>

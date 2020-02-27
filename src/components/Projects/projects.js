@@ -14,7 +14,7 @@ constructor(props){
 }
 
 onLoad(){
-    axios.get('https://ruwassa.herokuapp.com/api/v1/projects')
+    axios.get('/api/v1/projects')
     .then(res =>{
         this.setState({projects: res.data})
     })
@@ -26,7 +26,7 @@ onLoad(){
 
 componentDidMount(){
 //this.inTerval=setInterval(()=>this.onLoad(),60000)
-axios.get('https://ruwassa.herokuapp.com/api/v1/projects')
+axios.get('/api/v1/projects')
 .then(res =>{
     this.setState({projects: res.data})
 })

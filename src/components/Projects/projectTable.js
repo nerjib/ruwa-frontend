@@ -40,7 +40,7 @@ export default class Supervisors extends React.Component{
         <ProjectTableRow sn={i} title={this.props.projects[e].title}  id={this.props.projects[e].id}
         loc={this.props.projects[e].location} status={this.props.projects[e].status} community={this.props.projects[e].community}
             supervisor={this.props.projects[e].supervisor} lid={this.props.projects[e].local_id}
-            lga={this.props.projects[e].lga}
+            lga={this.props.projects[e].lga} contractor_id={this.props.projects[e].contractor_id}
         />)
     })
         return(
@@ -55,6 +55,7 @@ export default class Supervisors extends React.Component{
                             <th>location</th>
                             <th>Status</th>
                             <th>Supervisor</th>
+                            <th>Contractor Id</th>
                             <th></th>
                         </tr>
                     </thead>

@@ -28,7 +28,7 @@ export default class InsertProject extends React.Component{
     }
 
     checkSupervisor(id){
-        axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+id)
+        axios.get('/api/v1/users/'+id)
         .then(req=>{
             if(req.data[0])(
             this.setState({
@@ -55,7 +55,7 @@ export default class InsertProject extends React.Component{
         lot:this.state.lot,
         phase:this.state.phase
        }
-        axios.post('https://ruwassa.herokuapp.com/api/v1/projects',obj)
+        axios.post('/api/v1/projects',obj)
         .then((res)=>{
         this.props.history.push('/projects')
 

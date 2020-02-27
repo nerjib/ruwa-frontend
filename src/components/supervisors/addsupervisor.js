@@ -40,7 +40,7 @@ class AddSupervisor extends React.Component{
         active: this.state.active,
         }
 
-        axios.post('https://ruwassa.herokuapp.com/api/v1/users',obj)
+        axios.post('/api/v1/users',obj)
         .then((res)=>{
           //  console.log(res.data)
         this.props.history.push('/supervisors')

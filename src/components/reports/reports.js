@@ -9,18 +9,27 @@ constructor(props){
             reports:'',
             displayAll:'none',
             currentPage: 1,
-            reportsPerPage: 100
+            reportsPerPage: 10,
+            allreports:''
     }
 }
 
-onLoad(){
+onLoad=()=>{
    
-        axios.get('https://ruwassa.herokuapp.com/api/v1/reports')
+        axios.get('/api/v1/reports')
                 .then(res => {
                     this.setState({
                             reports:res.data
                     })
                 }).catch( errors=>{console.log(errors.message)})
+
+                axios.get('/api/v1/reports/completereports/all')
+                .then(res => {
+                    this.setState({
+                            allreports:res.data
+                    })
+                }).catch( errors=>{console.log(errors.message)})
+ 
  
 }
 
@@ -38,6 +47,48 @@ handleClick = (event) => {
       });
 }
 
+sanitationReport=()=>{
+    axios.get('/api/v1/reports/completereports/sanitation')
+    .then(res => {
+        this.setState({
+                allreports:res.data,
+                currentPage: 1,
+
+        })
+    }).catch( errors=>{console.log(errors.message)})
+}
+forceReport=()=>{
+    axios.get('/api/v1/reports/completereports/forcelift')
+    .then(res => {
+        this.setState({
+                allreports:res.data,
+                currentPage: 1,
+
+        })
+    }).catch( errors=>{console.log(errors.message)})
+}
+communityReport=()=>{
+    axios.get('/api/v1/reports/completereports/community')
+    .then(res => {
+        this.setState({
+                allreports:res.data,
+                currentPage: 1,
+
+        })
+    }).catch( errors=>{console.log(errors.message)})
+}
+solarReport=()=>{
+    axios.get('/api/v1/reports/completereports/solar')
+    .then(res => {
+        this.setState({
+                allreports:res.data,
+                currentPage: 1,
+
+        })
+    }).catch( errors=>{console.log(errors.message)})
+}
+
+
 render() {
     let row =[];
 
@@ -45,15 +96,15 @@ render() {
   
     // Logic for displaying todos
     const indexOfLastReport = currentPage * reportsPerPage;
-    const indexOfFirstReport = indexOfLastReport - reportsPerPage;
-    const currentProjects = Object.keys(this.state.reports).slice(indexOfFirstReport, indexOfLastReport);
+    const indexOfFirstReport = indexOfLastReport - reportsPerPage
+    const currentProjects = Object.keys(this.state.allreports).slice(indexOfFirstReport, indexOfLastReport);
 
     const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(Object.keys(this.state.reports).length / reportsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(Object.keys(this.state.allreports).length / reportsPerPage); i++) {
       pageNumbers.push(<button key={i}  id={i} onClick={this.handleClick}>{i}</button>);
     }
 
-
+{/*
 currentProjects.map((e,i)=>{row.push(
    <ReportRow sn={i+1} id={this.state.reports[e].id}
         uid={this.state.reports[e].uid}
@@ -62,20 +113,28 @@ currentProjects.map((e,i)=>{row.push(
        
     />
 
+ }
+ //<ReportRow 
     )
     })
-
+*/
+}
     
-           
+currentProjects.map((e,i)=>{row.push(<ReportRow sn={i+1} id={this.state.allreports[e].id} title={this.state.allreports[e].title}
+    lga={this.state.allreports[e].lga} ward={this.state.allreports[e].ward} community={this.state.allreports[e].community}
+    gps={this.state.allreports[e].gps} facility={this.state.allreports[e].facility} lot={this.state.allreports[e].lot}
+    contractor={this.state.allreports[e].company}  localsup={this.state.allreports[e].last_name+' '+this.state.allreports[e].first_name}
+     date={this.state.allreports[e].date}/>)})          
             
             return(
         <div>
       <div>
       <div className='row'>
-                <div> <button >Sanitation</button></div>
-                <div> <button >Force Lift</button></div>
-                <div> <button >Solar Motorized</button></div>
-                <div> <button >Community</button></div>
+               <div> <button onClick={this.onLoad} >All Report</button></div>
+                <div> <button onClick={this.sanitationReport} >Sanitation</button></div>
+                <div> <button onClick={this.forceReport} >Force Lift</button></div>
+                <div> <button onClick={this.solarReport} >Solar Motorized</button></div>
+                <div> <button onClick={this.communityReport} >Community</button></div>
 
             </div>
             <div>{pageNumbers}</div>

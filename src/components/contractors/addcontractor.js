@@ -36,7 +36,7 @@ class AddContractor extends React.Component{
        active:this.state.active
         }
 
-        axios.post('https://ruwassa.herokuapp.com/api/v1/contractors',obj)
+        axios.post('/api/v1/contractors',obj)
         .then((res)=>{
           //  console.log(res.data)
         this.props.history.push('/contractors')

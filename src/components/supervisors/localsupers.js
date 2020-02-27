@@ -12,7 +12,7 @@ constructor(props){
     }
 }
 componentDidMount(){
-axios.get('https://ruwassa.herokuapp.com/api/v1/projects/localsupervisors/1')
+axios.get('/api/v1/projects/localsupervisors/1')
 .then((res)=>{
     this.setState({
         data: res.data

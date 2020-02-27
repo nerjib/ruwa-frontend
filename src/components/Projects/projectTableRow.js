@@ -19,6 +19,7 @@ class ProjectTableRow extends React.Component{
                         <td>{this.props.community +', '+this.props.lga}</td>
                         <td>{this.props.status}</td>
                         <td>{this.props.lid}</td>
+                        <td>{this.props.contractor_id}</td>
                         <td>
                             <button className='btn btn-default btn-info'  style={{width:'200px'}}
                              onClick={this.goToUpdate}>Edit </button>                            
