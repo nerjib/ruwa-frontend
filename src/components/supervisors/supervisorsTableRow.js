@@ -1,11 +1,21 @@
 import React from 'react'
-
+import axios from 'axios'
 export default class SupervisorTableRow extends React.Component{
     constructor(props){
         super(props)
     }
 
-   
+   activeSwith=()=>{
+   // alert(this.props.active)
+   if (this.props.active=='active'){
+        axios.put('/api/v1/users/deactivate/'+this.props.id)
+        this.props.reload()
+   }
+   else{
+    axios.put('/api/v1/users/reactivate/'+this.props.id)
+    this.props.reload()
+   }
+   }
     render(){
         return(
             
@@ -19,7 +29,7 @@ export default class SupervisorTableRow extends React.Component{
                         <td >{this.props.email}</td>
                         <td >{this.props.lga}</td>
                         <td >
-                            <button onClick={()=>{alert(' Full details of '+this.props.fname)}}>info</button>                            
+                            <button onClick={this.activeSwith}>{this.props.active}</button>                            
                         </td>
                     </tr>
             

@@ -16,13 +16,17 @@ class ProjectTableRow extends React.Component{
                         <td>{this.props.sn+1}</td>
                         <td>{this.props.id}</td>
                         <td>{this.props.title}</td>
-                        <td>{this.props.community +', '+this.props.lga}</td>
+                        <td>{this.props.ward +', '+this.props.lga}</td>
                         <td>{this.props.status}</td>
-                        <td>{this.props.lid}</td>
-                        <td>{this.props.contractor_id}</td>
+                        <td>{this.props.supervisor}</td>
+                        <td>{this.props.contractor}</td>
                         <td>
-                            <button className='btn btn-default btn-info'  style={{width:'200px'}}
-                             onClick={this.goToUpdate}>Edit </button>                            
+                            <div className='row'>
+                        <button className='btn btn-default btn-info'  style={{width:'50px'}}
+                             onClick={()=>alert(this.props.id)}>View</button>
+                            <button className='btn btn-default btn-info'  style={{width:'50px', marginLeft:5}}
+                             onClick={this.goToUpdate}>Edit </button>
+                             </div>                            
                     </td>
                     </tr>
         )

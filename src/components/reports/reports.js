@@ -138,8 +138,8 @@ currentProjects.map((e,i)=>{row.push(<ReportRow sn={i+1} id={this.state.allrepor
 
             </div>
             <div>{pageNumbers}</div>
-            <table className='table'>
-      
+            <div className='col-md-1'>
+            <table  width='200' className='table'>      
                 <thead>
                     <tr><th>S/N</th>
                         <th>RID</th>
@@ -165,6 +165,7 @@ currentProjects.map((e,i)=>{row.push(<ReportRow sn={i+1} id={this.state.allrepor
 {//style={{display:this.state.displayAll}}
             }
             </table>
+            </div>
             </div>
             
         </div>

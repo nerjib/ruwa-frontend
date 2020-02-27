@@ -13,15 +13,18 @@ let row=[];
             supervisors:''
         }
     }
-    componentDidMount(){
+    load=()=>{
         axios.get('/api/v1/users')
-            .then((res) =>{
+        .then((res) =>{
 
-                this.setState({supervisors: res.data})
-            })
-            .catch(function(error){
-                 console.log(error)
-            })
+            this.setState({supervisors: res.data})
+        })
+        .catch(function(error){
+             console.log(error)
+        })
+    }
+    componentDidMount(){
+     this.load()
     }
 
     componentWillMount(){
@@ -39,7 +42,7 @@ let row=[];
         return(
             <div>
                 <div className="row">
-                <SupervisorsTable supervisors={this.state.supervisors}/>
+                <SupervisorsTable reload={this.load} supervisors={this.state.supervisors}/>
                 </div>
                 <div className="row" >
                 <div className='col-md-2'>    <button onClick={this.goToAdd} className="btn btn-info">Add supervisor</button></div>

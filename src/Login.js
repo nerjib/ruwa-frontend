@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import ruwasa from './img/ruwasa.jpg'
 //import './Login.css'
 
 export default class Login extends Component {
@@ -33,8 +34,9 @@ export default class Login extends Component {
     axios.get('/api/v1/users/signin/'+this.state.email)
     .then(res => {
       //  alert(res.data[0].phone)
+      alert(res.data[0].role)
         
-      if (res.data[0].phone === this.state.phone) {
+      if (res.data[0].phone === this.state.phone & res.data[0].role==='admin') {
        // return < Redirect to="/home"/>
       // alert('youre in')
        this.setState({
@@ -76,7 +78,15 @@ export default class Login extends Component {
     
     return (
       <div >
-      <form className="Container" onSubmit={this.onSubmit}>
+      <form className="Container border col-md-3 mx-auto border-primary" style={{margin:20}} onSubmit={this.onSubmit}>
+        <div>
+        <div >  <img className='  responsive-image' style={{width:'70%'}}
+                                                        src={ruwasa}
+
+                    alt='Logo'
+                                    />
+                                    </div>
+        </div>
         <h1>Login Below!</h1>
         <div className="table">
 <table align="center" ><tr><td>        <input
@@ -89,14 +99,14 @@ export default class Login extends Component {
         /></td></tr>
        
        <tr><td> <input
-          type="phone no"
+          type="password"
           name="phone"
           placeholder="Phone no."
           value={this.state.phone}
           onChange={this.handleInputChange}
           required
         /></td></tr>
-<tr><td>        <input type="submit" value="Submit"/>
+<tr><td>        <input type="submit" value="Login"/>
     </td></tr></table></div>  </form>
   </div>
     );

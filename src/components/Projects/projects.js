@@ -26,7 +26,7 @@ onLoad(){
 
 componentDidMount(){
 //this.inTerval=setInterval(()=>this.onLoad(),60000)
-axios.get('/api/v1/projects')
+axios.get('/api/v1/projects/completeprojects/all')
 .then(res =>{
     this.setState({projects: res.data})
 })
@@ -38,6 +38,51 @@ componentWillUnmount(){
     clearInterval(this.inTerval);
 }
 
+sanitationProjects=()=>{
+    axios.get('/api/v1/projects/completeprojects/sanitations')
+.then(res =>{
+    this.setState({projects: res.data})
+})
+.catch(function(error){
+     console.log(error)
+})    
+}
+forceProjects=()=>{
+    axios.get('/api/v1/projects/completeprojects/forcelift')
+.then(res =>{
+    this.setState({projects: res.data})
+})
+.catch(function(error){
+     console.log(error)
+})    
+}
+communityProjects=()=>{
+    axios.get('/api/v1/projects/completeprojects/community')
+.then(res =>{
+    this.setState({projects: res.data})
+})
+.catch(function(error){
+     console.log(error)
+})    
+}
+solarProjects=()=>{
+    axios.get('/api/v1/projects/completeprojects/solar')
+.then(res =>{
+    this.setState({projects: res.data})
+})
+.catch(function(error){
+     console.log(error)
+})    
+}
+allProjects=()=>{
+    axios.get('/api/v1/projects/completeprojects/all')
+.then(res =>{
+    this.setState({projects: res.data})
+})
+.catch(function(error){
+     console.log(error)
+})    
+}
 render(){
     
     return(
@@ -45,6 +90,12 @@ render(){
            <div className='row'>
              <div className='col-md-1'  ><Link to='/projectform'><button className='btn btn-default btn-info'>Add Project</button></Link></div>
             <div className='col-md-2' ><Link to='/home'><button className='btn btn-default btn-info'>Home</button></Link></div>
+            <div className='col-xs-2'  ><button onClick={this.allprojects} className='btn btn-default btn-info'>All Projects</button></div>
+            <div className='col-xs-2'  ><button onClick={this.sanitationProjects} className='btn btn-default btn-info'>Sanitation</button></div>
+            <div className='col-xs-2'  ><button onClick={this.solarProjects} className='btn btn-default btn-info'>Solar Boreholes</button></div>
+            <div className='col-xs-2'  ><button onClick={this.forceProjects} className='btn btn-default btn-info'>Force Lift</button></div>
+            <div className='col-xs-2'  ><button onClick={this.communityProjects} className='btn btn-default btn-info'>Community</button></div>
+         
             </div>
             <ProjectTable projects={this.state.projects} />
         </div>
