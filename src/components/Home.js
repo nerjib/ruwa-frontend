@@ -106,7 +106,7 @@ handleHome=()=>{
         title:'ABOUT'
     })
 }
-handleSignOut=()=> alert('hh')
+handleSignOut=()=> {}
     
 
 
@@ -140,18 +140,15 @@ render(){
   //     alert(this.state.login)
     return(
         <div className='fluid-container' >
-            <div className='row' style={{ backgroundColor:'hsl(180, 90%, 35%)', width:'100%'}}>
-         <div className='col-md-2'  >    <img className='  responsive-image' style={{width:'70%'}}
-                                                        src={ruwasa}
-
-                    alt='Logo'
-                                    />
-                                    </div>
-            <div  className='col-md-9'><h2 style={{color:'#ffffff'}} className=' text-center'>{this.state.title}</h2></div> 
+            <div className='row'>
+ <div className='col-md-2'  >    <img className='  responsive-image' style={{width:'70%'}}  src={ruwasa}
+ alt='Logo'  /> </div>
+            <div style={{ backgroundColor:'#00a9f9', width:'100%'}} className='col-md-10'>        
+            <div  className='col-md-9'><h2 style={{color:'#ffffff', marginTop:70}} className=' text-center'>{this.state.title}</h2></div> 
             </div> 
-           
+            </div>
   
-            <div className='row' >
+            <div className='row' style={{display:'flex', flexDirection:'row'}} >
         {//--menu--
         }
                 <div className='col-md-2' style={{backgroundColor:'#00a9f9'}}  >
@@ -159,7 +156,7 @@ render(){
                 <Menu  onSignOut={this.handleSignOut} onContractors={this.handleContractors} onHome={this.handleHome} onProjects={this.handleProjects} onReports={this.handleReports} onSupervisors={this.handleSupervisors} onAnalytics={this.handleAnalyticts} />
                 </div>
        
-                <div className='col-md-10' >
+                <div className='col-md-10' style={{ float:'right'}} >
                 <hr/>
                 <div><h2>{(this.state.time)}</h2></div>
                         <span >

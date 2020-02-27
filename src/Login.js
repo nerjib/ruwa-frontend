@@ -34,7 +34,7 @@ export default class Login extends Component {
     axios.get('/api/v1/users/signin/'+this.state.email)
     .then(res => {
       //  alert(res.data[0].phone)
-      alert(res.data[0].role)
+   //   alert(res.data[0].role)
         
       if (res.data[0].phone === this.state.phone & res.data[0].role==='admin') {
        // return < Redirect to="/home"/>
