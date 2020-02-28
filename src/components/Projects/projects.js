@@ -14,7 +14,7 @@ constructor(props){
 }
 
 onLoad(){
-    axios.get('/api/v1/projects')
+    axios.get('https://ruwassa.herokuapp.com/api/v1/projects')
     .then(res =>{
         this.setState({projects: res.data})
     })
@@ -26,7 +26,7 @@ onLoad(){
 
 componentDidMount(){
 //this.inTerval=setInterval(()=>this.onLoad(),60000)
-axios.get('/api/v1/projects/completeprojects/all')
+axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/all')
 .then(res =>{
     this.setState({projects: res.data})
 })
@@ -39,7 +39,7 @@ componentWillUnmount(){
 }
 
 sanitationProjects=()=>{
-    axios.get('/api/v1/projects/completeprojects/sanitations')
+    axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/sanitations')
 .then(res =>{
     this.setState({projects: res.data})
 })
@@ -48,7 +48,7 @@ sanitationProjects=()=>{
 })    
 }
 forceProjects=()=>{
-    axios.get('/api/v1/projects/completeprojects/forcelift')
+    axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/forcelift')
 .then(res =>{
     this.setState({projects: res.data})
 })
@@ -57,7 +57,7 @@ forceProjects=()=>{
 })    
 }
 communityProjects=()=>{
-    axios.get('/api/v1/projects/completeprojects/community')
+    axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/community')
 .then(res =>{
     this.setState({projects: res.data})
 })
@@ -66,7 +66,7 @@ communityProjects=()=>{
 })    
 }
 solarProjects=()=>{
-    axios.get('/api/v1/projects/completeprojects/solar')
+    axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/solar')
 .then(res =>{
     this.setState({projects: res.data})
 })
@@ -75,7 +75,7 @@ solarProjects=()=>{
 })    
 }
 allProjects=()=>{
-    axios.get('/api/v1/projects/completeprojects/all')
+    axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/all')
 .then(res =>{
     this.setState({projects: res.data})
 })

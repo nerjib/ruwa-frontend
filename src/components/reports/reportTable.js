@@ -24,7 +24,7 @@ class ReportTable extends React.Component{
 
     getDetails(pid){
      //   return('jj '+pid)
-     axios.get('/api/v1/projects/'+pid)
+     axios.get('https://ruwassa.herokuapp.com/api/v1/projects/'+pid)
      .then(res=>{
             this.setState({
                 title: res.data[0].title

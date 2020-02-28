@@ -14,7 +14,7 @@ let row=[];
         }
     }
     load=()=>{
-        axios.get('/api/v1/users')
+        axios.get('https://ruwassa.herokuapp.com/api/v1/users')
         .then((res) =>{
 
             this.setState({supervisors: res.data})

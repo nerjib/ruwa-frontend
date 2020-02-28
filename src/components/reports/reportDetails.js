@@ -37,7 +37,7 @@ constructor(props){
     componentDidMount(){
         const { params } = this.props.match;
 
-        axios.get('/api/v1/reports/'+params.id)
+        axios.get('https://ruwassa.herokuapp.com/api/v1/reports/'+params.id)
             .then(res=>{
               this.setState({
                 rid: res.data[0].id,
@@ -54,14 +54,14 @@ constructor(props){
 
               })
 
-              axios.get('/api/v1/reports/activity/'+params.id)
+              axios.get('https://ruwassa.herokuapp.com/api/v1/reports/activity/'+params.id)
             .then(res=>{
               this.setState({
                Activity: res.data
               })
             }).catch(error=>{console.log(error)})
 
-              axios.get('/api/v1/projects/'+this.state.pid)
+              axios.get('https://ruwassa.herokuapp.com/api/v1/projects/'+this.state.pid)
               .then(res=>{
                 this.setState({
                   ptitle:res.data[0].title,
@@ -72,7 +72,7 @@ constructor(props){
                 })
             })  
 
-            axios.get('/api/v1/users/'+this.state.uid)
+            axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+this.state.uid)
               .then(res=>{
                 this.setState({
                   fname:res.data[0].first_name,
@@ -83,7 +83,7 @@ constructor(props){
                 })
             })  
 
-            axios.get('/api/v1/users/'+this.state.contractor_id)
+            axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+this.state.contractor_id)
             .then(res=>{
               this.setState({
                 companyname:res.data[0].company,

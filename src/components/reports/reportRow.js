@@ -22,7 +22,7 @@ import { withRouter } from 'react-router-dom'
 
 componentDidMount(){
   //preventDefault()
-   axios.get('/api/v1/projects/'+this.props.pid)
+   axios.get('https://ruwassa.herokuapp.com/api/v1/projects/'+this.props.pid)
         .then(res=>{
           this.setState({
             pidName: res.data[0].title,
@@ -34,7 +34,7 @@ componentDidMount(){
             pidlot: res.data[0].lot,
           })  
                         //get contractors companyname
-                        axios.get('/api/v1/contractors/'+res.data[0].contractor_id)
+                        axios.get('https://ruwassa.herokuapp.com/api/v1/contractors/'+res.data[0].contractor_id)
                       .then(res1=>{
                         this.setState({
                         contractor: res1.data[0].company,
@@ -43,7 +43,7 @@ componentDidMount(){
                       }).catch(error=>{console.log(error.message)})
                       
                        //get localId name 
-                       axios.get('/api/v1/users/'+res.data[0].local_id)
+                       axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+res.data[0].local_id)
                        .then(res2=>{
                          this.setState({
                          localsuper: res2.data[0].first_name+' '+ res2.data[0].last_name,
@@ -51,7 +51,7 @@ componentDidMount(){
                          })  
                        }).catch(error=>{console.log(error.message)})
                     //get StateId name 
-                    axios.get('/api/v1/users/'+res.data[0].state_id)
+                    axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+res.data[0].state_id)
                     .then(res3=>{
                       this.setState({
                       statesuper: res3.data[0].first_name+' '+ res3.data[0].last_name,
@@ -62,7 +62,7 @@ componentDidMount(){
 
         }).catch(error=>{console.log(error.message)})
         
-        axios.get('/api/v1/users/'+this.props.uid)
+        axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+this.props.uid)
         .then(res=>{
           this.setState({
             lidName: res.data.map(e=>res.data[e].first_name),
@@ -78,7 +78,6 @@ goToDetails =(id)=>{
 
 render() {
     return (
-
    <tr>
      <td>{this.props.sn}</td>
     <td >{this.props.id}</td>

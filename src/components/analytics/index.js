@@ -43,7 +43,7 @@ class Analytics extends React.Component{
 
 onLoad(){
 
-    axios.get('/api/v1/analytics/ongoing')
+    axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/ongoing')
         .then(res =>{
             this.setState({ongoingProjects: res.data[0].count})
         })
@@ -51,7 +51,7 @@ onLoad(){
              console.log(error)
         })
 
-        axios.get('/api/v1/analytics')
+        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics')
         .then(res =>{
             this.setState({totalProjects: res.data[0].count})
         })
@@ -60,14 +60,14 @@ onLoad(){
         })
 
    
-        axios.get('/api/v1/analytics/abandoned')
+        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/abandoned')
         .then(res =>{
             this.setState({abandonedProjects: res.data[0].count})
         })
         .catch(error=>{
              console.log(error)
         })
-        axios.get('/api/v1/analytics/completed')
+        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/completed')
         .then(res =>{
             this.setState({completedProjects: res.data[0].count})
         })
@@ -75,7 +75,7 @@ onLoad(){
              console.log(error)
         })
 
-        axios.get('/api/v1/analytics/reports')
+        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports')
         .then(res =>{
             this.setState({allReport: res.data[0].count})
         })
@@ -83,7 +83,7 @@ onLoad(){
              console.log(error)
         })
 
-axios.get('/api/v1/analytics/forcelift')
+axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/forcelift')
         .then(res =>{
             this.setState({forcelift: res.data[0].count})
         })
@@ -91,7 +91,7 @@ axios.get('/api/v1/analytics/forcelift')
              console.log(error)
         })
 
-        axios.get('/api/v1/analytics/communitypump')
+        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/communitypump')
         .then(res =>{
             this.setState({communitypump: res.data[0].count})
         })
@@ -99,14 +99,14 @@ axios.get('/api/v1/analytics/forcelift')
              console.log(error)
         })
 
-        axios.get('/api/v1/analytics/solarpump')
+        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/solarpump')
         .then(res =>{
             this.setState({solarpump: res.data[0].count})
         })
         .catch(error=>{
              console.log(error)
         })
-        axios.get('/api/v1/analytics/sanitations')
+        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/sanitations')
         .then(res =>{
             this.setState({sanitations: res.data[0].count})
         })
@@ -115,7 +115,7 @@ axios.get('/api/v1/analytics/forcelift')
         })
 
         
-        axios.get('/api/v1/analytics/reports/sanitations')
+        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/sanitations')
         .then(res =>{
             this.setState({SanitationsOnlyReports: res.data[0].count})
         })
@@ -124,7 +124,7 @@ axios.get('/api/v1/analytics/forcelift')
         })
 
         
-        axios.get('/api/v1/analytics/reports/forcelift')
+        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/forcelift')
         .then(res =>{
             this.setState({ForceliftOnlyReports: res.data[0].count})
         })
@@ -132,7 +132,7 @@ axios.get('/api/v1/analytics/forcelift')
              console.log(error)
         })
 
-        axios.get('/api/v1/analytics/reports/communityboreholes')
+        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/communityboreholes')
         .then(res =>{
             this.setState({CommunityOnlyReports: res.data[0].count})
         })
@@ -140,7 +140,7 @@ axios.get('/api/v1/analytics/forcelift')
              console.log(error)
         })
 
-        axios.get('/api/v1/analytics/reports/solarborehole')
+        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/solarborehole')
         .then(res =>{
             this.setState({SolarOnlyReports: res.data[0].count})
         })

@@ -8,11 +8,11 @@ export default class SupervisorTableRow extends React.Component{
    activeSwith=()=>{
    // alert(this.props.active)
    if (this.props.active=='active'){
-        axios.put('/api/v1/users/deactivate/'+this.props.id)
+        axios.put('https://ruwassa.herokuapp.com/api/v1/users/deactivate/'+this.props.id)
         this.props.reload()
    }
    else{
-    axios.put('/api/v1/users/reactivate/'+this.props.id)
+    axios.put('https://ruwassa.herokuapp.com/api/v1/users/reactivate/'+this.props.id)
     this.props.reload()
    }
    }

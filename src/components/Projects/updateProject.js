@@ -31,7 +31,7 @@ componentDidMount(){
     const { params } = this.props.match;
 
    // console.log(params.id)
-    axios.get('/api/v1/projects/'+params.id)
+    axios.get('https://ruwassa.herokuapp.com/api/v1/projects/'+params.id)
     .then(res=>{
       if(res.data[0].title==='Sanitation'){
         this.setState({compartmentdisplay:''})
@@ -81,7 +81,7 @@ else if (name=='contractor_id'){
 }
 
 gotoCheckLocal(id){
-  axios.get('/api/v1/users/'+id)
+  axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+id)
   .then(req=>{
       if(req.data[0])(
       this.setState(prevState=>{
@@ -97,7 +97,7 @@ gotoCheckLocal(id){
 }
 
 gototCheckState(id){
-  axios.get('/api/v1/users/'+id)
+  axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+id)
   .then(req=>{
       if(req.data[0])(
       this.setState({
@@ -113,7 +113,7 @@ gototCheckState(id){
 }
 
 checkcontractor(id){
-  axios.get('/api/v1/contractors/'+id)
+  axios.get('https://ruwassa.herokuapp.com/api/v1/contractors/'+id)
   .then(req=>{
       if(req.data[0])(
       this.setState({
@@ -152,7 +152,7 @@ const obj = {
 
 }
 const {params}=this.props.match;
-axios.put('/api/v1/projects/'+params.id, obj)
+axios.put('https://ruwassa.herokuapp.com/api/v1/projects/'+params.id, obj)
 .catch((error)=>{console.log(error)});
 this.props.history.push('/projects')
 

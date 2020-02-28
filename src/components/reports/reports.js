@@ -16,14 +16,14 @@ constructor(props){
 
 onLoad=()=>{
    
-        axios.get('/api/v1/reports')
+        axios.get('https://ruwassa.herokuapp.com/api/v1/reports')
                 .then(res => {
                     this.setState({
                             reports:res.data
                     })
                 }).catch( errors=>{console.log(errors.message)})
 
-                axios.get('/api/v1/reports/completereports/all')
+                axios.get('https://ruwassa.herokuapp.com/api/v1/reports/completereports/all')
                 .then(res => {
                     this.setState({
                             allreports:res.data
@@ -48,7 +48,7 @@ handleClick = (event) => {
 }
 
 sanitationReport=()=>{
-    axios.get('/api/v1/reports/completereports/sanitation')
+    axios.get('https://ruwassa.herokuapp.com/api/v1/reports/completereports/sanitation')
     .then(res => {
         this.setState({
                 allreports:res.data,
@@ -58,7 +58,7 @@ sanitationReport=()=>{
     }).catch( errors=>{console.log(errors.message)})
 }
 forceReport=()=>{
-    axios.get('/api/v1/reports/completereports/forcelift')
+    axios.get('https://ruwassa.herokuapp.com/api/v1/reports/completereports/forcelift')
     .then(res => {
         this.setState({
                 allreports:res.data,
@@ -68,7 +68,7 @@ forceReport=()=>{
     }).catch( errors=>{console.log(errors.message)})
 }
 communityReport=()=>{
-    axios.get('/api/v1/reports/completereports/community')
+    axios.get('https://ruwassa.herokuapp.com/api/v1/reports/completereports/community')
     .then(res => {
         this.setState({
                 allreports:res.data,
@@ -78,7 +78,7 @@ communityReport=()=>{
     }).catch( errors=>{console.log(errors.message)})
 }
 solarReport=()=>{
-    axios.get('/api/v1/reports/completereports/solar')
+    axios.get('https://ruwassa.herokuapp.com/api/v1/reports/completereports/solar')
     .then(res => {
         this.setState({
                 allreports:res.data,
