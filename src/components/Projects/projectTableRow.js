@@ -9,6 +9,9 @@ class ProjectTableRow extends React.Component{
     goToUpdate = () =>{
         this.props.history.push('/updateproject/'+this.props.id)
     }
+    goToDetails = () =>{
+        this.props.history.push('/projectdetails/'+this.props.id)
+    }
     render(){
         return(
             
@@ -23,7 +26,7 @@ class ProjectTableRow extends React.Component{
                         <td>
                             <div className='row'>
                         <button className='btn btn-default btn-info'  style={{width:'50px'}}
-                             onClick={()=>alert(this.props.id)}>View</button>
+                             onClick={this.goToDetails}>View</button>
                             <button className='btn btn-default btn-info'  style={{width:'50px', marginLeft:5}}
                              onClick={this.goToUpdate}>Edit </button>
                              </div>                            

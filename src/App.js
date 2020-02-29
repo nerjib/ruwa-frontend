@@ -19,6 +19,7 @@ import AddContractor from './components/contractors/addcontractor';
 import Paginat from './components/Projects/pagination';
 import Login from './Login'
 import SignOut from './signout';
+import ProjectDetails from './components/Projects/projectdeails'
 function App() {
   return (
     <div className="App">
@@ -42,6 +43,7 @@ function App() {
           <Route path='/contractors' exact component={Contractors} />
           <Route path='/contractors/add' exact component={AddContractor} />
           <Route path='/paginat' exact component={Paginat} />
+          <Route path='/projectdetails/:id' exact component={ProjectDetails}/>
 
      </Switch>
 
