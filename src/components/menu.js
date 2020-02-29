@@ -27,6 +27,7 @@ import { Link, Route, Redirect, withRouter } from 'react-router-dom';
     }
     goToSignOut=()=>{
         this.props.onSignOut()
+        this.props.history.push('/signout')
     }
     
   render(){
@@ -39,8 +40,8 @@ import { Link, Route, Redirect, withRouter } from 'react-router-dom';
         <button onClick={this.goToAnalytics} className='btn btn-defult btn-block'><h5 className='text-center text-primary'>Analytics</h5></button>
     {//    <button onClick={this.goToHome} className='btn btn-defult btn-block'><h5 className='text-center text-primary'>About</h5></button>
         }
-       <Link to='/signout'>  <button onClick={this.goToSignOut} className='btn btn-defult btn-block' style={{margin:5}}><h5 className='text-center text-primary'>Sign Out</h5></button>
-</Link>
+        <button onClick={this.goToSignOut} className='btn btn-defult btn-block' style={{marginBottom:5}}><h5 className='text-center text-primary'>Sign Out</h5></button>
+
     </div>
     )
 }
