@@ -3,6 +3,7 @@ import axios from 'axios';
 import ActivityRow from './activityRow';
 import Pdf from 'react-to-pdf';
 const ref=React.createRef();
+const ref1=React.createRef();
 export default class ReportDetails extends React.Component {
 constructor(props){
     super(props)
@@ -29,7 +30,9 @@ constructor(props){
         Activity:'',
         gps:'',
         contractor_id:'',
-        companyname:''
+        companyname:'',
+        imgdisplay:'none',
+        reportdisplay:''
     }
 }
 
@@ -103,22 +106,28 @@ constructor(props){
         
             const options={
                 orientation: 'landscape',
-                unit: 'in',
-                format: [40,2]
+                unit: 'px',
+                format: [900,400]
             }
         return(
             <div className='fluid-container'>
-            
-                <div className='col-md-7'>
-                <Pdf targetRef={ref} filename={this.state.pid+'_'+this.state.ptitle+'_'+this.state.plga+'_'+this.state.summaryfrom+'_'+this.state.summaryto} x={.5} y={.5}>
+             <div className='row'>   <button onClick={()=>{this.setState({reportdisplay:'',imgdisplay:'none'})}}>Report summary</button>
+                    <button onClick={()=>{this.setState({reportdisplay:'none',imgdisplay:''})}}>Activity images</button>
+             </div>
+                <div className='col-md-12'  >
+                <Pdf  targetRef={ref} filename={this.state.pid+'_'+this.state.ptitle+'_'+this.state.plga+'_'+this.state.summaryfrom+'_'+this.state.summaryto} 
+                x={1} y={1}
+                >
                     {({toPdf})=><button className='btn btn-default btn-info' onClick={toPdf}>Download Report</button>}
                 </Pdf>
+              
                 </div>
                 <div className='row'>
                 <div className='col-md-3'></div>
 
-                <div className='fluid-container col-md-7' ref={ref}>
+                <div className='fluid-container col-md-12'ref={ref}>
                 <br/><br/>
+                <div className=' col-md-7' style={{display:this.state.reportdisplay }}>
                 <div ><span><h5><strong>KADUNA FIELD OFFICE: WASH WEEKLY PROGRESS REPORT</strong></h5></span></div>
                 <table className='table table-bordered ' style={{border: '1px inset black'}}>
                     <thead>
@@ -197,17 +206,18 @@ constructor(props){
                     </tbody>
 
                 </table>
-              
-                </div>
-             
               </div>
-              <div className='row'>
-                  <div className='col-md-3'></div>
-                   { Object.keys(this.state.Activity).map(e=>
-                   <div className='col-md-4' style={{margin:10}}> <img style={{width:400, heigth:400}} src={this.state.Activity[e].imgurl}/></div>
-                )   
+             
+            
+              <div className='row ' style={{display:this.state.imgdisplay}} >
+                   { Object.keys(this.state.Activity).map(e=><div><div style={{backgroundColor:'green', width:250,height:400}}></div>
+                   <div className='col-md-3' style={{margin:20}}> <img style={{width:250, heigth:400}} src={this.state.Activity[e].imgurl}/></div></div>
+                   )   
                 }
                      </div>
+                     </div>
+                     </div>
+
             </div>            
         )
     }
