@@ -210,8 +210,8 @@ constructor(props){
              
             
               <div className='row ' style={{display:this.state.imgdisplay}} >
-                   { Object.keys(this.state.Activity).map(e=><div><div style={{backgroundColor:'green', width:250,height:400}}></div>
-                   <div className='col-md-3' style={{margin:20}}> <img style={{width:250, heigth:400}} src={this.state.Activity[e].imgurl}/></div></div>
+                   { Object.keys(this.state.Activity).map(e=>
+                   <div className='col-md-3' style={{margin:20}}> <img style={{width:250, heigth:400}} src={this.state.Activity[e].imgurl}/></div>
                    )   
                 }
                      </div>
