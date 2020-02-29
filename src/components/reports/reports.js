@@ -137,7 +137,7 @@ currentProjects.map((e,i)=>{row.push(<ReportRow sn={i+1} id={this.state.allrepor
                 <div> <button onClick={this.communityReport} >Community</button></div>
 
             </div>
-            <div>{pageNumbers}</div>
+            <div> pages {pageNumbers}</div>
             <div className='col-md-1'>
             <table  width='200' className='table'>      
                 <thead>

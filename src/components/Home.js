@@ -10,6 +10,9 @@ import ruwasa from '../img/ruwasa.jpg'
 import Menu from './menu'
 import Reports from './reports/reports'
 import Analytics from './analytics'
+import './home.css'
+
+
 export default class Home extends React.Component{
 constructor(props){
     super(props)
@@ -140,25 +143,24 @@ render(){
   //     alert(this.state.login)
     return(
         <div className='fluid-container' >
-            <div className='row'>
- <div className='col-md-2'  >    <img className='  responsive-image' style={{width:'70%'}}  src={ruwasa}
+            <div id='header1' className='row'>
+ <div className='col-md-2'style={{zIndex:4}}  ><img style={{zIndex:3}} className='responsive-image' id='img'  src={ruwasa}
  alt='Logo'  /> </div>
-            <div style={{ backgroundColor:'#00a9f9', width:'100%'}} className='col-md-10'>        
-            <div  className='col-md-9'><h2 style={{color:'#ffffff', marginTop:70}} className=' text-center'>{this.state.title}</h2></div> 
+            <div style={{ backgroundColor:'#00a9f9', width:'100%'}}   className='col-md-10'>        
+            <div><h2 style={{color:'#ffffff', marginTop:70}} className=' text-center'>{this.state.title}</h2></div> 
+             <div><h2 style={{color:'white'}}>{(this.state.time)}</h2></div>
             </div> 
             </div>
   
-            <div className='row'  >
+            <div className='row' id='contentbody'  >
         {//--menu--
         }
-                <div className='col-md-2' style={{backgroundColor:'#00a9f9'}}   >
+                <div className='col-md-2' style={{backgroundColor:'#00a9f9'}} id='menu'  >
                 <div className='block' style={{backgroundColor:'#00a9f9', height:50, alignItems:'center', display:'block'}}><h3 className='text-center'>Dashboard</h3></div>
                 <Menu  onSignOut={this.handleSignOut} onContractors={this.handleContractors} onHome={this.handleHome} onProjects={this.handleProjects} onReports={this.handleReports} onSupervisors={this.handleSupervisors} onAnalytics={this.handleAnalyticts} />
                 </div>
        
-                <div className='col-md-10' style={{ float:'right' }} >
-                <hr/>
-                <div><h2>{(this.state.time)}</h2></div>
+                <div  className='col-md-10' id='viewcontent' style={{ float:'right' }} >
                         <span >
                             <div style={{display:this.state.welcome}}>
                            <h6 className='text-block text-justify'> The goal of the WASH programme is to contribute to an 

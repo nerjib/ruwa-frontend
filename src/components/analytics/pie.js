@@ -12,7 +12,7 @@ data={{
                     labels: ['sanitation','Hand pump','Motorized Solar', 'Community borehole'],
                     datasets: [{
                         data:[this.props.sanitations,this.props.forcelift,this.props.solarpump,this.props.communitypump],
-                        backgroundColor:['red','blue','yellow','green']
+                        backgroundColor:['red','blue','purple','green']
                     }]
                 }}
                     height='100%'

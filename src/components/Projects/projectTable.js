@@ -43,7 +43,7 @@ export default class Supervisors extends React.Component{
     })
         return(
             <div>
-                {pageNumbers}
+                pages {pageNumbers}
                 <table className='table'>
                     <thead>
                         <tr>

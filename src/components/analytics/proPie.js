@@ -12,7 +12,7 @@ data={{
                     labels: ['Completed','Abandoned','Ongoing'],
                     datasets: [{
                         data:[this.props.completed, this.props.abandoned, this.props.ongoing,],
-                        backgroundColor:['green','red','yellow']
+                        backgroundColor:['green','red','blue']
                     }]
                 }}
                     height='100%'
