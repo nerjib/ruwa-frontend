@@ -9,7 +9,10 @@ constructor(props){
     super(props)
     this.state={
         projects:'',
-        projectsfocus:''
+        projectsfocus:'',
+        acttype:'Projects Coverage',
+        projectdisplay:'',
+        coveragedisplay:'none'
     }
 }
 
@@ -103,7 +106,20 @@ allProjects=()=>{
 })    
 }
 gotoProjectstatus=()=>{
-    alert(this.state.projectsfocus)
+ //  alert(this.state.projectsfocus)
+   if(this.state.acttype=='Projects Coverage')
+    this.setState({
+        acttype: 'Projects',
+        coveragedisplay:'',
+        projectdisplay:'none'
+    })
+    else if (this.state.acttype=='Projects'){
+        this.setState({
+            acttype: 'Projects Coverage',
+            projectdisplay:'',
+            coveragedisplay:'none',
+        })
+    }
 }
 render(){
     
@@ -117,11 +133,15 @@ render(){
             <div className='col-xs-2'  ><button onClick={this.solarProjects} className='btn btn-default btn-info'>Solar Boreholes</button></div>
             <div className='col-xs-2'  ><button onClick={this.forceProjects} className='btn btn-default btn-info'>Force Lift</button></div>
             <div className='col-xs-2'  ><button onClick={this.communityProjects} className='btn btn-default btn-info'>Community</button></div>
-            <div className='col-xs-2'  ><button onClick={this.gotoProjectstatus} className='btn btn-default btn-info'>project Status</button></div>
+            <div className='col-xs-2'  ><button onClick={this.gotoProjectstatus} className='btn btn-default btn-info'>{this.state.acttype}</button></div>
 
             </div>
+            <div style={{display:this.state.projectdisplay}}>
             <ProjectTable projects={this.state.projects} />
-            <ProjectsStatus reports={this.state.projects}/>
+            </div>
+            <div style={{display:this.state.coveragedisplay}}>
+            <ProjectsStatus projecttype={this.state.projectsfocus} reports={this.state.projects}/>
+            </div>
         </div>
     )
 }
