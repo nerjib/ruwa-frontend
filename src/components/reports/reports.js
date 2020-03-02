@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import ReportRow from './reportRow';
 import ReportTable from './reportTable'
+import StatusReports from './statusreports'
 class Reports extends React.Component{
 constructor(props){
     super(props)
@@ -10,7 +11,8 @@ constructor(props){
             displayAll:'none',
             currentPage: 1,
             reportsPerPage: 10,
-            allreports:''
+            allreports:'',
+            reportfocus:''
     }
 }
 
@@ -26,7 +28,8 @@ onLoad=()=>{
                 axios.get('https://ruwassa.herokuapp.com/api/v1/reports/completereports/all')
                 .then(res => {
                     this.setState({
-                            allreports:res.data
+                            allreports:res.data,
+                            reportfocus:'all'
                     })
                 }).catch( errors=>{console.log(errors.message)})
  
@@ -53,6 +56,7 @@ sanitationReport=()=>{
         this.setState({
                 allreports:res.data,
                 currentPage: 1,
+                reportfocus:'sanitation'
 
         })
     }).catch( errors=>{console.log(errors.message)})
@@ -63,6 +67,7 @@ forceReport=()=>{
         this.setState({
                 allreports:res.data,
                 currentPage: 1,
+                reportfocus:'forcelift'
 
         })
     }).catch( errors=>{console.log(errors.message)})
@@ -73,6 +78,7 @@ communityReport=()=>{
         this.setState({
                 allreports:res.data,
                 currentPage: 1,
+                reportfocus:'community'
 
         })
     }).catch( errors=>{console.log(errors.message)})
@@ -83,12 +89,15 @@ solarReport=()=>{
         this.setState({
                 allreports:res.data,
                 currentPage: 1,
+                reportfocus:'solar'
 
         })
     }).catch( errors=>{console.log(errors.message)})
 }
 
-
+gotoReportstatus=()=>{
+    alert(this.state.reportfocus)
+}
 render() {
     let row =[];
 
@@ -135,7 +144,7 @@ currentProjects.map((e,i)=>{row.push(<ReportRow sn={i+1} id={this.state.allrepor
                 <div> <button onClick={this.forceReport} >Force Lift</button></div>
                 <div> <button onClick={this.solarReport} >Solar Motorized</button></div>
                 <div> <button onClick={this.communityReport} >Community</button></div>
-
+                <div> <button onClick={this.gotoReportstatus} >Status Reports</button></div>
             </div>
             <div> pages {pageNumbers}</div>
             <div className='col-md-1'>
@@ -167,7 +176,8 @@ currentProjects.map((e,i)=>{row.push(<ReportRow sn={i+1} id={this.state.allrepor
             </table>
             </div>
             </div>
-            
+       {//     <StatusReports reports={this.state.allreports}/>
+       }
         </div>
     )
 }

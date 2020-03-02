@@ -2,14 +2,14 @@ import React from 'react';
 import axios from 'axios';
 import ProjectTable from './projectTable';
 import { Link, Route, Redirect } from 'react-router-dom';
-
+import ProjectsStatus from './projectsstatus'
 
 export default class Projects extends React.Component{
 constructor(props){
     super(props)
     this.state={
         projects:'',
-        
+        projectsfocus:''
     }
 }
 
@@ -28,7 +28,10 @@ componentDidMount(){
 //this.inTerval=setInterval(()=>this.onLoad(),60000)
 axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/all')
 .then(res =>{
-    this.setState({projects: res.data})
+    this.setState({
+        projects: res.data,
+        projectsfocus:'all'
+    })
 })
 .catch(function(error){
      console.log(error)
@@ -41,7 +44,11 @@ componentWillUnmount(){
 sanitationProjects=()=>{
     axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/sanitations')
 .then(res =>{
-    this.setState({projects: res.data})
+    this.setState({
+        projects: res.data,
+        projectsfocus:'sanitation'
+    
+    })
 })
 .catch(function(error){
      console.log(error)
@@ -50,7 +57,10 @@ sanitationProjects=()=>{
 forceProjects=()=>{
     axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/forcelift')
 .then(res =>{
-    this.setState({projects: res.data})
+    this.setState({
+        projects: res.data,
+        projectsfocus:'forcelift'
+    })
 })
 .catch(function(error){
      console.log(error)
@@ -59,7 +69,10 @@ forceProjects=()=>{
 communityProjects=()=>{
     axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/community')
 .then(res =>{
-    this.setState({projects: res.data})
+    this.setState({
+        projects: res.data,
+        projectsfocus:'community'
+    })
 })
 .catch(function(error){
      console.log(error)
@@ -68,7 +81,10 @@ communityProjects=()=>{
 solarProjects=()=>{
     axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/solar')
 .then(res =>{
-    this.setState({projects: res.data})
+    this.setState({
+        projects: res.data,
+        projectsfocus:'solar'
+    })
 })
 .catch(function(error){
      console.log(error)
@@ -77,11 +93,17 @@ solarProjects=()=>{
 allProjects=()=>{
     axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/all')
 .then(res =>{
-    this.setState({projects: res.data})
+    this.setState({
+        projects: res.data,
+        projectsfocus:'all'
+    })
 })
 .catch(function(error){
      console.log(error)
 })    
+}
+gotoProjectstatus=()=>{
+    alert(this.state.projectsfocus)
 }
 render(){
     
@@ -95,9 +117,11 @@ render(){
             <div className='col-xs-2'  ><button onClick={this.solarProjects} className='btn btn-default btn-info'>Solar Boreholes</button></div>
             <div className='col-xs-2'  ><button onClick={this.forceProjects} className='btn btn-default btn-info'>Force Lift</button></div>
             <div className='col-xs-2'  ><button onClick={this.communityProjects} className='btn btn-default btn-info'>Community</button></div>
-         
+            <div className='col-xs-2'  ><button onClick={this.gotoProjectstatus} className='btn btn-default btn-info'>project Status</button></div>
+
             </div>
             <ProjectTable projects={this.state.projects} />
+            <ProjectsStatus reports={this.state.projects}/>
         </div>
     )
 }

@@ -36,7 +36,7 @@ export default class Supervisors extends React.Component{
     
 
     currentProjects.map((e,i)=>{row.push(
-        <ProjectTableRow sn={i} title={this.props.projects[e].title}  id={this.props.projects[e].id}
+        <ProjectTableRow sn={i} title={this.props.projects[e].title}  id={this.props.projects[e].id} lot={this.props.projects[e].lot}
         loc={this.props.projects[e].location} status={this.props.projects[e].status} ward={this.props.projects[e].ward}
             supervisor={this.props.projects[e].first_name+' '+this.props.projects[e].last_name}
             lga={this.props.projects[e].lga}   contractor={this.props.projects[e].company }     />)
@@ -48,7 +48,7 @@ export default class Supervisors extends React.Component{
                     <thead>
                         <tr>
                             <th>SN</th>
-                            <th>Project ID</th>
+                            <th>Lots</th>
                             <th>Title</th>
                             <th>location</th>
                             <th>Status</th>

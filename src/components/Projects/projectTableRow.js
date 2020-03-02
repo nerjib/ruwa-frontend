@@ -17,7 +17,7 @@ class ProjectTableRow extends React.Component{
             
                     <tr>       
                         <td>{this.props.sn+1}</td>
-                        <td>{this.props.id}</td>
+                        <td>{this.props.lot}</td>
                         <td>{this.props.title}</td>
                         <td>{this.props.ward +', '+this.props.lga}</td>
                         <td>{this.props.status}</td>
