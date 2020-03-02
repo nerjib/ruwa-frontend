@@ -46,8 +46,9 @@ export default class ProjectsStatus extends React.Component {
             <div>
                 <table class='table'>
                     <thead>
+                        <tr><th colSpan='8'>{this.props.projecttype}</th></tr>
                         <tr>
-                            <th>S/N</th><th>LOTS</th><th>LGEA</th><th>Council Ward</th><th>Community Name</th><th>Facility</th><th>Name of Contractor</th><th>% Coverage</th>
+                            <th>S/N</th><th>LOTS</th><th>LGA</th><th>Council Ward</th><th>Community Name</th><th>Facility</th><th>Name of Contractor</th><th>% Coverage</th>
                         </tr>
                     </thead>
                     <tbody>
