@@ -80,15 +80,14 @@ render() {
     return (
    <tr>
      <td>{this.props.sn}</td>
-    <td >{this.props.id}</td>
+    <td >{this.props.lot}</td>
    <td >{this.props.title}</td>
    <td >{this.props.lga}</td>
    <td >{this.props.ward}</td>
    <td>{this.props.community}</td>
-   <td>{(this.props.gps)}</td>
-   <td>{this.props.gps}</td>
+   <td>{((this.props.gps).split(","))[0]}</td>
+   <td>{((this.props.gps).split(","))[1]}</td>
    <td>{this.props.facility}</td>
-   <td>{this.props.lot}</td>
    <td>{this.props.contractor}</td>
    <td>{this.props.statesuper}</td>
    <td >{this.props.localsup}</td>

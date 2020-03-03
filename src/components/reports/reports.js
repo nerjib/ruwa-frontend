@@ -151,7 +151,7 @@ currentProjects.map((e,i)=>{row.push(<ReportRow sn={i+1} id={this.state.allrepor
             <table  width='200' className='table'>      
                 <thead>
                     <tr><th>S/N</th>
-                        <th>RID</th>
+                        <th>LOTS</th>
                         <th>Title</th>
                         <th>LGA</th>
                         <th>Council Ward</th>
@@ -159,7 +159,6 @@ currentProjects.map((e,i)=>{row.push(<ReportRow sn={i+1} id={this.state.allrepor
                         <th>LATITUDE</th>
                         <th>LONGITUDE</th>
                         <th>FACILITY</th>
-                        <th>LOT NO.</th>
                         <th>CONTRACTOR</th>
                        <th>STATE SUPERVISOR</th> 
                        <th>LGA SUPERVISOR</th>

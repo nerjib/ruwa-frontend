@@ -133,7 +133,7 @@ render(){
             <div className='col-xs-2'  ><button onClick={this.solarProjects} className='btn btn-default btn-info'>Solar Boreholes</button></div>
             <div className='col-xs-2'  ><button onClick={this.forceProjects} className='btn btn-default btn-info'>Force Lift</button></div>
             <div className='col-xs-2'  ><button onClick={this.communityProjects} className='btn btn-default btn-info'>Community</button></div>
-            <div className='col-xs-2'  ><button onClick={this.gotoProjectstatus} className='btn btn-default btn-info'>{this.state.acttype}</button></div>
+            <div className='col-xs-2'  ><button onClick={this.gotoProjectstatus} className='btn btn-default btn-primary'>{this.state.acttype}</button></div>
 
             </div>
             <div style={{display:this.state.projectdisplay}}>
