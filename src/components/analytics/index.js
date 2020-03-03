@@ -25,6 +25,18 @@ class Analytics extends React.Component{
             SolarOnlyReports:'',
             CommunityOnlyReports:'',
             ForceliftOnlyReports:'',
+            today:0,
+            todaySolar:0,
+            todayCommunity:0,
+            todayForcelift:0,
+            todaySanitation:0,
+            month:0,
+            monthSolar:0,
+            monthCommunity:0,
+            monthForcelift:0,
+            monthSanitation: 0,
+            week:0
+            
         }
     }
 
@@ -147,6 +159,134 @@ axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/forcelift')
         .catch(error=>{
              console.log(error)
         })
+
+        //montly report
+        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/date/all')
+        .then(res =>{
+            let mon=0; 
+            let tod=0
+           
+            Object.keys(res.data).map(e=>{
+                if (new Date(res.data[e].date).getMonth()== new Date().getMonth()){
+                    mon ++;
+                }
+            })
+
+            Object.keys(res.data).map(e=>{
+                if (new Date(res.data[e].date).getDate()== new Date().getDate() && new Date(res.data[e].date).getMonth()== new Date().getMonth()){
+                    tod ++;
+                }
+            })
+
+            this.setState({
+               month:  mon,
+                today:tod
+            })
+        })
+        .catch(error=>{
+             console.log(error)
+        })
+        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/date/sanitation')
+        .then(res =>{
+            let monSan=0; 
+            let todSan=0
+           
+            Object.keys(res.data).map(e=>{
+                if (new Date(res.data[e].date).getMonth()== new Date().getMonth()){
+                    monSan ++;
+                }
+            })
+            Object.keys(res.data).map(e=>{
+                if (new Date(res.data[e].date).getDate()== new Date().getDate() && new Date(res.data[e].date).getMonth()== new Date().getMonth()){
+                    todSan ++;
+                }
+            })
+
+            this.setState({
+               monthSanitation:  monSan,
+               todaySanitation: todSan
+               
+            })
+        })
+        .catch(error=>{
+             console.log(error)
+        })
+
+        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/date/force')
+        .then(res =>{
+            let monForce=0;
+            let todForce=0;
+           
+            Object.keys(res.data).map(e=>{
+                if (new Date(res.data[e].date).getMonth()== new Date().getMonth()){
+                    monForce ++;
+                }
+            })
+
+            Object.keys(res.data).map(e=>{
+                if (new Date(res.data[e].date).getDate()== new Date().getDate() && new Date(res.data[e].date).getMonth()== new Date().getMonth()){
+                    todForce ++;
+                }
+            })
+
+            this.setState({
+               monthForcelift:  monForce,
+               todayForcelift: todForce
+            })
+        })
+        .catch(error=>{
+             console.log(error)
+        })
+
+        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/date/community')
+        .then(res =>{
+            let monCom=0;
+            let todCom=0
+           
+            Object.keys(res.data).map(e=>{
+                if (new Date(res.data[e].date).getMonth()== new Date().getMonth()){
+                    monCom ++;
+                }
+            })
+            Object.keys(res.data).map(e=>{
+                if (new Date(res.data[e].date).getDate()== new Date().getDate() && new Date(res.data[e].date).getMonth()== new Date().getMonth()){
+                    todCom ++;
+                }
+            })
+
+            this.setState({
+               monthCommunity:  monCom,
+               todayCommunity:todCom
+            })
+        })
+        .catch(error=>{
+             console.log(error)
+        })
+
+        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/date/solar')
+        .then(res =>{
+            let monSolar=0;
+            let todSolar=0;
+           
+            Object.keys(res.data).map(e=>{
+                if (new Date(res.data[e].date).getMonth()== new Date().getMonth()){
+                    monSolar ++;
+                }
+            })
+            Object.keys(res.data).map(e=>{
+                if (new Date(res.data[e].date).getDate()== new Date().getDate() && new Date(res.data[e].date).getMonth()== new Date().getMonth()){
+                    todSolar ++;
+                }
+            })
+
+            this.setState({
+               monthSolar:  monSolar,
+               todaySolar:todSolar,
+            })
+        })
+        .catch(error=>{
+             console.log(error)
+        })
     }
 
     componentDidMount(){
@@ -242,11 +382,11 @@ componentWillUnmount(){
                 <div className='col-md-4'>
                     <span><h5 className='text-info'>Reports Received this month</h5></span>
                     <div className='col-md-12'>
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Sanitation:</h6><h6 className='text-right col-md-3' >{this.state.SanitationsOnlyReports}</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.ForceliftOnlyReports}</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.CommunityOnlyReports}</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.SolarOnlyReports}</h6></div>              
-                    <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >xx</h5></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Sanitation:</h6><h6 className='text-right col-md-3' >{this.state.monthSanitation}</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.monthForcelift}</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.monthCommunity}</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.monthSolar}</h6></div>              
+                    <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >{this.state.month}</h5></div>              
 
                 </div>
 
@@ -266,11 +406,11 @@ componentWillUnmount(){
                 <div className='col-md-4'>
                     <span><h5 className='text-info'>Reports Received Today</h5></span>
                     <div className='col-md-12'>
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Sanitation:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
-                    <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >xx</h5></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Sanitation:</h6><h6 className='text-right col-md-3' >{this.state.todaySanitation}</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.todayForcelift}</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.todayCommunity}</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.todaySolar}</h6></div>              
+                    <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >{this.state.today}</h5></div>              
 
                 </div>
                 </div>
