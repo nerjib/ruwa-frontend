@@ -20,6 +20,8 @@ import Paginat from './components/Projects/pagination';
 import Login from './Login'
 import SignOut from './signout';
 import ProjectDetails from './components/Projects/projectdeails'
+import WeeklyReports from './components/reports/weeklyreports';
+import WeeklyReportDetails from './components/reports/weeklyreportdetails';
 function App() {
   return (
     <div className="App">
@@ -44,6 +46,9 @@ function App() {
           <Route path='/contractors/add' exact component={AddContractor} />
           <Route path='/paginat' exact component={Paginat} />
           <Route path='/projectdetails/:id' exact component={ProjectDetails}/>
+          <Route path='/weeklyreports' exact component={WeeklyReports}/>
+          <Route path='/weeklyreportdetails/:id' exact component={WeeklyReportDetails}/>
+
 
      </Switch>
 

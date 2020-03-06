@@ -3,6 +3,7 @@ import axios from 'axios';
 import ReportRow from './reportRow';
 import ReportTable from './reportTable'
 import StatusReports from './statusreports'
+import {Link} from 'react-router-dom'
 class Reports extends React.Component{
 constructor(props){
     super(props)
@@ -98,6 +99,11 @@ solarReport=()=>{
 gotoReportstatus=()=>{
     alert(this.state.reportfocus)
 }
+gotoWeeklyReports=()=>{
+   // alert('weekly')
+    this.props.history.push('/addsupervisor')
+
+}
 render() {
     let row =[];
 
@@ -145,6 +151,8 @@ currentProjects.map((e,i)=>{row.push(<ReportRow sn={i+1} id={this.state.allrepor
                 <div> <button onClick={this.solarReport} >Solar Motorized</button></div>
                 <div> <button onClick={this.communityReport} >Community</button></div>
                 <div> <button onClick={this.gotoReportstatus} >Status Reports</button></div>
+                <div> <Link to='/weeklyreports'><button  >Weekly Reports</button></Link></div>
+
             </div>
             <div> pages {pageNumbers}</div>
             <div className='col-md-1'>

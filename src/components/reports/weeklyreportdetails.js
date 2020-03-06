@@ -4,7 +4,7 @@ import ActivityRow from './activityRow';
 import Pdf from 'react-to-pdf';
 const ref=React.createRef();
 const ref1=React.createRef();
-export default class ReportDetails extends React.Component {
+export default class WeeklyReportDetails extends React.Component {
 constructor(props){
     super(props)
     this.state={
@@ -36,8 +36,7 @@ constructor(props){
         activity1:'',
         activitydate:'',
         activityoutcome:'',
-        imgurl:'',
-        lot:''
+        imgurl:''
     }
 }
 
@@ -45,7 +44,7 @@ constructor(props){
     componentDidMount(){
         const { params } = this.props.match;
 
-        axios.get('https://ruwassa.herokuapp.com/api/v1/reports/'+params.id)
+        axios.get('https://ruwassa.herokuapp.com/api/v1/reports/submitted/weekly/'+params.id)
             .then(res=>{
               this.setState({
                 rid: res.data[0].id,
@@ -66,7 +65,7 @@ constructor(props){
 
               })
 
-              axios.get('https://ruwassa.herokuapp.com/api/v1/reports/activity/'+params.id)
+              axios.get('https://ruwassa.herokuapp.com/api/v1/reports/activity/weekly/'+params.id)
             .then(res=>{
               this.setState({
                Activity: res.data
@@ -80,17 +79,8 @@ constructor(props){
                   plocation: res.data[0].location,
                   plga: res.data[0].lga,
                   pgps: res.data[0].gps,
-                  contractor_id: res.data[0].contractor_id,
-                  lot:res.data[0].lot
+                  contractor_id: res.data[0].contractor_id
                 })
-
-                axios.get('https://ruwassa.herokuapp.com/api/v1/contractors/'+res.data[0].contractor_id)
-                .then(res=>{
-                    this.setState({
-                        companyname: res.data[0].company
-                    })
-                })
-
             })  
 
             axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+this.state.uid)
@@ -146,7 +136,7 @@ constructor(props){
                 <div className='fluid-container col-md-12'ref={ref}>
                 <br/><br/>
                 <div className=' col-md-7' style={{display:this.state.reportdisplay }}>
-                <div ><span><h5><strong>KADUNA FIELD OFFICE: WASH DAILY PROGRESS REPORT</strong></h5></span></div>
+                <div ><span><h5><strong>KADUNA FIELD OFFICE: WASH WEEKLY PROGRESS REPORT</strong></h5></span></div>
                 <table className='table table-bordered ' style={{border: '1px inset black'}}>
                     <thead>
                         
@@ -155,7 +145,7 @@ constructor(props){
                             <strong> NAME OF PROJECT:</strong>KADUNA RUWASSA: {(this.state.ptitle).toUpperCase()}
                             </th>
                             <th>
-                            <strong> REPORT ID:</strong> {this.state.rid}
+                            <strong> REPORT NO:</strong> {this.state.rid}
                             </th>
                         </tr>
                         </thead>
@@ -164,12 +154,19 @@ constructor(props){
                         <tr className='text-left'>
                             <td ><strong>LGA:</strong> {(this.state.plga).toUpperCase()}</td>
                             <td ><strong>CONTRACTOR:</strong> {this.state.companyname}</td>
-                            <td><strong>LOT NO:</strong> {this.state.lot}</td>
-                            <td><strong>DATE:</strong> {new Date(this.state.date).getDate()+'-'+(new Date(this.state.date).getMonth()+1)+'-'+new Date(this.state.date).getFullYear()}<br/><strong>GPS:</strong> {this.state.gps}</td>
-                            <td>{(new Date(this.state.date).toString()).substr(0,3)}</td>
+                            <td><strong>LOT NO:</strong></td>
+                            <td><strong>DATE:</strong> {new Date(this.state.date).getDate()+'-'+(new Date(this.state.date).getMonth()+1)+'-'+new Date(this.state.date).getFullYear()}<br/>GPS: {this.state.gps}</td>
                         </tr>
-                      
-                     
+                        <tr className='text-left'>
+                            <td colSpan="4">
+                            <strong>  SUMMARY OF PLANNED ACTIVITIES:</strong> {this.state.summary}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colSpan='4'>
+                            <strong>   Summary of KEY ACTIVITIES</strong>
+                            </td>
+                        </tr>
                         <tr>
                             <td colSpan='4'>
                             <strong> DETAILS OF ACTIVITIES CARRIED OUT WITH DATES: (attach photographs)</strong>
@@ -181,42 +178,51 @@ constructor(props){
                             <td><strong>OUTPUT/OUTCOME</strong></td>
                         </tr>
                         {row}
-                       <tr> <td>{this.state.activitydate}</td><td colSpan='2'>{this.state.activity1}</td><td>{this.state.activityoutcome}</td></tr>
-                        <tr><td colSpan='4'>
-                        <div className='col-md-3' style={{margin:20}}> <img style={{width:250, heigth:400}} src={this.state.imgurl}/></div>
-
-                            </td></tr>
-                            <tr>
-                            <td colSpan="4" className='text-left'>
-                            <strong> IS WORK PROGRESSING ACCORDING TI SUBMITED PLAN?</strong> {(this.state.compliance).toUpperCase()}<br/><br/>
-
-                            </td>
-                        </tr>
-                        
                         <tr>
                                                       <td colSpan="4" className='text-left'>
                             <strong>  CONCLUSION AND RECOMMENDATION:</strong> {this.state.conclusion}
                             <br/>
                             </td>
                         </tr>
-                  
+                        <tr>
+                            <td colSpan="4" className='text-left'><strong>
+                            <strong>PLANNED FOLLOW-UP ACTIVITIES FOR NEXT WEEK OTHER COMMENT:</strong></strong> {this.state.followup}
+                                <br/><br/>
+                            </td>
+                        </tr>
                         <tr>
                             <td colSpan="4" className='text-left'>
                              <strong>Name of Supervisor:</strong>   {this.state.fname+' '+this.state.lname+' '+this.state.oname}<br/>
                                <br/>
-                               <strong>DATE OF SUBMISSION:</strong> {new Date(this.state.date).getDate() +'-'+ (new Date(this.state.date).getMonth()+1)+'-'+new Date(this.state.date).getFullYear()}<br/><br/>
+                               <strong>DATE OF SUBMISSION:</strong> {new Date(this.state.date).getDate() +'-'+ (new Date(this.state.date).getMonth()+1)+' '+new Date(this.state.date).getFullYear()}<br/><br/>
                                <strong>PNONE:</strong> {this.state.phone}  <strong>EMAIL:</strong> {this.state.email}
                             </td>
                         </tr>
-                      
-                       
+                        <tr>
+                            <td colSpan="4" className='text-left'>
+                            <strong> IS WORK PROGRESSING ACCORDING TI SUBMITED PLAN?</strong> {(this.state.compliance).toUpperCase()}<br/><br/>
+
+                            <strong>  GROUP SUPERVISOR'S COMMENTS AND SIGNATURE</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colSpan="4" className='text-left'>
+                            <strong> GENERAL SUPERVISOR'S COMMENTS AND SIGNATURE:</strong> 
+                            </td>
+                        </tr>
                     </tbody>
 
                 </table>
+                <div className='col-md-3' style={{margin:20}}> <img style={{width:250, heigth:400}} src={this.state.imgurl}/></div>
               </div>
              
             
-            
+              <div className='row ' style={{display:this.state.imgdisplay}} >
+                   { Object.keys(this.state.Activity).map(e=>
+                   <div className='col-md-3' style={{margin:20}}> <img style={{width:250, heigth:400}} src={this.state.Activity[e].imgurl}/></div>
+                   )   
+                }
+                     </div>
                      </div>
                      </div>
 
