@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import now from 'performance-now';
 import ProPie from './proPie'
 import Barcharts from './barcharts'
+import DailyMap from '../map/dailymap'
 
 class Analytics extends React.Component{
     constructor(props){
@@ -35,11 +36,14 @@ class Analytics extends React.Component{
             monthCommunity: 0,
             monthForcelift: 0,
             monthSanitation: 0,
-            week: '((new Date()).toISOString()).getWeek()',
+            week: '',
             weekSolar: 0,
             weekCommunity: 0,
             weekForcelift: 0,
-            weekSanitation: 0
+            weekSanitation: 0,
+            pidd: [],
+            marker:{},
+            piddd:[]
             
         }
     }
@@ -170,6 +174,7 @@ axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/forcelift')
             let mon=0; 
             let tod=0;
             let wk= 0;
+            
            
             Object.keys(res.data).map(e=>{
                 if (new Date(res.data[e].date).getMonth()== new Date().getMonth()){
@@ -180,6 +185,25 @@ axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/forcelift')
             Object.keys(res.data).map(e=>{
                 if (new Date(res.data[e].date).getDate()== new Date().getDate() && new Date(res.data[e].date).getMonth()== new Date().getMonth()){
                     tod ++;
+                 this.state.pidd.push(res.data[e].pid)
+                 
+                 //alert(res.data[e].pid)
+                /* axios.get('https://ruwassa.herokuapp.com/api/v1/projects/details/'+res.data[e].pid)
+                 .then(res3=>{
+                     let data={
+                        name : res3.data[0].title,
+                        lat: 10.15368509, 
+                        lng: 7.147864129
+                     }
+                 //    alert(res3.data[0].title)
+                  this.state.piddd.push(data)
+
+
+                     this.setState({
+                         marker: {...this.state.marker, ...data},
+                     })
+                 })
+                 */
                 }
             })
             Object.keys(res.data).map(e=>{
@@ -191,7 +215,7 @@ axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/forcelift')
             this.setState({
                month:  mon,
                 today:tod,
-                week: new Date().getWeek()
+                week: new Date().getWeek(),
             })
         })
         .catch(error=>{
@@ -427,6 +451,10 @@ componentWillUnmount(){
                 </div>
 
 
+            </div>
+
+            <div>
+                <DailyMap/>
             </div>
          
 

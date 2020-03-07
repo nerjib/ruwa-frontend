@@ -22,6 +22,7 @@ import SignOut from './signout';
 import ProjectDetails from './components/Projects/projectdeails'
 import WeeklyReports from './components/reports/weeklyreports';
 import WeeklyReportDetails from './components/reports/weeklyreportdetails';
+import DailyMap from './components/map/dailymap';
 function App() {
   return (
     <div className="App">
@@ -48,6 +49,7 @@ function App() {
           <Route path='/projectdetails/:id' exact component={ProjectDetails}/>
           <Route path='/weeklyreports' exact component={WeeklyReports}/>
           <Route path='/weeklyreportdetails/:id' exact component={WeeklyReportDetails}/>
+          <Route path='/dailymap' exact component={DailyMap}/>
 
 
      </Switch>
