@@ -111,7 +111,7 @@ export default class DailyMap extends Component {
   }
 
   loader=()=>{
-    axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/date/sanitation')
+    axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/date/all')
     .then(res =>{
         let mon=0; 
         let tod=0;
