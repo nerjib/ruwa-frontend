@@ -31,11 +31,15 @@ class Analytics extends React.Component{
             todayForcelift:0,
             todaySanitation:0,
             month:0,
-            monthSolar:0,
-            monthCommunity:0,
-            monthForcelift:0,
+            monthSolar: 0,
+            monthCommunity: 0,
+            monthForcelift: 0,
             monthSanitation: 0,
-            week:0
+            week: '((new Date()).toISOString()).getWeek()',
+            weekSolar: 0,
+            weekCommunity: 0,
+            weekForcelift: 0,
+            weekSanitation: 0
             
         }
     }
@@ -164,7 +168,8 @@ axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/forcelift')
         axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/date/all')
         .then(res =>{
             let mon=0; 
-            let tod=0
+            let tod=0;
+            let wk= 0;
            
             Object.keys(res.data).map(e=>{
                 if (new Date(res.data[e].date).getMonth()== new Date().getMonth()){
@@ -177,10 +182,16 @@ axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/forcelift')
                     tod ++;
                 }
             })
+            Object.keys(res.data).map(e=>{
+                if (new Date(res.data[e].date).getDate()== new Date().getWeek() && new Date(res.data[e].date).getMonth()== new Date().getMonth()){
+                    wk ++;
+                }
+            })
 
             this.setState({
                month:  mon,
-                today:tod
+                today:tod,
+                week: new Date().getWeek()
             })
         })
         .catch(error=>{
@@ -380,13 +391,13 @@ componentWillUnmount(){
                 */
                 }
                 <div className='col-md-4'>
-                    <span><h5 className='text-info'>Reports Received this month</h5></span>
+                    <span><h5 className='text-info'>Reports Received this month{this.state.month}</h5></span>
                     <div className='col-md-12'>
                     <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Sanitation:</h6><h6 className='text-right col-md-3' >{this.state.monthSanitation}</h6></div>              
                     <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.monthForcelift}</h6></div>              
                     <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.monthCommunity}</h6></div>              
                     <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.monthSolar}</h6></div>              
-                    <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >{this.state.month}</h5></div>              
+                    <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >{this.state.monthSanitation+this.state.monthForcelift+this.state.monthCommunity+this.state.monthSolar}</h5></div>              
 
                 </div>
 
@@ -398,7 +409,7 @@ componentWillUnmount(){
                     <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
                     <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
                     <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
-                    <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >xx</h5></div>              
+                    <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >{this.state.week}</h5></div>              
 
                 </div>
                 </div>
@@ -410,7 +421,7 @@ componentWillUnmount(){
                     <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.todayForcelift}</h6></div>              
                     <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.todayCommunity}</h6></div>              
                     <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.todaySolar}</h6></div>              
-                    <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >{this.state.today}</h5></div>              
+                    <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >{this.state.todayCommunity+this.state.todayForcelift+this.state.todaySanitation+this.state.todaySolar}</h5></div>              
 
                 </div>
                 </div>
