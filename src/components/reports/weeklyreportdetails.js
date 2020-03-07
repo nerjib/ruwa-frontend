@@ -215,15 +215,17 @@ constructor(props){
                 </table>
               </div>
              
-            
-              <div className='row col-md-8' style={{display:this.state.imgdisplay}} >
-               <div>Attached images of {this.state.ptitle} in {this.state.plga} </div>
-                        <div> From: {this.state.summaryfrom+' - '+this.state.summaryto} </div>
+              <div className=' col-md-8' style={{display:this.state.imgdisplay}} >
+
+              <div>Attached images of {this.state.ptitle} in {this.state.plga} </div>
+              <div> From: {this.state.summaryfrom+' - '+this.state.summaryto} </div>
+<div className='row'>
                    { Object.keys(this.state.Activity).map(e=>
                    <div className='col-md-4' style={{margin:20}}> <img style={{width:250, heigth:400}} src={this.state.Activity[e].imgurl}/></div>
                    
                    )   
                 }
+                </div>
                      </div>
                      </div>
                      </div>
