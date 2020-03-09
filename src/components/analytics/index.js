@@ -453,9 +453,7 @@ componentWillUnmount(){
 
             </div>
 
-            <div>
-                <DailyMap/>
-            </div>
+         
          
 
         </div>

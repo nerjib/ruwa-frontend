@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import ActivityRow from './activityRow';
 import Pdf from 'react-to-pdf';
+import ReportPie from './reportpie'
 const ref=React.createRef();
 const ref1=React.createRef();
 export default class ReportDetails extends React.Component {
@@ -129,9 +130,7 @@ constructor(props){
             }
         return(
             <div className='fluid-container'>
-             <div className='row'>   <button onClick={()=>{this.setState({reportdisplay:'',imgdisplay:'none'})}}>Report summary</button>
-                    <button onClick={()=>{this.setState({reportdisplay:'none',imgdisplay:''})}}>Activity images</button>
-             </div>
+         
                 <div className='col-md-12'  >
                 <Pdf  targetRef={ref} filename={this.state.pid+'_'+this.state.ptitle+'_'+this.state.plga+'_'+this.state.summaryfrom+'_'+this.state.summaryto} 
                 x={1} y={1}
@@ -166,8 +165,9 @@ constructor(props){
                             <td ><strong>CONTRACTOR:</strong> {this.state.companyname}</td>
                             <td><strong>LOT NO:</strong> {this.state.lot}</td>
                             <td><strong>DATE:</strong> {new Date(this.state.date).getDate()+'-'+(new Date(this.state.date).getMonth()+1)+'-'+new Date(this.state.date).getFullYear()}<br/><strong>GPS:</strong> {this.state.gps}</td>
-                            <td>{(new Date(this.state.date).toString()).substr(0,3)}</td>
-                        </tr>
+                       {//     <td>{(new Date(this.state.date).toString()).substr(0,3)}</td>
+                       }
+                       </tr>
                       
                      
                         <tr>
@@ -182,9 +182,11 @@ constructor(props){
                         </tr>
                         {row}
                        <tr> <td>{this.state.activitydate}</td><td colSpan='2'>{this.state.activity1}</td><td>{this.state.activityoutcome}</td></tr>
-                        <tr><td colSpan='4'>
-                        <div className='col-md-3' style={{margin:20}}> <img style={{width:250, heigth:400}} src={this.state.imgurl}/></div>
-
+                        <tr><td colSpan='5'>
+                        <div className='row'>
+                        <div className='col-xd-2' style={{margin:20}}> <img style={{width:250, heigth:400}} src={this.state.imgurl}/></div>
+                            <ReportPie stage={90}/>
+                        </div>
                             </td></tr>
                             <tr>
                             <td colSpan="4" className='text-left'>

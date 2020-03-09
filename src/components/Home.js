@@ -6,7 +6,7 @@ import Contractors from './contractors/contractors'
 import { Link, Route, Redirect } from 'react-router-dom';
 import wassh from '../img/wassh1.jpg'
 import ruwasa from '../img/ruwasa.jpg'
-
+import DailyMap from './map/dailymap'
 import Menu from './menu'
 import Reports from './reports/reports'
 import Analytics from './analytics'
@@ -30,6 +30,7 @@ constructor(props){
         title:'ANALYTICS',
         time:'',
         login: access,
+        mapView:'none'
 
     }
 
@@ -50,6 +51,8 @@ handleProjects=()=>{
         reportView: this.state.display='none',
         contractorsView: this.state.display='none',
         analyticsView: this.state.display='none',
+        mapView: this.state.display='none',
+
         title: 'PROJECTS'
     })
 }
@@ -62,6 +65,8 @@ handleSupervisors=()=>{
         reportView: this.state.display='none',
         contractorsView: this.state.display='none',
         analyticsView: this.state.display='none',
+        mapView: this.state.display='none',
+
         title:'SUPERVISORS'
     })
 }
@@ -73,6 +78,8 @@ handleReports=()=>{
         reportView: this.state.display='',
         contractorsView: this.state.display='none',
         analyticsView: this.state.display='none',
+        mapView: this.state.display='none',
+
         title:'Reports'
     })
 }
@@ -84,6 +91,8 @@ handleContractors=()=>{
         reportView: this.state.display='none',
         contractorsView: this.state.display='',
         analyticsView: this.state.display='none',
+        mapView: this.state.display='none',
+
         title:'CONTRACTORS'
     })
 }
@@ -95,6 +104,8 @@ handleAnalyticts=()=>{
         reportView: this.state.display='none',
         contractorsView: this.state.display='none',
         analyticsView: this.state.display='',
+        mapView: this.state.display='none',
+
         title:'ANALYTICS'
     })
 }
@@ -106,8 +117,25 @@ handleHome=()=>{
         reportView: this.state.display='none',
         contractorsView: this.state.display='none',
         analyticsView: this.state.display='none',
+        mapView: this.state.display='none',
+
         title:'ABOUT'
     })
+}
+
+handleMap=()=>{
+    this.setState({
+        display: this.state.display='none',
+        welcome: this.state.display='none',
+        supervisorView: this.state.display='none',
+        reportView: this.state.display='none',
+        contractorsView: this.state.display='none',
+        analyticsView: this.state.display='none',
+        mapView: this.state.display='',
+
+        title:'MAP'
+    })
+
 }
 handleSignOut=()=> {}
     
@@ -157,7 +185,7 @@ render(){
         }
                 <div className='col-md-2' style={{backgroundColor:'#00a9f9'}} id='menu'  >
                 <div className='block' style={{backgroundColor:'#00a9f9', height:50, alignItems:'center', marginBottom:10, display:'block'}}><h3 className='text-center'>Dashboard</h3></div>
-                <Menu  onSignOut={this.handleSignOut} onContractors={this.handleContractors} onHome={this.handleHome} onProjects={this.handleProjects} onReports={this.handleReports} onSupervisors={this.handleSupervisors} onAnalytics={this.handleAnalyticts} />
+                <Menu onMap={this.handleMap} onSignOut={this.handleSignOut} onContractors={this.handleContractors} onHome={this.handleHome} onProjects={this.handleProjects} onReports={this.handleReports} onSupervisors={this.handleSupervisors} onAnalytics={this.handleAnalyticts} />
                 </div>
        
                 <div  className='col-md-10' id='viewcontent' style={{ float:'right' }} >
@@ -222,6 +250,9 @@ render(){
                             <div style={{display: this.state.contractorsView}}>
                             <Contractors />                            
                             </div>
+                            <div style={{display: this.state.mapView}}>
+                               <DailyMap/>
+                          </div>
                 </div>
 
             </div>
