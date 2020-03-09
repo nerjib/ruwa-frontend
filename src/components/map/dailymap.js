@@ -131,8 +131,10 @@ export default class DailyMap extends Component {
                  let data={
                     name : res3.data[0].title,
                     lat: (res3.data[0].gps.split(','))[0], 
-                    lng: (res3.data[0].gps.split(','))[1]
+                    lng: (res3.data[0].gps.split(','))[1],
+                    id:  Number(res.data[e].id)
                  }
+             //    alert(res.data[e].id)
              //    alert(res3.data[0].title)
             // markerlist={...markerlist,...data}
            this.state.myMarkers.push(data);
@@ -160,10 +162,11 @@ componentWillUnmount=()=>{
   render() {
 
     //Marker Component
-    const Marker = ({text}) => {
+    const Marker = ({text, id}) => {
         return (
-              <div><b style={{color:'green'}}>{text}</b><img style={{width:20}} className='responsive-image' id='img'  src={ruwasa}
-              alt='Logo'  /></div>
+              <div>         
+               <b style={{color:'green'}}>{text}</b><a href={`/#/reports/${id}`}><img style={{width:20}} className='responsive-image' id='img'  src={ruwasa}
+              alt='Logo'  /></a></div>
         );
     }
 
@@ -186,10 +189,11 @@ componentWillUnmount=()=>{
           {
             //Add a list of Markers to Your Map
             this.state.myMarkers.map( (each) =>
-              <Marker
+                          <Marker
                 lat = {each.lat}
                 lng = {each.lng}
               text = {each.name}
+              id= {each.id}
               />
             )
           }
@@ -197,8 +201,7 @@ componentWillUnmount=()=>{
         </div>
 
         </center>
-        marker1 {//Object.keys(this.props.markerid).map(e=>this.props.markerid[e])
-        }
+     
       </div>
       
     );

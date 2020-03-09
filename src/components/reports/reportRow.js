@@ -78,8 +78,7 @@ goToDetails =(id)=>{
 
 render() {
     return (
-   <tr>
-     <td>{this.props.sn}</td>
+   <tr> <td>{this.props.sn}</td>
     <td >{this.props.lot}</td>
    <td >{this.props.title}</td>
    <td >{this.props.lga}</td>
@@ -94,7 +93,7 @@ render() {
    <td >{new Date(this.props.date).getDate() +'-'+ (new Date(this.props.date).getMonth()+1)+' '+new Date(this.props.date).getFullYear()}</td>
    <td ><button className='btn btn-default btn-info' 
    onClick={()=>{this.goToDetails(this.props.id)}}>View</button></td>
-   </tr>
+</tr>
     )
 }
 }

@@ -25,6 +25,9 @@ import { Link, Route, Redirect, withRouter } from 'react-router-dom';
     goToHome=()=>{
         this.props.onHome()
     }
+    goToMap=()=>{
+        this.props.onMap()
+    }
     goToSignOut=()=>{
         this.props.onSignOut()
         this.props.history.push('/signout')
@@ -38,6 +41,7 @@ import { Link, Route, Redirect, withRouter } from 'react-router-dom';
         <button onClick={this.goToContractors} className='btn btn-defult btn-block'><h5 className='text-center text-primary'>Contractors</h5></button>
         <button onClick={this.goToReports} className='btn btn-defult btn-block'><h5 className='text-center text-primary'>Reports</h5></button>
         <button onClick={this.goToAnalytics} className='btn btn-defult btn-block'><h5 className='text-center text-primary'>Analytics</h5></button>
+        <button onClick={this.goToMap} className='btn btn-defult btn-block'><h5 className='text-center text-primary'>Map</h5></button>
     {//    <button onClick={this.goToHome} className='btn btn-defult btn-block'><h5 className='text-center text-primary'>About</h5></button>
         }
         <button onClick={this.goToSignOut} className='btn btn-defult btn-block' style={{marginBottom:5}}><h5 className='text-center text-primary'>Sign Out</h5></button>
