@@ -38,7 +38,8 @@ constructor(props){
         activitydate:'',
         activityoutcome:'',
         imgurl:'',
-        lot:''
+        lot:'',
+        projectstage:''
     }
 }
 
@@ -63,10 +64,9 @@ constructor(props){
                 activity1: res.data[0].activity,
                 activitydate: res.data[0].activitydate,
                 activityoutcome: res.data[0].activityoutcome,
-                imgurl: res.data[0].imgurl
-
+                imgurl: res.data[0].imgurl,
+                projectstage: res.data[0].pstatus
               })
-
               axios.get('https://ruwassa.herokuapp.com/api/v1/reports/activity/'+params.id)
             .then(res=>{
               this.setState({
@@ -185,7 +185,7 @@ constructor(props){
                         <tr><td colSpan='5'>
                         <div className='row'>
                         <div className='col-xd-2' style={{margin:20}}> <img style={{width:250, heigth:400}} src={this.state.imgurl}/></div>
-                            <ReportPie stage={90}/>
+                            <ReportPie pstatus={this.state.projectstage} stage={90}/>
                         </div>
                             </td></tr>
                             <tr>
