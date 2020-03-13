@@ -39,7 +39,22 @@ export default class ProjectsStatus extends React.Component {
         else if(e=='FR'){
             return('100%')
         }
+        else if(e=='Excavation'){
+            return('20%')
+        }
+     
+        else if(e=='SubS'){
+            return('40%')
+        }
+        else if(e=='Finishing'){
+            return('80%')
+        }
+        else if (e=='SuperS'){
+            return('60%')
+        }
+    
     }
+    
     render(){
         return (
 
