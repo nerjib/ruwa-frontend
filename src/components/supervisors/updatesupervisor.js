@@ -1,62 +1,81 @@
-import React from 'react';
-
+import React from 'react'
 import axios from 'axios'
-import {  Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom'
 
 
-class AddSupervisor extends React.Component{
-    constructor(props){
-        super(props)
-        this.state={
-            fname:'',
-            lname:'',
-            oname: '',
-            role:'',
-            lga:'',
-            active:'active',
-            email:''
+ class UpdateSupervisor extends React.Component {
+constructor(props){
+    super(props)
 
-        }
+    this.state={
+        fname:'',
+        lname:'',
+        oname: '',
+        role:'',
+        lga:'',
+        email:'',
+        phone:''
     }
+}
 
-    handleChange = (e) => {
-        const { value, name } = e.target
-        
+componentDidMount=()=>{
+    const {params} = this.props.match
+    axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+params.id)
+    .then(res=>{
+//        alert(res.data[0].first_name)
         this.setState({
-            [name]: value
+            fname: res.data[0].first_name,
+            lname: res.data[0].last_name,
+            role: res.data[0].role,
+            phone: res.data[0].phone,
+            email: res.data[0].email,
+            lga: res.data[0].lga
         })
+    }).catch(error=>{console.log(error)})
+}
 
-        e.preventDefault()
 
+handleChange = (e) => {
+    const { value, name } = e.target
+    
+    this.setState({
+        [name]: value
+    })
+
+    e.preventDefault()
+
+}
+onSubmit = () => {
+    const {params} = this.props.match
+
+    const obj = {
+    fname: this.state.fname,
+    lname: this.state.lname,
+    phone: this.state.phone,
+    email: this.state.email,
+    role: this.state.role,
+    lga:this.state.lga,
     }
-    onSubmit = () => {
-        const obj = {
-        fname: this.state.fname,
-        lname: this.state.lname,
-        oname: this.state.oname,
-        phone: this.state.phone,
-        email: this.state.email,
-        role: this.state.role,
-        lga:this.state.lga,
-        active: this.state.active,
-        }
 
-        axios.post('https://ruwassa.herokuapp.com/api/v1/users',obj)
-        .then((res)=>{
-          //  console.log(res.data)
-        this.props.history.push('/supervisors')
-        
-        }).catch((error)=>{
-            console.log(error)
-        })
-        this.props.history.push('/supervisors')
+    axios.put('https://ruwassa.herokuapp.com/api/v1/users/updateuser/'+params.id,obj)
+    .then((res)=>{
+      //  console.log(res.data)
+    this.props.history.push('/supervisors')
+    
+    }).catch((error)=>{
+        console.log(error)
+    })
+    this.props.history.push('/supervisors')
 
-    }
+}
+
 
     render(){
-        return(
-            <div style={{}}>
-              <form>
+  const      {params} = this.props.match
+        return (
+            <div>
+<br/>
+                <form>
                   <div className='row'>
                       <div className='col-md-3'>
                 <label className='text-primary'>
@@ -80,18 +99,7 @@ class AddSupervisor extends React.Component{
                         onChange={this.handleChange} placeholder='Last Name' required/>
                         </div>
                   </div>
-                  <br/>
-                  <div className='row'>
-                      <div className='col-md-3'>
-                <label className='text-primary'>
-                    Other Name
-                </label>  
-                </div>
-                    <div className='col-md-5'>
-                    <input name='oname'  class="form-control" value={this.state.oname}
-                        onChange={this.handleChange} placeholder='Other Name' />
-                        </div>
-                  </div>
+             
                   <br/>
                   <div className='row'>
                       <div className='col-md-3'>
@@ -164,12 +172,12 @@ class AddSupervisor extends React.Component{
       </div>
       </div>
     <br/>
-    <button onClick={this.onSubmit}>Add</button> 
+    <button onClick={this.onSubmit}>Update</button> 
 
-                </form> 
+                </form>
             </div>
         )
     }
-
 }
-export default withRouter(AddSupervisor)
+
+export default  withRouter(UpdateSupervisor)

@@ -132,7 +132,6 @@ handleMap=()=>{
         contractorsView: this.state.display='none',
         analyticsView: this.state.display='none',
         mapView: this.state.display='',
-
         title:'MAP'
     })
 

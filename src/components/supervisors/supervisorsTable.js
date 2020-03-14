@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import  SupervisorsTableRow from './supervisorsTableRow'
+import { Link, Route, Redirect } from 'react-router-dom';
 
 
 export default class SupervisorsTable extends React.Component{
@@ -45,7 +46,9 @@ export default class SupervisorsTable extends React.Component{
     
 
             return(
-                <div>
+                <div><div>
+                <Link to='/home'>    <button>Home</button></Link>
+                </div>
                    pages {pageNumbers}
                     <table className='table'>
                         <thead>

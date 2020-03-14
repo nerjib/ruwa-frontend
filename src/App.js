@@ -23,6 +23,7 @@ import ProjectDetails from './components/Projects/projectdeails'
 import WeeklyReports from './components/reports/weeklyreports';
 import WeeklyReportDetails from './components/reports/weeklyreportdetails';
 import DailyMap from './components/map/dailymap';
+import UpdateSupervisor from './components/supervisors/updatesupervisor';
 function App() {
   return (
     <div className="App">
@@ -50,6 +51,8 @@ function App() {
           <Route path='/weeklyreports' exact component={WeeklyReports}/>
           <Route path='/weeklyreportdetails/:id' exact component={WeeklyReportDetails}/>
           <Route path='/dailymap' exact component={DailyMap}/>
+          <Route path='/updatesupervisor/:id' exact component={UpdateSupervisor}/>
+
 
 
      </Switch>
