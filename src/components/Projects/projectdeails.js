@@ -8,7 +8,8 @@ export default class ProjectDetails extends React.Component{
 
         this.state={
                 project:'',
-                reports:''
+                reports:'',
+                lid:''
         }
     }
 
@@ -20,12 +21,30 @@ export default class ProjectDetails extends React.Component{
                 project: res.data[0]
             })
         }).catch(error=>{console.log(error.message)})
+      
         axios.get('https://ruwassa.herokuapp.com/api/v1/reports/project/'+params.id)
         .then(res=>{
             this.setState({
                 reports: res.data
             })
         }).catch(error=>{console.log(error.message)})
+   
+        axios.get('https://ruwassa.herokuapp.com/api/v1/projects/'+params.id)
+        .then(res=>{
+            this.setState({
+              //  lid: res.data[0].local_id
+            })
+
+            axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+res.data[0].local_id)
+           // alert(res.data[0].local_id+2)
+            .then(res=>{
+                    this.setState({
+                        lid: res.data[0].first_name+' '+res.data[0].last_name
+                    })
+            }).catch(error=>{console.log(error.message)})
+        }).catch(error=>{console.log(error.message)})
+      
+
     }
     gotoReport=(id)=>{
 //        alert(id)
@@ -38,6 +57,10 @@ export default class ProjectDetails extends React.Component{
                <div> Title:{this.state.project.title}</div>
               <div>  Status:{this.state.project.status}</div>
               <div>  Stage:{this.state.project.pstatus}</div>
+              <div>  State Supervisor:{this.state.project.first_name+' '+this.state.project.last_name}</div>
+              <div>  Lid:{this.state.lid}</div>
+
+
               <table className='table'>
                   <thead>
                       <tr>

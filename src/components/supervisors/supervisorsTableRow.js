@@ -29,8 +29,8 @@ class SupervisorTableRow extends React.Component{
                     <tr>
                         <td>{this.props.sn}</td>
                         <td >{this.props.id}</td>
-                        <td>{this.props.lname}</td>
                         <td >{this.props.fname}</td>
+                        <td>{this.props.lname}</td>
                         <td >{this.props.oname}</td>
                         <td >{this.props.phone}</td>
                         <td >{this.props.email}</td>

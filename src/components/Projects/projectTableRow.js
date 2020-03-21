@@ -20,6 +20,8 @@ class ProjectTableRow extends React.Component{
                         <td>{this.props.lot}</td>
                         <td>{this.props.title}</td>
                         <td>{this.props.ward +', '+this.props.lga}</td>
+                        <td>{this.props.community}</td>
+                        <td>{this.props.facility}</td>
                         <td>{this.props.status}</td>
                         <td>{this.props.supervisor}</td>
                         <td>{this.props.contractor}</td>
