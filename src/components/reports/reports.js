@@ -2,7 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import ReportRow from './reportRow';
 import ReportTable from './reportTable'
-import StatusReports from './statusreports'
+import StatusReports from './statusreports';
+import Calender from './calender'
 import {Link} from 'react-router-dom'
 class Reports extends React.Component{
 constructor(props){
@@ -11,9 +12,12 @@ constructor(props){
             reports:'',
             displayAll:'none',
             currentPage: 1,
-            reportsPerPage: 10,
+            reportsPerPage: 150,
             allreports:'',
-            reportfocus:''
+            reportfocus:'',
+            day:new Date().getDate(),
+            month:new Date().getMonth(),
+            title:''
     }
 }
 
@@ -91,7 +95,6 @@ solarReport=()=>{
                 allreports:res.data,
                 currentPage: 1,
                 reportfocus:'solar'
-
         })
     }).catch( errors=>{console.log(errors.message)})
 }
@@ -103,6 +106,14 @@ gotoWeeklyReports=()=>{
    // alert('weekly')
     this.props.history.push('/addsupervisor')
 
+}
+
+handleCalender=(day=new Date().getDate(),month=new Date().getMonth(),title='all')=>{
+    this.setState({
+            day,
+            month,
+            title
+    })
 }
 render() {
     let row =[];
@@ -134,17 +145,24 @@ currentProjects.map((e,i)=>{row.push(
     })
 */
 }
-    
-currentProjects.map((e,i)=>{row.push(<ReportRow sn={i+1} id={this.state.allreports[e].id} title={this.state.allreports[e].title}
+//(new Date(this.props.date).getMonth()+1)
+currentProjects.map((e,i)=>{
+    //if(new Date(this.state.allreports[e].date).getDate()==this.state.day & new Date(this.state.allreports[e].date).getMonth()==this.state.month &this.state.allreports[e].title==this.state.title){
+    row.push(<ReportRow sn={i+1} id={this.state.allreports[e].id} title={this.state.allreports[e].title}
     lga={this.state.allreports[e].lga} ward={this.state.allreports[e].ward} community={this.state.allreports[e].community}
     gps={this.state.allreports[e].gps} facility={this.state.allreports[e].facility} lot={this.state.allreports[e].lot}
     contractor={this.state.allreports[e].company}  localsup={this.state.allreports[e].last_name+' '+this.state.allreports[e].first_name}
-     date={this.state.allreports[e].date}/>)})          
+     date={this.state.allreports[e].date}  status={this.state.allreports[e].status}/>)
+  //  }
+    })          
             
             return(
         <div>
       <div>
       <div className='row'>
+          <div>
+                    <Calender onCalender={this.handleCalender}/>
+                    </div>
                <div> <button onClick={this.onLoad} >All Report</button></div>
                 <div> <button onClick={this.sanitationReport} >Sanitation</button></div>
                 <div> <button onClick={this.forceReport} >Force Lift</button></div>
@@ -153,6 +171,10 @@ currentProjects.map((e,i)=>{row.push(<ReportRow sn={i+1} id={this.state.allrepor
                 <div> <button onClick={this.gotoReportstatus} >Status Reports</button></div>
                 <div> <Link to='/weeklyreports'><button  >Weekly Reports</button></Link></div>
 
+            </div>
+            <div>
+                {//this.state.day
+                }
             </div>
             <div> pages {pageNumbers}</div>
             <table  className='table table-hover'>      
@@ -170,6 +192,8 @@ currentProjects.map((e,i)=>{row.push(<ReportRow sn={i+1} id={this.state.allrepor
                        <th>STATE SUPERVISOR</th> 
                        <th>LGA SUPERVISOR</th>
                        <th>Date Submitted</th>
+                       <th>Status</th>
+
                     </tr>
                 </thead>
                 <tbody >
@@ -188,6 +212,7 @@ currentProjects.map((e,i)=>{row.push(<ReportRow sn={i+1} id={this.state.allrepor
 }
 
 }
+
 
 
 export default Reports;

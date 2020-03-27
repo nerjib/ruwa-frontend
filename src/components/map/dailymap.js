@@ -128,17 +128,23 @@ export default class DailyMap extends Component {
              axios.get('https://ruwassa.herokuapp.com/api/v1/projects/details/'+res.data[e].pid)
              .then(res3=>{
                // alert((res3.data[0].gps.split(','))[0])
+               let lat=0;
+               let long=0;
+               if (res3.data[0].gps){
+                 lat=(res3.data[0].gps.split(','))[0];
+                 long=(res3.data[0].gps.split(','))[1]
+               }
                  let data={
                     name : res3.data[0].title,
-                    lat: (res3.data[0].gps.split(','))[0], 
-                    lng: (res3.data[0].gps.split(','))[1],
+                    lat: lat, 
+                    lng: long,
                     id:  Number(res.data[e].id)
                  }
+                
              //    alert(res.data[e].id)
              //    alert(res3.data[0].title)
             // markerlist={...markerlist,...data}
            this.state.myMarkers.push(data);
-
                 })
             }
         })

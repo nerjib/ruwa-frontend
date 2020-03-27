@@ -77,6 +77,12 @@ goToDetails =(id)=>{
 }
 
 render() {
+  let lat=0;
+  let lon=0
+  if(this.props.gps){
+    lat=((this.props.gps).split(","))[0];
+    lon=((this.props.gps).split(","))[1]
+  }
     return (
    <tr> <td>{this.props.sn}</td>
     <td >{this.props.lot}</td>
@@ -84,12 +90,13 @@ render() {
    <td >{this.props.lga}</td>
    <td >{this.props.ward}</td>
    <td>{this.props.community}</td>
-   <td>{((this.props.gps).split(","))[0]}</td>
-   <td>{((this.props.gps).split(","))[1]}</td>
+   <td>{lat}</td>
+   <td>{lon}</td>
    <td>{this.props.facility}</td>
    <td>{this.props.contractor}</td>
    <td>{this.props.statesuper}</td>
    <td >{this.props.localsup}</td>
+   <td >{this.props.status}</td>
    <td >{new Date(this.props.date).getDate() +'-'+ (new Date(this.props.date).getMonth()+1)+' '+new Date(this.props.date).getFullYear()}</td>
    <td ><button className='btn btn-default btn-info' 
    onClick={()=>{this.goToDetails(this.props.id)}}>View</button></td>

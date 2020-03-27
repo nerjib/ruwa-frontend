@@ -28,7 +28,7 @@ constructor(props){
         contractorsView:'none',
         analyticsView:'',
         title:'ANALYTICS',
-        time:'',
+//        time:'',
         login: access,
         mapView:'none'
 
@@ -142,16 +142,14 @@ handleSignOut=()=> {}
 
 tick2(){
     this.setState({
-        time: new Date().toLocaleString()
+   //   time: new Date().toLocaleString()
 
     })
 }
 componentDidMount(){
 
 
-    this.inInterval2= setInterval( ()=>this.tick2(), 1000);
-
-
+   
     axios.get('/api/v1/users')
         .then(res =>{
             this.setState({supervisors: res.data})
@@ -159,6 +157,8 @@ componentDidMount(){
         .catch(function(error){
              console.log(error)
         })
+     //  this.inInterval2= setInterval( ()=>this.tick2(), 1000);
+
 }
 componentWillUnmount(){
     clearInterval(this.inInterval2)

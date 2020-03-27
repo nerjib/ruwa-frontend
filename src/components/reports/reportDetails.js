@@ -82,7 +82,9 @@ constructor(props){
                   plga: res.data[0].lga,
                   pgps: res.data[0].gps,
                   contractor_id: res.data[0].contractor_id,
-                  lot:res.data[0].lot
+                  lot:res.data[0].lot,
+                  ppstatus: res.data[0].status,
+                  comunity: res.data[0].community
                 })
 
                 axios.get('https://ruwassa.herokuapp.com/api/v1/contractors/'+res.data[0].contractor_id)
@@ -135,7 +137,7 @@ constructor(props){
                 <Pdf  targetRef={ref} filename={this.state.pid+'_'+this.state.ptitle+'_'+this.state.plga+'_'+this.state.summaryfrom+'_'+this.state.summaryto} 
                 x={1} y={1}
                 >
-                    {({toPdf})=><button className='btn btn-default btn-info' onClick={toPdf}>Download Report</button>}
+                    {({toPdf})=><button className='btn btn-default btn-info' onClick={toPdf}>Download Report{this.state.ppstatus}</button>}
                 </Pdf>
               
                 </div>
@@ -154,14 +156,14 @@ constructor(props){
                             <strong> NAME OF PROJECT:</strong>KADUNA RUWASSA: {(this.state.ptitle).toUpperCase()}
                             </th>
                             <th>
-                            <strong> REPORT ID:</strong> {this.state.rid}
+                            <strong> REPORT ID:</strong> {this.state.rid+'#'+this.state.pid}
                             </th>
                         </tr>
                         </thead>
                         
                         <tbody>
                         <tr className='text-left'>
-                            <td ><strong>LGA:</strong> {(this.state.plga).toUpperCase()}</td>
+                            <td ><strong>LGA:</strong> {(this.state.plga).toUpperCase()} <div>{this.state.comunity}</div></td>
                             <td ><strong>CONTRACTOR:</strong> {this.state.companyname}</td>
                             <td><strong>LOT NO:</strong> {this.state.lot}</td>
                             <td><strong>DATE:</strong> {new Date(this.state.date).getDate()+'-'+(new Date(this.state.date).getMonth()+1)+'-'+new Date(this.state.date).getFullYear()}<br/><strong>GPS:</strong> {this.state.gps}</td>
@@ -184,8 +186,12 @@ constructor(props){
                        <tr> <td>{this.state.activitydate}</td><td colSpan='2'>{this.state.activity1}</td><td>{this.state.activityoutcome}</td></tr>
                         <tr><td colSpan='5'>
                         <div className='row'>
-                        <div className='col-xd-2' style={{margin:20}}> <img style={{width:250, heigth:400}} src={this.state.imgurl}/></div>
-                            <ReportPie pstatus={this.state.projectstage} stage={90}/>
+                        <div className='col-xd-2' style={{margin:20}}> <img style={{width:250, heigth:400}} src={this.state.imgurl}/>
+                      <div> {this.state.projectstage}</div>
+                        </div>
+                          {//
+                           // <ReportPie pstatus={this.state.projectstage} stage={90}/>
+                          }
                         </div>
                             </td></tr>
                             <tr>

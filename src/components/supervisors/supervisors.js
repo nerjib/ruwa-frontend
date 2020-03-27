@@ -41,11 +41,12 @@ let row=[];
   
         return(
             <div>
+                                <div className='col-md-2'>    <button onClick={this.goToAdd} className="btn btn-info">Add supervisor</button></div>
+
                 <div className="row">
                 <SupervisorsTable reload={this.load} supervisors={this.state.supervisors}/>
                 </div>
                 <div className="row" >
-                <div className='col-md-2'>    <button onClick={this.goToAdd} className="btn btn-info">Add supervisor</button></div>
                 <div e='col-md-2'>    <button className="btn btn-info">Drop supervisor</button></div>
 
                 </div>

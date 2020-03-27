@@ -4,51 +4,64 @@ import { Pie } from 'react-chartjs-2';
 
 
 class ReportPie extends React.Component{
-
+constructor(props){
+    super(props)
+    this.state={
+        completeionrate:''
+    }
+}
 
 
     checkStatus=(e)=>{
     //    alert(e)
         if (e=='TOS'){
+      
             return(10)
         }
      
         else if(e=='GS'){
+      
             return(25)
         }
         else if(e=='Drilling'){
+      
             return(45)
         }
         else if(e=='PT'){
             return(55)
         }
         else if(e=='FS'){
-            return(65)
+                        return(65)
         }
         else if(e=='ES'){
-            return(80)
+                        return(80)
         }
         else if(e=='ISP'){
+            
             return(85)
         }
         else if(e=='Reticulation'){
+            
             return(90)
         }
              else if(e=='FR'){
-            return(100)
+                        return(100)
         }
        
         else if(e=='Excavation'){
+      
             return(20)
         }
      
         else if(e=='SubS'){
+            
             return(40)
         }
         else if(e=='Finishing'){
-            return(80)
+                        return(80)
         }
         else if (e=='SuperS'){
+            
             return(60)
         }
     }
@@ -59,7 +72,7 @@ class ReportPie extends React.Component{
         <div>
 <Pie
 data={{
-                    labels: ['% completion','% remainder'],
+                    labels: [this.state.completeionrate +' % completion', this.state.completeionrate+' % remainder'],
                     datasets: [{
                         data:[this.checkStatus(this.props.pstatus),100- this.checkStatus(this.props.pstatus)],
                         backgroundColor:['green','red']

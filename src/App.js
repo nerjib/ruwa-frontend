@@ -24,6 +24,9 @@ import WeeklyReports from './components/reports/weeklyreports';
 import WeeklyReportDetails from './components/reports/weeklyreportdetails';
 import DailyMap from './components/map/dailymap';
 import UpdateSupervisor from './components/supervisors/updatesupervisor';
+import ProjectsSupervisors from './components/Projects/projectsSupervisors'
+import ReportsView from './components/reports/reportView'
+
 function App() {
   return (
     <div className="App">
@@ -52,6 +55,9 @@ function App() {
           <Route path='/weeklyreportdetails/:id' exact component={WeeklyReportDetails}/>
           <Route path='/dailymap' exact component={DailyMap}/>
           <Route path='/updatesupervisor/:id' exact component={UpdateSupervisor}/>
+          <Route path='/projectsupa' exact component={ProjectsSupervisors}/>
+          <Route path='/reportsview' exact component={ReportsView}/>
+
 
 
 

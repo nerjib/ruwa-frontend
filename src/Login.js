@@ -33,10 +33,10 @@ export default class Login extends Component {
     event.preventDefault();
     axios.get('https://ruwassa.herokuapp.com/api/v1/users/admin/'+this.state.email)
     .then(res => {
-      //  alert(res.data[0].phone)
-   //  alert(res.data[0].role)
+       alert(res.data[0].phone)
+  // alert(res.data[0].role)
         
-      if (res.data[0].phone === this.state.phone & res.data[0].role==='admin') {
+      if (res.data[0].phone == this.state.phone & res.data[0].role=='admin') {
        // return < Redirect to="/home"/>
       // alert('youre in')
        this.setState({
