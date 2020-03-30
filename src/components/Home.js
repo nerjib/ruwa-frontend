@@ -28,7 +28,7 @@ constructor(props){
         contractorsView:'none',
         analyticsView:'',
         title:'ANALYTICS',
-//        time:'',
+       time:'',
         login: access,
         mapView:'none'
 
@@ -92,7 +92,6 @@ handleContractors=()=>{
         contractorsView: this.state.display='',
         analyticsView: this.state.display='none',
         mapView: this.state.display='none',
-
         title:'CONTRACTORS'
     })
 }
@@ -142,7 +141,7 @@ handleSignOut=()=> {}
 
 tick2(){
     this.setState({
-   //   time: new Date().toLocaleString()
+      time: new Date().toLocaleString()
 
     })
 }
@@ -157,7 +156,7 @@ componentDidMount(){
         .catch(function(error){
              console.log(error)
         })
-     //  this.inInterval2= setInterval( ()=>this.tick2(), 1000);
+       this.inInterval2= setInterval( ()=>this.tick2(), 1000);
 
 }
 componentWillUnmount(){

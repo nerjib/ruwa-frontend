@@ -2,7 +2,13 @@ import React from 'react';
 import axios from 'axios';
 import ActivityRow from './activityRow';
 import Pdf from 'react-to-pdf';
-import ReportPie from './reportpie'
+import ReportPie from './reportpie';
+import uncef from '../../../src/img/uncef.jpg'
+import ruwassa from '../../../src/img/ruwasa.jpg'
+import unicef from '../../../src/img/unicef.png'
+import ukaid from '../../../src/img/ukaid.png'
+
+
 const ref=React.createRef();
 const ref1=React.createRef();
 export default class ReportDetails extends React.Component {
@@ -110,7 +116,7 @@ constructor(props){
             axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+this.state.contractor_id)
             .then(res=>{
               this.setState({
-                companyname:res.data[0].company,
+           //     companyname:res.data[0].company,
                            
               })
           })  
@@ -134,7 +140,7 @@ constructor(props){
             <div className='fluid-container'>
          
                 <div className='col-md-12'  >
-                <Pdf  targetRef={ref} filename={this.state.pid+'_'+this.state.ptitle+'_'+this.state.plga+'_'+this.state.summaryfrom+'_'+this.state.summaryto} 
+                <Pdf  targetRef={ref} filename={this.state.lot+'_'+this.state.pid+'_'+this.state.ptitle+'_'+this.state.plga+'_'+this.state.summaryfrom+'_'+this.state.summaryto} 
                 x={1} y={1}
                 >
                     {({toPdf})=><button className='btn btn-default btn-info' onClick={toPdf}>Download Report{this.state.ppstatus}</button>}
@@ -142,10 +148,29 @@ constructor(props){
               
                 </div>
                 <div className='row'>
-                <div className='col-md-3'></div>
+    
+               
 
                 <div className='fluid-container col-md-12'ref={ref}>
                 <br/><br/>
+                <div className='col-md-7 row'>
+    
+ 
+<div className='col-md-2' style={{marginLeft:30}}>
+<img style={{zIndex:3 }}  className='responsive-image' id='img'  src={unicef}
+alt='Logo'  />
+</div>
+<div className='col-md-3'>
+ <img style={{zIndex:3, width:'50%', marginLeft:40}} className='responsive-image' id='img'  src={ruwassa}
+alt='Logo'  /></div>
+<div className='col-md-4'>
+<img style={{zIndex:3, width:'50%'}} className='responsive-image' id='img'  src={ukaid}
+alt='Logo'  />
+</div>
+
+    </div>
+    <br/>
+<br/>
                 <div className=' col-md-7' style={{display:this.state.reportdisplay }}>
                 <div ><span><h5><strong>KADUNA FIELD OFFICE: WASH DAILY PROGRESS REPORT</strong></h5></span></div>
                 <table className='table table-bordered ' style={{border: '1px inset black'}}>

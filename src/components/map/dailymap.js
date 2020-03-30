@@ -171,7 +171,7 @@ componentWillUnmount=()=>{
     const Marker = ({text, id}) => {
         return (
               <div>         
-              <a href={`/#/reports/${id}`}> <b style={{color:'green'}}>{text}</b><img style={{width:20}} className='responsive-image' id='img'  src={ruwasa}
+              <a target='_blank' href={`/#/reports/${id}`}> <b style={{color:'green'}}>{text}</b><img style={{width:20}} className='responsive-image' id='img'  src={ruwasa}
               alt='Logo'  /></a></div>
         );
     }

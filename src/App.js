@@ -26,7 +26,7 @@ import DailyMap from './components/map/dailymap';
 import UpdateSupervisor from './components/supervisors/updatesupervisor';
 import ProjectsSupervisors from './components/Projects/projectsSupervisors'
 import ReportsView from './components/reports/reportView'
-
+import AddProjectsSupervisor from './components/Projects/addProjectsSupervisor'
 function App() {
   return (
     <div className="App">
@@ -57,6 +57,8 @@ function App() {
           <Route path='/updatesupervisor/:id' exact component={UpdateSupervisor}/>
           <Route path='/projectsupa' exact component={ProjectsSupervisors}/>
           <Route path='/reportsview' exact component={ReportsView}/>
+          <Route path='/addprojectssupervisor' exact component={AddProjectsSupervisor}/>
+
 
 
 

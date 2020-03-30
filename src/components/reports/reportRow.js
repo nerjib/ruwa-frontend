@@ -98,8 +98,8 @@ render() {
    <td >{this.props.localsup}</td>
    <td >{this.props.status}</td>
    <td >{new Date(this.props.date).getDate() +'-'+ (new Date(this.props.date).getMonth()+1)+' '+new Date(this.props.date).getFullYear()}</td>
-   <td ><button className='btn btn-default btn-info' 
-   onClick={()=>{this.goToDetails(this.props.id)}}>View</button></td>
+   <td ><a target='_blank' href={`/#/reports/${this.props.id}`}><button className='btn btn-default btn-info' 
+  >View</button></a></td>
 </tr>
     )
 }
