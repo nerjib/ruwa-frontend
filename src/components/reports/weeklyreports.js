@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {  Redirect, withRouter } from 'react-router-dom';
-import weeklyReportRow from './weeklyReportRow'
+import WeeklyReportRows from './weeklyReportRow'
 
  class WeeklyReports extends React.Component{
 constructor(props){
@@ -11,7 +11,7 @@ constructor(props){
             weeklyreports:'',
         displayAll:'none',
         currentPage: 1,
-        reportsPerPage: 3,
+        reportsPerPage: 35,
         allreports:'',
         reportfocus:''
 }
@@ -32,6 +32,11 @@ gotoReportDetails=(id)=>{
    // alert(id)
     this.props.history.push('/weeklyreportdetails/'+id)
 }
+handleClick = (event) => {
+    this.setState({
+        currentPage: Number(event.target.id)
+      });
+}
 render(){
 
     let row =[];
@@ -49,16 +54,16 @@ render(){
     }
 
 
-    currentProjects.map((e,i)=>{row.push(< weeklyReportRow sn={i+1} id={this.state.weeklyreports[e].id} title={this.state.weeklyreports[e].title}
+    currentProjects.map((e,i)=>row.push(<WeeklyReportRows sn={i+1} id={this.state.weeklyreports[e].id} title={this.state.weeklyreports[e].title}
         lga={this.state.weeklyreports[e].lga} ward={this.state.weeklyreports[e].ward} community={this.state.weeklyreports[e].community}
         gps={this.state.weeklyreports[e].gps} facility={this.state.weeklyreports[e].facility} lot={this.state.weeklyreports[e].lot}
         contractor={this.state.weeklyreports[e].company}  localsup={this.state.weeklyreports[e].last_name+' '+this.state.weeklyreports[e].first_name}
-         date={this.state.weeklyreports[e].date}/>)})          
+         date={this.state.weeklyreports[e].date}/>))          
     
 
     return(
         <div>
-                            <weeklyReportRow sn={1}/>
+                          
 
            {pageNumbers}
             <table className='table'>
@@ -79,7 +84,9 @@ render(){
                     </tr>
                 </thead>
                 <tbody>
-                {Object.keys(this.state.weeklyreports).map((e,i)=><tr><td>{i+1}</td>
+                {row}
+                {
+                    /*Object.keys(this.state.weeklyreports).map((e,i)=><tr><td>{i+1}</td>
                 <td>{this.state.weeklyreports[e].lot}</td>
                 <td>{this.state.weeklyreports[e].title}</td>
                 <td>{this.state.weeklyreports[e].lga}</td>
@@ -94,11 +101,11 @@ render(){
                 <td>{new Date(this.state.weeklyreports[e].date).getDate()+'-' +(new Date(this.state.weeklyreports[e].date).getMonth()+1)+'-'+new Date(this.state.weeklyreports[e].date).getFullYear()}</td>
                 <td><button onClick={()=>this.gotoReportDetails(this.state.weeklyreports[e].id)}>View</button></td>
 
-                </tr>)}
+                </tr>)
+            */}
 
                 </tbody>
-                <weeklyReportRow/>
-
+            
             </table>
         </div>
 

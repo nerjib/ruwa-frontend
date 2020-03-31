@@ -2,8 +2,15 @@ import React from 'react';
 import axios from 'axios';
 import ActivityRow from './activityRow';
 import Pdf from 'react-to-pdf';
+import ruwassa from '../../../src/img/ruwasa.jpg'
+import unicef from '../../../src/img/unicef.png'
+import ukaid from '../../../src/img/ukaid.png'
+
 const ref=React.createRef();
 const ref1=React.createRef();
+
+
+
 export default class WeeklyReportDetails extends React.Component {
 constructor(props){
     super(props)
@@ -79,8 +86,18 @@ constructor(props){
                   plocation: res.data[0].location,
                   plga: res.data[0].lga,
                   pgps: res.data[0].gps,
-                  contractor_id: res.data[0].contractor_id
+                  contractor_id: res.data[0].contractor_id,
+                  lot: res.data[0].lot,
+                  community: res.data[0].community
                 })
+
+                axios.get('https://ruwassa.herokuapp.com/api/v1/contractors/'+res.data[0].contractor_id)
+                .then(res=>{
+                    this.setState({
+                        companyname: res.data[0].company
+                    })
+                })
+
             })  
 
             axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+this.state.uid)
@@ -94,13 +111,6 @@ constructor(props){
                 })
             })  
 
-            axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+this.state.contractor_id)
-            .then(res=>{
-              this.setState({
-                companyname:res.data[0].company,
-                           
-              })
-          })  
   
 
             })
@@ -123,7 +133,7 @@ constructor(props){
                     <button onClick={()=>{this.setState({reportdisplay:'none',imgdisplay:''})}}>Activity images</button>
              </div>
                 <div className='col-md-12'  >
-                <Pdf  targetRef={ref} filename={this.state.pid+'_'+this.state.ptitle+'_'+this.state.plga+'_'+this.state.summaryfrom+'_'+this.state.summaryto} 
+                <Pdf  targetRef={ref} filename={this.state.lot+'_'+this.state.pid+'_'+this.state.ptitle+'_'+this.state.plga+'_'+this.state.summaryfrom+'_'+this.state.summaryto} 
                 x={1} y={1}
                 >
                     {({toPdf})=><button className='btn btn-default btn-info' onClick={toPdf}>Download Report</button>}
@@ -135,7 +145,26 @@ constructor(props){
 
                 <div className='fluid-container col-md-12'ref={ref}>
                 <br/><br/>
+    
+ 
+   
                 <div className=' col-md-7' style={{display:this.state.reportdisplay }}>
+                <div className='col-md-12 row'>
+
+         <div className='col-md-2' style={{marginLeft:30}}>
+    <img style={{zIndex:3 }}  className='responsive-image' id='img'  src={unicef}
+    alt='Logo'  />
+    </div>
+    <div className='col-md-3'>
+     <img style={{zIndex:3, width:'90%', marginLeft:40}} className='responsive-image' id='img'  src={ruwassa}
+    alt='Logo'  /></div>
+    <div className='col-md-4'>
+    <img style={{zIndex:3, width:'90%'}} className='responsive-image' id='img'  src={ukaid}
+    alt='Logo'  />
+    </div>
+    
+        </div>
+        <br/><br/>
                 <div ><span><h5><strong>KADUNA FIELD OFFICE: WASH WEEKLY PROGRESS REPORT</strong></h5></span></div>
                 <table className='table table-bordered ' style={{border: '1px inset black'}}>
                     <thead>
@@ -145,17 +174,17 @@ constructor(props){
                             <strong> NAME OF PROJECT:</strong>KADUNA RUWASSA: {(this.state.ptitle).toUpperCase()}
                             </th>
                             <th>
-                            <strong> REPORT NO:</strong> {this.state.rid}
+                            <strong> REPORT ID:</strong> {'WR'+this.state.pid+'#'+this.state.rid}
                             </th>
                         </tr>
                         </thead>
                         
                         <tbody>
                         <tr className='text-left'>
-                            <td ><strong>LGA:</strong> {(this.state.plga).toUpperCase()}</td>
+                            <td ><strong>LGA:</strong> {(this.state.plga).toUpperCase()} <div>{this.state.community}</div></td>
                             <td ><strong>CONTRACTOR:</strong> {this.state.companyname}</td>
-                            <td><strong>LOT NO:</strong></td>
-                            <td><strong>DATE:</strong> {new Date(this.state.date).getDate()+'-'+(new Date(this.state.date).getMonth()+1)+'-'+new Date(this.state.date).getFullYear()}<br/>GPS: {this.state.gps}</td>
+                            <td><strong>LOT NO:</strong>{this.state.lot}</td>
+                            <td><strong>DATE:</strong> {new Date(this.state.date).getDate()+'-'+(new Date(this.state.date).getMonth()+1)+'-'+new Date(this.state.date).getFullYear()}</td>
                         </tr>
                         <tr className='text-left'>
                             <td colSpan="4">
@@ -202,8 +231,9 @@ constructor(props){
                             <td colSpan="4" className='text-left'>
                             <strong> IS WORK PROGRESSING ACCORDING TI SUBMITED PLAN?</strong> {(this.state.compliance).toUpperCase()}<br/><br/>
 
-                            <strong>  GROUP SUPERVISOR'S COMMENTS AND SIGNATURE</strong>
-                            </td>
+                           {// <strong>  GROUP SUPERVISOR'S COMMENTS AND SIGNATURE</strong>
+                            
+        }</td>
                         </tr>
                         <tr>
                             <td colSpan="4" className='text-left'>

@@ -136,9 +136,19 @@ constructor(props){
                 unit: 'px',
                 format: [900,400]
             }
+
+            const getpdf=({toPdf})=>{
+return (<div>
+              <Pdf  targetRef={ref} filename={this.state.lot+'_'+this.state.pid+'_'+this.state.ptitle+'_'+this.state.plga+'_'+this.state.summaryfrom+'_'+this.state.summaryto} 
+              x={1} y={1}
+              >
+                {toPdf}
+             </Pdf>
+              </div>)
+            }
         return(
             <div className='fluid-container'>
-         
+         <button onClick={getpdf}>cll</button>
                 <div className='col-md-12'  >
                 <Pdf  targetRef={ref} filename={this.state.lot+'_'+this.state.pid+'_'+this.state.ptitle+'_'+this.state.plga+'_'+this.state.summaryfrom+'_'+this.state.summaryto} 
                 x={1} y={1}

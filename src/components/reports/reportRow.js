@@ -76,6 +76,10 @@ goToDetails =(id)=>{
     this.props.history.push('/reports/'+id)
 }
 
+handleDownload=(id)=>{
+  alert('you want to download report '+id)
+}
+
 render() {
   let lat=0;
   let lon=0
@@ -100,6 +104,7 @@ render() {
    <td >{new Date(this.props.date).getDate() +'-'+ (new Date(this.props.date).getMonth()+1)+' '+new Date(this.props.date).getFullYear()}</td>
    <td ><a target='_blank' href={`/#/reports/${this.props.id}`}><button className='btn btn-default btn-info' 
   >View</button></a></td>
+    <td><button onClick={()=>this.handleDownload(this.props.id)}>download</button></td>  
 </tr>
     )
 }
