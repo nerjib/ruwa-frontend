@@ -115,6 +115,21 @@ handleCalender=(day=new Date().getDate(),month=new Date().getMonth(),title='all'
             title
     })
 }
+
+nextPage = () =>{
+    //    alert('hello')
+        this.setState({
+            currentPage: this.state.currentPage+10
+        })
+    
+    }
+    backPage =()=>{
+        this.setState({
+            currentPage: this.state.currentPage - 10
+        })
+    
+    }
+
 render() {
     let row =[];
 
@@ -146,11 +161,13 @@ currentProjects.map((e,i)=>{row.push(
 */
 }
 //(new Date(this.props.date).getMonth()+1)
+
 currentProjects.map((e,i)=>{
     //if(new Date(this.state.allreports[e].date).getDate()==this.state.day & new Date(this.state.allreports[e].date).getMonth()==this.state.month &this.state.allreports[e].title==this.state.title){
     row.push(<ReportRow sn={i+1} id={this.state.allreports[e].id} title={this.state.allreports[e].title}
     lga={this.state.allreports[e].lga} ward={this.state.allreports[e].ward} community={this.state.allreports[e].community}
     gps={this.state.allreports[e].gps} facility={this.state.allreports[e].facility} lot={this.state.allreports[e].lot}
+    geo={(this.state.allreports[e].gps)}
     contractor={this.state.allreports[e].company}  localsup={this.state.allreports[e].last_name+' '+this.state.allreports[e].first_name}
      date={this.state.allreports[e].date}  status={this.state.allreports[e].status}/>)
   //  }
@@ -176,7 +193,10 @@ currentProjects.map((e,i)=>{
                 {//this.state.day
                 }
             </div>
-            <div> pages {pageNumbers}</div>
+            <div> {//pages {pageNumbers}
+            }
+            <button onClick={this.backPage}>Back</button><button onClick={this.nextPage}>Next</button>
+            </div>
             <table  className='table table-hover'>      
                 <thead>
                     <tr><th>S/N</th>
@@ -197,13 +217,18 @@ currentProjects.map((e,i)=>{
                     </tr>
                 </thead>
                 <tbody >
-                {row}
+                   {row}
                 </tbody>
               {// <ReportTable reports={this.state.reports}/>
               }
 {//style={{display:this.state.displayAll}}
             }
             </table>
+            <div> {//pages {pageNumbers}
+            }
+            <button onClick={this.backPage}>Back</button><button onClick={this.nextPage}>Next</button>
+            </div>
+            
             </div>
        {//     <StatusReports reports={this.state.allreports}/>
        }

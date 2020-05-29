@@ -16,7 +16,8 @@ import { withRouter } from 'react-router-dom'
             pidfacility:'',
             pidlot:'',
             localsuper:'',
-            statesuper: ''
+            statesuper: '',
+            geo:''
         })
     }
 
@@ -80,13 +81,50 @@ handleDownload=(id)=>{
   alert('you want to download report '+id)
 }
 
+
+geocode=(e)=>{
+  const f=e.split
+  let config = {
+    'latitude': e[0],
+    'longitude': e[1]
+  }
+
+  let lat=0;
+  let lon=0
+  if(e){
+    lat=((e).split(","))[0];
+    lon=((e).split(","))[1]
+  }
+if (lat!=0){
+  axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=AIzaSyAVT4-Uzdp9LaBGtIFlw7iGEKbPQ8fZxHI`)
+    .then(req=>{
+   //  alert(lat)
+   return (req.data.results[0].address_components[0].long_name)
+  //  alert(req.data.results[0].address_components[0].long_name)
+    })
+  }
+}
+
 render() {
   let lat=0;
   let lon=0
+  let geo=''
   if(this.props.gps){
     lat=((this.props.gps).split(","))[0];
     lon=((this.props.gps).split(","))[1]
+    /*axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=AIzaSyAVT4-Uzdp9LaBGtIFlw7iGEKbPQ8fZxHI`)
+    .then(req=>{
+ //    alert(lat)
+ if( req.data.results[1]){
+     this.setState({
+      geo: req.data.results[1].address_components[0].long_name+','+req.data.results[1].address_components[1].long_name
+        })
+   // alert(req.data.results[0].address_components[0].long_name)
+      }  
+  })
+  */
   }
+
     return (
    <tr> <td>{this.props.sn}</td>
     <td >{this.props.lot}</td>
@@ -104,7 +142,8 @@ render() {
    <td >{new Date(this.props.date).getDate() +'-'+ (new Date(this.props.date).getMonth()+1)+' '+new Date(this.props.date).getFullYear()}</td>
    <td ><a target='_blank' href={`/#/reports/${this.props.id}`}><button className='btn btn-default btn-info' 
   >View</button></a></td>
-    <td><button onClick={()=>this.handleDownload(this.props.id)}>download</button></td>  
+   {// <td><button onClick={()=>this.handleDownload(this.props.id)}>download</button></td>  
+   }
 </tr>
     )
 }

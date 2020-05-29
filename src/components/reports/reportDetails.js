@@ -6,11 +6,16 @@ import ReportPie from './reportpie';
 import uncef from '../../../src/img/uncef.jpg'
 import ruwassa from '../../../src/img/ruwasa.jpg'
 import unicef from '../../../src/img/unicef.png'
-import ukaid from '../../../src/img/ukaid.png'
+import ukaid from '../../../src/img/ukaid.png';
+
+
+var geocoding = new require('reverse-geocoding')
 
 
 const ref=React.createRef();
 const ref1=React.createRef();
+
+
 export default class ReportDetails extends React.Component {
 constructor(props){
     super(props)
@@ -70,7 +75,7 @@ constructor(props){
                 activity1: res.data[0].activity,
                 activitydate: res.data[0].activitydate,
                 activityoutcome: res.data[0].activityoutcome,
-                imgurl: res.data[0].imgurl,
+                imgurl: this.imgCompress(res.data[0].imgurl),
                 projectstage: res.data[0].pstatus
               })
               axios.get('https://ruwassa.herokuapp.com/api/v1/reports/activity/'+params.id)
@@ -124,8 +129,38 @@ constructor(props){
 
             })
         }
-            
-    render(){
+
+        imgCompress=(e)=>{
+          if(e){
+          const intialurl = e.substring(0, 49);
+    const finalurl = e.substring(50, e.length);
+    return `${intialurl}/q_10/${finalurl}`
+          }
+      }
+
+      geocode=(e)=>{
+        const f=e.split
+        let config = {
+          'latitude': e[0],
+          'longitude': e[1]
+        }
+
+        let lat=0;
+        let lon=0
+        if(e){
+          lat=((e).split(","))[0];
+          lon=((e).split(","))[1]
+        }
+      if (lat!=0){
+        axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=AIzaSyAVT4-Uzdp9LaBGtIFlw7iGEKbPQ8fZxHI`)
+          .then(req=>{
+         //  alert(lat)
+          alert(req.data.results[0].address_components[0].long_name)
+          })
+        }
+      }
+
+      render(){
         const { params } = this.props.match;
         let row=[];
         Object.keys(this.state.Activity).map(e=>{row.push(<ActivityRow activity={this.state.Activity[e].activity}
@@ -139,16 +174,24 @@ constructor(props){
 
             const getpdf=({toPdf})=>{
 return (<div>
-              <Pdf  targetRef={ref} filename={this.state.lot+'_'+this.state.pid+'_'+this.state.ptitle+'_'+this.state.plga+'_'+this.state.summaryfrom+'_'+this.state.summaryto} 
+
+                <Pdf  targetRef={ref} filename={this.state.lot+'_'+this.state.pid+'_'+this.state.ptitle+'_'+this.state.plga+'_'+this.state.summaryfrom+'_'+this.state.summaryto} 
               x={1} y={1}
               >
                 {toPdf}
              </Pdf>
               </div>)
             }
+
         return(
             <div className='fluid-container'>
-         <button onClick={getpdf}>cll</button>
+{/*
+<Pdf>
+    {({toPdf, targetRef}) =>  (
+        <div style={{width: 500, height: 500, background: 'red'}} onClick={toPdf} ref={targetRef}/>
+    )}
+</Pdf>
+*/}
                 <div className='col-md-12'  >
                 <Pdf  targetRef={ref} filename={this.state.lot+'_'+this.state.pid+'_'+this.state.ptitle+'_'+this.state.plga+'_'+this.state.summaryfrom+'_'+this.state.summaryto} 
                 x={1} y={1}
@@ -159,9 +202,7 @@ return (<div>
                 </div>
                 <div className='row'>
     
-               
-
-                <div className='fluid-container col-md-12'ref={ref}>
+                  <div className='fluid-container col-md-12'ref={ref}>
                 <br/><br/>
                 <div className='col-md-7 row'>
     
@@ -198,7 +239,9 @@ alt='Logo'  />
                         
                         <tbody>
                         <tr className='text-left'>
-                            <td ><strong>LGA:</strong> {(this.state.plga).toUpperCase()} <div>{this.state.comunity}</div></td>
+                            <td >
+                            
+                              <strong>LGA:</strong> {(this.state.plga).toUpperCase()} <div>{this.state.comunity}</div></td>
                             <td ><strong>CONTRACTOR:</strong> {this.state.companyname}</td>
                             <td><strong>LOT NO:</strong> {this.state.lot}</td>
                             <td><strong>DATE:</strong> {new Date(this.state.date).getDate()+'-'+(new Date(this.state.date).getMonth()+1)+'-'+new Date(this.state.date).getFullYear()}<br/><strong>GPS:</strong> {this.state.gps}</td>
@@ -225,7 +268,7 @@ alt='Logo'  />
                       <div> {this.state.projectstage}</div>
                         </div>
                           {//
-                           // <ReportPie pstatus={this.state.projectstage} stage={90}/>
+                        //    <ReportPie pstatus={this.state.projectstage} stage={90}/>
                           }
                         </div>
                             </td></tr>

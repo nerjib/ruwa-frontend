@@ -69,7 +69,7 @@ handleChange=(e)=>{
 
                     </select> 
                     {this.state.title}
-
+                <table className='table'>
                 <thead>
                     <tr>
                         <th>sn</th>
@@ -80,7 +80,9 @@ handleChange=(e)=>{
                         <th> local supervisor</th>
                     </tr>
                 </thead>
+              
                 {row}
+                </table>
             </div>
         )
     }

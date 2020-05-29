@@ -389,8 +389,8 @@ componentWillUnmount(){
 
             <div><h3 className='text-primary'>Reports Received</h3></div>
             <div className='row'>
-                <div className='col-md-2'><h5>Sanitation:<h5 className='text-danger'>{this.state.SanitationsOnlyReports}</h5></h5></div>
-                <div className='col-md-2'><h5>Hand Boreholes:<h5 className='text-danger'>{this.state.ForceliftOnlyReports}</h5></h5></div>
+                <div className='col-md-2'><h5>VIP:<h5 className='text-danger'>{this.state.SanitationsOnlyReports}</h5></h5></div>
+                <div className='col-md-2'><h5>Force Lift:<h5 className='text-danger'>{this.state.ForceliftOnlyReports}</h5></h5></div>
                 <div className='col-md-3'><h5>Motorized Pump Boreholes:<h5 className='text-danger'>{this.state.SolarOnlyReports}</h5></h5></div>
                 <div className='col-md-3'><h5>Community Boreholes:<h5 className='text-danger'>{this.state.CommunityOnlyReports}</h5></h5></div>
                 <div className='col-md-2'><h5>Total:</h5><h5 className='text-danger'>{this.state.allReport}</h5></div>
@@ -417,8 +417,8 @@ componentWillUnmount(){
                 <div className='col-md-4'>
                     <span><h5 className='text-info'>Reports Received this month{this.state.month}</h5></span>
                     <div className='col-md-12'>
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Sanitation:</h6><h6 className='text-right col-md-3' >{this.state.monthSanitation}</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' > Hand Pump Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.monthForcelift}</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >VIP:</h6><h6 className='text-right col-md-3' >{this.state.monthSanitation}</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' > Force Lift:</h6><h6 className='text-right col-md-3' >{this.state.monthForcelift}</h6></div>              
                     <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.monthCommunity}</h6></div>              
                     <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.monthSolar}</h6></div>              
                     <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >{this.state.monthSanitation+this.state.monthForcelift+this.state.monthCommunity+this.state.monthSolar}</h5></div>              
@@ -429,8 +429,8 @@ componentWillUnmount(){
                 <div className='col-md-4'>
                     <span><h5 className='text-info'>Reports Received this week</h5></span>
                     <div className='col-md-12'>
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Sanitation:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Hand Pump Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >VIP:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
                     <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
                     <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >xx</h6></div>              
                     <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >{this.state.week}</h5></div>              
@@ -441,8 +441,8 @@ componentWillUnmount(){
                 <div className='col-md-4'>
                     <span><h5 className='text-info'>Reports Received Today</h5></span>
                     <div className='col-md-12'>
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Sanitation:</h6><h6 className='text-right col-md-3' >{this.state.todaySanitation}</h6></div>              
-                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Hand Pump Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.todayForcelift}</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >VIP:</h6><h6 className='text-right col-md-3' >{this.state.todaySanitation}</h6></div>              
+                    <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Force Lift:</h6><h6 className='text-right col-md-3' >{this.state.todayForcelift}</h6></div>              
                     <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Community Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.todayCommunity}</h6></div>              
                     <div className='row col-md-12'><h6 className='row col-md-10 text-left' >Motorized Solar Boreholes:</h6><h6 className='text-right col-md-3' >{this.state.todaySolar}</h6></div>              
                     <div className='row col-md-12'><h5 className='row col-md-10 text-left' >Total:</h5><h5 className='text-right col-md-3' >{this.state.todayCommunity+this.state.todayForcelift+this.state.todaySanitation+this.state.todaySolar}</h5></div>              

@@ -5,6 +5,7 @@ import Pdf from 'react-to-pdf';
 import ruwassa from '../../../src/img/ruwasa.jpg'
 import unicef from '../../../src/img/unicef.png'
 import ukaid from '../../../src/img/ukaid.png'
+import WeeklyReportImages from './weeklyreportimages'
 
 const ref=React.createRef();
 const ref1=React.createRef();
@@ -43,7 +44,8 @@ constructor(props){
         activity1:'',
         activitydate:'',
         activityoutcome:'',
-        imgurl:''
+        imgurl:'',
+        type:''
     }
 }
 
@@ -68,7 +70,7 @@ constructor(props){
                 activity1: res.data[0].activity,
                 activitydate: res.data[0].activitydate,
                 activityoutcome: res.data[0].activityoutcome,
-                imgurl: res.data[0].imgurl
+                imgurl: this.imgCompress(res.data[0].imgurl)
 
               })
 
@@ -116,11 +118,23 @@ constructor(props){
             })
         }
             
+        imgCompress=(e)=>{
+            if(e){
+            const intialurl = e.substring(0, 49);
+      const finalurl = e.substring(50, e.length);
+      return `${intialurl}/q_10/${finalurl}`
+            }
+        }
+
     render(){
         const { params } = this.props.match;
         let row=[];
+        let imgRow=[];
+        Object.keys(this.state.Activity).map(e=>{imgRow.push(
+        <WeeklyReportImages  imgurl={(this.state.Activity[e].imgurl)}/>)
+        }) ;                 
         Object.keys(this.state.Activity).map(e=>{row.push(<ActivityRow activity={this.state.Activity[e].activity}
-                        date={new Date(this.state.Activity[e].date).getDate()} outcome={this.state.Activity[e].outcome}/>)})
+                        date={(this.state.Activity[e].date)} outcome={this.state.Activity[e].outcome}/>)})
         
             const options={
                 orientation: 'landscape',
@@ -129,11 +143,11 @@ constructor(props){
             }
         return(
             <div className='fluid-container'>
-             <div className='row'>   <button onClick={()=>{this.setState({reportdisplay:'',imgdisplay:'none'})}}>Report summary</button>
-                    <button onClick={()=>{this.setState({reportdisplay:'none',imgdisplay:''})}}>Activity images</button>
+             <div className='row'>   <button onClick={()=>{this.setState({reportdisplay:'',imgdisplay:'none',type:''})}}>Report summary</button>
+                    <button onClick={()=>{this.setState({reportdisplay:'none',imgdisplay:'',type:'im'})}}>Activity images</button>
              </div>
                 <div className='col-md-12'  >
-                <Pdf  targetRef={ref} filename={this.state.lot+'_'+this.state.pid+'_'+this.state.ptitle+'_'+this.state.plga+'_'+this.state.summaryfrom+'_'+this.state.summaryto} 
+                <Pdf  targetRef={ref} filename={'wk'+this.state.type+this.state.lot+'_'+this.state.pid+'_'+this.state.ptitle+'_'+this.state.plga+'_'+this.state.summaryfrom+'_'+this.state.summaryto} 
                 x={1} y={1}
                 >
                     {({toPdf})=><button className='btn btn-default btn-info' onClick={toPdf}>Download Report</button>}
@@ -151,20 +165,22 @@ constructor(props){
                 <div className=' col-md-7' style={{display:this.state.reportdisplay }}>
                 <div className='col-md-12 row'>
 
-         <div className='col-md-2' style={{marginLeft:30}}>
-    <img style={{zIndex:3 }}  className='responsive-image' id='img'  src={unicef}
-    alt='Logo'  />
+         <div className='col-md-3' style={{marginLeft:30}}>
+  {//}  <img style={{zIndex:3 }}  className='responsive-image' id='img'  src={unicef}
+ //   alt='Logo'  />
+        }
     </div>
-    <div className='col-md-3'>
-     <img style={{zIndex:3, width:'90%', marginLeft:40}} className='responsive-image' id='img'  src={ruwassa}
+    <div className='col-md-4'>
+     <img style={{zIndex:3, width:'60%', marginLeft:60}} className='responsive-image' id='img'  src={ruwassa}
     alt='Logo'  /></div>
     <div className='col-md-4'>
-    <img style={{zIndex:3, width:'90%'}} className='responsive-image' id='img'  src={ukaid}
-    alt='Logo'  />
+  {//  <img style={{zIndex:3, width:'90%'}} className='responsive-image' id='img'  src={ukaid}
+  //  alt='Logo'  />
+        }
     </div>
     
         </div>
-        <br/><br/>
+        <br/>
                 <div ><span><h5><strong>KADUNA FIELD OFFICE: WASH WEEKLY PROGRESS REPORT</strong></h5></span></div>
                 <table className='table table-bordered ' style={{border: '1px inset black'}}>
                     <thead>
@@ -188,7 +204,7 @@ constructor(props){
                         </tr>
                         <tr className='text-left'>
                             <td colSpan="4">
-                            <strong>  SUMMARY OF PLANNED ACTIVITIES:</strong> {this.state.summary}
+                            <strong>  SUMMARY OF PLANNED ACTIVITIES:</strong> {this.state.summary} <strong>From </strong>{ this.state.summaryfrom }<strong> to </strong> { this.state.summaryto}
                             </td>
                         </tr>
                         <tr>
@@ -247,14 +263,16 @@ constructor(props){
              
               <div className=' col-md-8' style={{display:this.state.imgdisplay}} >
 
-              <div>Attached images of {this.state.ptitle} in {this.state.plga} </div>
+              <div>Attached images of Lot {this.state.lot} {this.state.ptitle} in {this.state.community+' , '+this.state.plga} </div>
               <div> From: {this.state.summaryfrom+' - '+this.state.summaryto} </div>
 <div className='row'>
-                   { Object.keys(this.state.Activity).map(e=>
-                   <div className='col-md-4' style={{margin:20}}> <img style={{width:250, heigth:400}} src={this.state.Activity[e].imgurl}/></div>
+                   {
+                       /* Object.keys(this.state.Activity).map(e=>
+                   <div className='col-md-4' style={{margin:20}}> <img style={{width:250, heigth:400}} src={(this.state.Activity[e].imgurl)}/></div>
                    
-                   )   
+                   )   */
                 }
+                {imgRow}
                 </div>
                      </div>
                      </div>

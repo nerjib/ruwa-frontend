@@ -9,7 +9,8 @@ export default class ProjectDetails extends React.Component{
         this.state={
                 project:'',
                 reports:'',
-                lid:''
+                lid:'',
+                weeklyreport:''
         }
     }
 
@@ -28,7 +29,14 @@ export default class ProjectDetails extends React.Component{
                 reports: res.data
             })
         }).catch(error=>{console.log(error.message)})
-   
+
+        axios.get('https://ruwassa.herokuapp.com/api/v1/reports/activity/projectweekly/'+params.id)
+        .then(res=>{
+            this.setState({
+                weeklyreport: res.data
+            })
+        }).catch(error=>{console.log(error.message)})
+
         axios.get('https://ruwassa.herokuapp.com/api/v1/projects/'+params.id)
         .then(res=>{
             this.setState({
@@ -44,12 +52,14 @@ export default class ProjectDetails extends React.Component{
             }).catch(error=>{console.log(error.message)})
         }).catch(error=>{console.log(error.message)})
       
+    
 
     }
     gotoReport=(id)=>{
 //        alert(id)
      this.props.history.push('/reports/'+id)
     }
+
     render() {
 
         return(
@@ -58,7 +68,7 @@ export default class ProjectDetails extends React.Component{
               <div>  Status:{this.state.project.status}</div>
               <div>  Stage:{this.state.project.pstatus}</div>
               <div>  State Supervisor:{this.state.project.first_name+' '+this.state.project.last_name}</div>
-              <div>  Lid:{this.state.lid}</div>
+              <div>  Local Supervisor:{this.state.lid}</div>
 
 
               <table className='table'>
@@ -71,8 +81,16 @@ export default class ProjectDetails extends React.Component{
                       </tr>
                   </thead>
                   <tbody>
+                      {
+                             Object.keys(this.state.weeklyreport).map((e,i)=><tr><td>{i+1}</td><td>{this.state.weeklyreport[e].summaryfrom}</td>
+                             <td>{this.state.weeklyreport[e].summaryto}</td>
+                             <td>{this.state.project.first_name+' '+this.state.project.last_name}</td>
+                             <td><a target='_blank' href={`/#/weeklyreportdetails/${this.state.weeklyreport[e].id}`} ><button >view</button></a></td>
+                             </tr>)
+                      }
                       
              {
+              
                Object.keys(this.state.reports).map((e,i)=>
                <tr key={e+1}>
                    <td>{i+1}</td>

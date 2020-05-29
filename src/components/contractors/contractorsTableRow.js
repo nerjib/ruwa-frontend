@@ -18,7 +18,7 @@ export default class ContractorsTableRow extends React.Component{
                         <td >{this.props.email}</td>
                        
                         <td >
-                            <button onClick={()=>{alert(' Full details of '+this.props.company)}}>info</button>                            
+                          <a href={`/#/updatecontractor/${this.props.id}`}>  <button >edit</button>        </a>                    
                         </td>
                     </tr>
             

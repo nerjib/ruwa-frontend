@@ -12,10 +12,13 @@ export default class StatusReports extends React.Component {
 
     
     checkStatus=(e)=>{
-        if (e=='TOS'){
+
+        if (e=='TOS') {
+
             return('10%')
+            
         }
-        else if(e=='GS'){
+        else if(e=='GS') {
             return('25%')
         }
         else if(e=='Drilling'){

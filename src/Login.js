@@ -33,7 +33,7 @@ export default class Login extends Component {
     event.preventDefault();
     axios.get('https://ruwassa.herokuapp.com/api/v1/users/admin/'+this.state.email)
     .then(res => {
-       alert(res.data[0].phone)
+      // alert(res.data[0].phone)
   // alert(res.data[0].role)
         
       if (res.data[0].phone == this.state.phone & res.data[0].role=='admin') {
@@ -52,7 +52,7 @@ export default class Login extends Component {
         localStorage.setItem('login', 'stop');
         const error = new Error(res.error);
         throw error;
-        alert('not in')
+     //   alert('not in')
       }
     }
     )

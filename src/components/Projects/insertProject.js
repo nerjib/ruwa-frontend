@@ -25,7 +25,69 @@ export default class InsertProject extends React.Component{
         if (name=='supervisor'){
             this.checkSupervisor(value)
         }
-    }
+
+        if (name=='local_id'){
+            this.gotoCheckLocal(value)
+          }
+          else if(name=='state_id'){
+            this.gototCheckState(value)
+          }
+          else if (name=='contractor_id'){
+            this.checkcontractor(value);
+          }
+              }
+
+
+   
+     
+      gotoCheckLocal(id){
+        axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+id)
+        .then(req=>{
+            if(req.data[0])(
+            this.setState(prevState=>{
+              return prevState.localIdname= req.data[0].first_name +" "+ req.data[0].last_name
+            })
+            )
+            else{
+                this.setState({
+                    localIdname: 'is not Found' 
+                })
+            }
+        })
+      }
+      
+      gototCheckState(id){
+        axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+id)
+        .then(req=>{
+            if(req.data[0])(
+            this.setState({
+                stateIdname: req.data[0].first_name +" "+ req.data[0].last_name
+            })
+            )
+            else{
+                this.setState({
+                    stateIdname: 'Not found' 
+                })
+            }
+        })
+      }
+      
+      checkcontractor(id){
+        axios.get('https://ruwassa.herokuapp.com/api/v1/contractors/'+id)
+        .then(req=>{
+            if(req.data[0])(
+            this.setState({
+                CompanyName: req.data[0].company
+            })
+            )
+            else{
+                this.setState({
+                    CompanyName: 'Not found' 
+                })
+            }
+        })
+      }
+
 
     checkSupervisor(id){
         axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+id)
@@ -49,11 +111,18 @@ export default class InsertProject extends React.Component{
         title: this.state.title,
         location:this.state.location,
         status:this.state.status,
-        local_id: this.state.supervisor,
+        local_id: this.state.local_id,
+        state_id: this.state.state_id,
+        contractor_id: this.state.contractor_id,
+        ward: this.state.ward,
+        community: this.state.community,
         lga: this.state.lga,
         type:this.state.type,
         lot:this.state.lot,
-        phase:this.state.phase
+        phase:this.state.phase,
+        facility: this.state.facility,
+        
+
        }
         axios.post('https://ruwassa.herokuapp.com/api/v1/projects',obj)
         .then((res)=>{
@@ -70,6 +139,12 @@ export default class InsertProject extends React.Component{
             lga:'',
             type:'',
             lot:'',
+            state_id:'',
+            local_id:'',
+            contractor_id:'',
+            community:'',
+            ward:'',
+            facility:''
            })
     this.props.history.push('/projects')
     }
@@ -159,6 +234,69 @@ export default class InsertProject extends React.Component{
                     </select> 
                   </div>
                   </div>                <br/>
+
+                  <div className='row'>            
+          <div class='col-md-2'> <label className='text-left text-primary'> Ward </label> </div>  
+            <div className='col-md-5'> 
+                <input className='form-control' name='ward' value={this.state.ward}
+                        onChange={this.handleChange} required/>
+                  </div>
+                  </div>
+                  <br/>
+                  <div className='row'>            
+          <div class='col-md-2'> <label className='text-left text-primary'>Community Name </label> </div>  
+            <div className='col-md-5'> 
+                <input className='form-control' name='community' value={this.state.community}
+                        onChange={this.handleChange} required/>
+                  </div>
+                  </div>
+                  <br/>
+
+                  <div className='row'>            
+          <div class='col-md-2'> <label className='text-left text-primary'> Facility Name </label> </div>  
+            <div className='col-md-5'> 
+                <input className='form-control' name='facility' value={this.state.facility}
+                        onChange={this.handleChange} required/>
+                  </div>
+                  </div>
+                  <br/>
+
+                  <div className='row'>
+            
+            <div class='col-md-2'>      <label className='text-left text-primary'>   Local   Project Supervisor ID    </label> </div>  
+  
+              <div className='col-md-5'> 
+             
+                    <input className='form-control' name='local_id' value={this.state.local_id} 
+                        onChange={this.handleChange} />
+                        <div>{this.state.localIdname}</div>
+                         </div>
+                  </div>
+                  <br/>
+
+                  <div className='row'>    
+                  <div>Pstatus:{this.state.pstatus}</div>
+        
+          <div class='col-md-2'> <label className='text-left text-primary'> State Project Supervisor Id </label> </div>  
+            <div className='col-md-5'> 
+                <input className='form-control' name='state_id' value={this.state.state_id}
+                        onChange={this.handleChange}/>
+                         <div>{this.state.stateIdname}</div>
+                  </div>
+                  </div>
+                  <br/>
+                
+                  <div className='row'>            
+          <div class='col-md-2'> <label className='text-left text-primary'> Contractor ID </label>
+             
+           </div>  
+            <div className='col-md-5'> 
+                <input className='form-control' name='contractor_id' value={this.state.contractor_id}
+                        onChange={this.handleChange} />
+                           <div>{this.state.CompanyName}</div>
+                  </div>
+                  </div>
+     
          <div className='col-md-8'> 
                  <button className='btn btn-default btn-info' onClick={this.onSubmit}>Add Project</button> 
          </div>

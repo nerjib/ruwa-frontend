@@ -27,10 +27,10 @@ class ProjectTableRow extends React.Component{
                         <td>{this.props.contractor}</td>
                         <td>
                             <div className='row'>
-                        <button className='btn btn-default btn-info'  style={{width:'50px'}}
-                             onClick={this.goToDetails}>View</button>
-                            <button className='btn btn-default btn-info'  style={{width:'50px', marginLeft:5}}
-                             onClick={this.goToUpdate}>Edit </button>
+                       <a target='_blank' href={`/#/projectdetails/${this.props.id}`}> <button className='btn btn-default btn-info'  style={{width:'50px'}}
+                             >View</button></a>
+                      <a target='_blank' href={`/#/updateproject/${this.props.id}`}>      <button className='btn btn-default btn-info'  style={{width:'50px', marginLeft:5}}
+                            >Edit </button></a>
                              </div>                            
                     </td>
                     </tr>

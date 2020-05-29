@@ -9,7 +9,7 @@ class MyPie extends React.Component{
         <div>
 <Pie
 data={{
-                    labels: ['sanitation','Hand pump','Motorized Solar', 'Community borehole'],
+                    labels: ['Vip','Force Lift','Motorized Solar', 'Community borehole'],
                     datasets: [{
                         data:[this.props.sanitations,this.props.forcelift,this.props.solarpump,this.props.communitypump],
                         backgroundColor:['red','blue','purple','green']

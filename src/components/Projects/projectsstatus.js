@@ -24,10 +24,13 @@ export default class ProjectsStatus extends React.Component {
         else if(e=='PT'){
             return('55%')
         }
+        else if(e=='PI'){
+            return('60%')
+        }
         else if(e=='FS'){
             return('65%')
         }
-        else if(e=='ES'){
+        else if(e == 'ES'){
             return('80%')
         }
         else if(e=='ISP'){
@@ -35,6 +38,9 @@ export default class ProjectsStatus extends React.Component {
         }
         else if(e=='Reticulation'){
             return('90%')
+        }
+        else if(e=='CR'){
+            return('95%')
         }
         else if(e=='FR'){
             return('100%')
@@ -63,18 +69,21 @@ export default class ProjectsStatus extends React.Component {
                     <thead>
                         <tr><th colSpan='8'>{this.props.projecttype}</th></tr>
                         <tr>
-                            <th>S/N</th><th>LOTS</th><th>LGA</th><th>Council Ward</th><th>Community Name</th><th>Facility</th><th>Name of Contractor</th><th>% Coverage</th>
+                            <th>S/N</th><th>LOTS</th><th>LGA</th><th>Council Ward</th><th>Community Name</th><th>gps</th><th>Facility</th><th>Name of Contractor</th><th>% Coverage</th>
                         </tr>
                     </thead>
                     <tbody>
-                {Object.keys(this.props.reports).map((e,i)=><tr><td>{i+1}</td>
+                {Object.keys(this.props.reports).map((e,i)=>
+                <tr><td> <a target='_blank' href={`/#/projectdetails/${this.props.reports[e].id}`}>{i+1}</a></td>
                 <td>{this.props.reports[e].lot}</td>
                 <td>{this.props.reports[e].lga}</td>
                 <td>{this.props.reports[e].ward}</td>
                 <td>{this.props.reports[e].community}</td>
+                <td>{this.props.reports[e].gps}</td>
                 <td>{this.props.reports[e].facility}</td>
                 <td>{this.props.reports[e].company}</td>
-               <td>{this.checkStatus(this.props.reports[e].pstatus)}</td></tr>)}
+               <td><a target='_blank' href={`/#/projectdetails/${this.props.reports[e].id}`}>
+               {this.checkStatus(this.props.reports[e].pstatus)}</a></td></tr>)}
                 </tbody>
                 </table>
             </div>

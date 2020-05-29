@@ -7,20 +7,22 @@ class ReportPie extends React.Component{
 constructor(props){
     super(props)
     this.state={
-        completeionrate:''
+        completeionrate:30
     }
 }
 
 
+
     checkStatus=(e)=>{
     //    alert(e)
+
         if (e=='TOS'){
-      
+
             return(10)
-        }
+                   }
      
         else if(e=='GS'){
-      
+
             return(25)
         }
         else if(e=='Drilling'){
@@ -72,7 +74,7 @@ constructor(props){
         <div>
 <Pie
 data={{
-                    labels: [this.state.completeionrate +' % completion', this.state.completeionrate+' % remainder'],
+                    labels: [this.checkStatus(this.props.pstatus) +' % completion', (100-this.checkStatus(this.props.pstatus))+' % remainder'],
                     datasets: [{
                         data:[this.checkStatus(this.props.pstatus),100- this.checkStatus(this.props.pstatus)],
                         backgroundColor:['green','red']

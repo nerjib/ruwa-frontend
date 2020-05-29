@@ -52,7 +52,7 @@ if(this.props.gps){
    <td>{this.props.statesuper}</td>
    <td >{this.props.localsup}</td>
    <td >{new Date(this.props.date).getDate() +'-'+ (new Date(this.props.date).getMonth()+1)+' '+new Date(this.props.date).getFullYear()}</td>
-   <td ><a href={`/#/weeklyreportdetails/${this.props.id}`}><button className='btn btn-default btn-info' 
+   <td ><a target='_blank' href={`/#/weeklyreportdetails/${this.props.id}`}><button className='btn btn-default btn-info' 
   >View</button></a></td>
 </tr>
     )

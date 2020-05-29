@@ -18,11 +18,21 @@ constructor(props){
     
          // return url
             this.setState({
-        url: res.data[0].imgurl
+        url: this.imgCompress(res.data[0].imgurl)
             })
         }).catch(error=>{console.log(error)})
      
     }
+
+    imgCompress=(e)=>{
+        if(e){
+        const intialurl = e.substring(0, 49);
+  const finalurl = e.substring(50, e.length);
+  return `${intialurl}/q_10/${finalurl}`
+        }
+  
+    }
+    
     render(){
         return (
             <div>

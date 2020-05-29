@@ -11,7 +11,7 @@ constructor(props){
             weeklyreports:'',
         displayAll:'none',
         currentPage: 1,
-        reportsPerPage: 35,
+        reportsPerPage: 100,
         allreports:'',
         reportfocus:''
 }

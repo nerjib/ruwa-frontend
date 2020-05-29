@@ -27,6 +27,8 @@ import UpdateSupervisor from './components/supervisors/updatesupervisor';
 import ProjectsSupervisors from './components/Projects/projectsSupervisors'
 import ReportsView from './components/reports/reportView'
 import AddProjectsSupervisor from './components/Projects/addProjectsSupervisor'
+import UpdateContractors from './components/contractors/updateContractors'
+import Performance from './components/supervisors/performance'
 function App() {
   return (
     <div className="App">
@@ -58,6 +60,9 @@ function App() {
           <Route path='/projectsupa' exact component={ProjectsSupervisors}/>
           <Route path='/reportsview' exact component={ReportsView}/>
           <Route path='/addprojectssupervisor' exact component={AddProjectsSupervisor}/>
+          <Route path='/updatecontractor/:id' exact component={UpdateContractors}/>
+          <Route path='/performance' exact component={Performance}/>
+
 
 
 
