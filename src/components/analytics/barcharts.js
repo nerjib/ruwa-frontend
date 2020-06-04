@@ -9,10 +9,10 @@ export default class Barcharts extends React.Component{
     render(){
         const data = [
             {
-                    text: 'Ongoing Projects', value:this.props.ongoing, backgroundColor:'red'
+                    text: 'Weekly Reports', value:this.props.weeklyreports, backgroundColor:'red'
             },
             {
-                    text:'Reports Received', value:this.props.allreports
+                    text:'Daily Reports', value:this.props.dailyeports
             }
         ];
         return(
@@ -23,9 +23,9 @@ export default class Barcharts extends React.Component{
                 */
                <Pie
 data={{
-                    labels: ['Ongoing Project','Report received this week'],
+                    labels: ['Weekly Reports','Daily Reports'],
                     datasets: [{
-                        data:[this.props.ongoing,this.props.allreports],
+                        data:[this.props.weeklyreports,this.props.dailyreports],
                         backgroundColor:['red','blue']
                     }]
                 }}
