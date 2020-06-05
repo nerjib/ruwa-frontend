@@ -578,23 +578,19 @@ goToPhase7=()=>{
                     solarpump={this.state.phaseSolar} sanitations={this.state.phaseSan}/>    
             </div>
             <div className='col-md-6'>
-                Status of Projects {phase6 +' '+phase7}<br/>
-               {this.state.phaseComlpete+ ' '+this.state.phaseOngoing+' '+this.state.phaseAbandoned}
+                Status of Projects 
                 <div id="piechart"></div>
                 <ProPie ongoing={this.state.phaseOngoing} abandoned={this.state.phaseAbandoned} completed={this.state.phaseComlpete}/>    
             </div>            
             </div>
             <hr/>
 
-                { this.state.phaseSolarWkReports+' '+this.state.phaseSanWkReports+' '+this.state.phaseflWkReports+' '+this.state.phasecbhWkReports}
-           <br/>
-           {this.state.dailySol+' '+this.state.dailycbh+' '+this.state.dailyfl+' '+this.state.dailysan}
                 <div>
                 <Barcharts weeklyreports={this.state.phaseflWkReports+this.state.phasecbhWkReports+this.state.phaseSolarWkReports+this.state.phaseSanWkReports} dailyreports={this.state.phaseflReports+this.state.phasecbhReports+this.state.phaseSolarReports+this.state.phaseSanReports}/>
             </div>
 
             <div><h3 className='text-primary'>Reports Received</h3></div>
-            <div className='row'>
+ {/*}           <div className='row'>
                 <div className='col-md-2'><h5>VIP:<h5 className='text-danger'>{this.state.SanitationsOnlyReports}</h5></h5></div>
                 <div className='col-md-2'><h5>Force Lift:<h5 className='text-danger'>{this.state.ForceliftOnlyReports}</h5></h5></div>
                 <div className='col-md-3'><h5>Motorized Pump Boreholes:<h5 className='text-danger'>{this.state.SolarOnlyReports}</h5></h5></div>
@@ -603,7 +599,7 @@ goToPhase7=()=>{
 
 
             </div>
-
+*/}
             <div className='row'>
       {/*}          <div className='col-md-3'>
                     
