@@ -4,11 +4,10 @@ import  ProjectTableRow from './projectTableRow'
 
 export default class Supervisors extends React.Component{
     constructor(props){
-        super(props);
-
+        super(props);      
         this.state={
             currentPage: 1,
-        projectPerPage: 20
+        projectPerPage: 1000
   }
     }
 
@@ -27,6 +26,7 @@ export default class Supervisors extends React.Component{
         // Logic for displaying todos
         const indexOfLastTodo = currentPage * projectPerPage;
         const indexOfFirstTodo = indexOfLastTodo - projectPerPage;
+     //   Object.keys(this.props.projects).map(e)
         const currentProjects = Object.keys(this.props.projects).slice(indexOfFirstTodo, indexOfLastTodo);
     
         const pageNumbers = [];
@@ -36,7 +36,7 @@ export default class Supervisors extends React.Component{
     
 
     currentProjects.map((e,i)=>{
-        if(this.props.projects[e].phase !='7'){
+        if(this.props.projects[e].phase == this.props.phase & this.props.projects[e].title==this.props.focus){
 
         row.push(
         <ProjectTableRow sn={i} title={this.props.projects[e].title}  id={this.props.projects[e].id} lot={this.props.projects[e].lot}

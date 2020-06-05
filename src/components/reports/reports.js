@@ -17,7 +17,8 @@ constructor(props){
             reportfocus:'',
             day:new Date().getDate(),
             month:new Date().getMonth(),
-            title:''
+            title:'Sanitation',
+            phase:6
     }
 }
 
@@ -56,47 +57,47 @@ handleClick = (event) => {
 }
 
 sanitationReport=()=>{
-    axios.get('https://ruwassa.herokuapp.com/api/v1/reports/completereports/sanitation')
-    .then(res => {
+ 
         this.setState({
-                allreports:res.data,
+             //   allreports:res.data,
                 currentPage: 1,
-                reportfocus:'sanitation'
+                reportfocus:'Sanitation',
+                title:'Sanitation'
 
         })
-    }).catch( errors=>{console.log(errors.message)})
 }
 forceReport=()=>{
-    axios.get('https://ruwassa.herokuapp.com/api/v1/reports/completereports/forcelift')
-    .then(res => {
+  //  axios.get('https://ruwassa.herokuapp.com/api/v1/reports/completereports/forcelift')
+    //.then(res => {
         this.setState({
-                allreports:res.data,
+              //  allreports:res.data,
                 currentPage: 1,
-                reportfocus:'forcelift'
+                reportfocus:'forcelift',
+                title: 'Force Lift'
 
         })
-    }).catch( errors=>{console.log(errors.message)})
+//    }).catch( errors=>{console.log(errors.message)})
 }
 communityReport=()=>{
-    axios.get('https://ruwassa.herokuapp.com/api/v1/reports/completereports/community')
-    .then(res => {
-        this.setState({
-                allreports:res.data,
+   this.setState({
+  //              allreports:res.data,
                 currentPage: 1,
-                reportfocus:'community'
+                reportfocus:'community',
+                title: 'Community Borehole'
 
         })
-    }).catch( errors=>{console.log(errors.message)})
+//    }).catch( errors=>{console.log(errors.message)})
 }
 solarReport=()=>{
-    axios.get('https://ruwassa.herokuapp.com/api/v1/reports/completereports/solar')
-    .then(res => {
+  //  axios.get('https://ruwassa.herokuapp.com/api/v1/reports/completereports/solar')
+    //.then(res => {
         this.setState({
-                allreports:res.data,
+              //  allreports:res.data,
                 currentPage: 1,
-                reportfocus:'solar'
+                reportfocus:'solar',
+                title: 'Motorized Solar Borehole'
         })
-    }).catch( errors=>{console.log(errors.message)})
+    //}).catch( errors=>{console.log(errors.message)})
 }
 
 gotoReportstatus=()=>{
@@ -164,6 +165,7 @@ currentProjects.map((e,i)=>{row.push(
 
 currentProjects.map((e,i)=>{
     //if(new Date(this.state.allreports[e].date).getDate()==this.state.day & new Date(this.state.allreports[e].date).getMonth()==this.state.month &this.state.allreports[e].title==this.state.title){
+    if(this.state.allreports[e].phase== this.state.phase & this.state.allreports[e].title==this.state.title){
     row.push(<ReportRow sn={i+1} id={this.state.allreports[e].id} title={this.state.allreports[e].title}
     lga={this.state.allreports[e].lga} ward={this.state.allreports[e].ward} community={this.state.allreports[e].community}
     gps={this.state.allreports[e].gps} facility={this.state.allreports[e].facility} lot={this.state.allreports[e].lot}
@@ -171,6 +173,7 @@ currentProjects.map((e,i)=>{
     contractor={this.state.allreports[e].company}  localsup={this.state.allreports[e].last_name+' '+this.state.allreports[e].first_name}
      date={this.state.allreports[e].date}  status={this.state.allreports[e].status}/>)
   //  }
+    }
     })          
             
             return(

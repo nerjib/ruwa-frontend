@@ -12,7 +12,9 @@ constructor(props){
         projectsfocus:'',
         acttype:'Projects Coverage',
         projectdisplay:'',
-        coveragedisplay:'none'
+        coveragedisplay:'none',
+        focus: 'Sanitation',
+        phase: 6
     }
 }
 
@@ -33,7 +35,7 @@ axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/all')
 .then(res =>{
     this.setState({
         projects: res.data,
-        projectsfocus:'all'
+        projectsfocus:'Sanitation'
     })
 })
 .catch(function(error){
@@ -45,54 +47,33 @@ componentWillUnmount(){
 }
 
 sanitationProjects=()=>{
-    axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/sanitations')
-.then(res =>{
     this.setState({
-        projects: res.data,
-        projectsfocus:'sanitation'
-    
+        //projects: res.data,
+        projectsfocus:'sanitation',
+        focus: 'Sanitation'
     })
-})
-.catch(function(error){
-     console.log(error)
-})    
 }
 forceProjects=()=>{
-    axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/forcelift')
-.then(res =>{
     this.setState({
-        projects: res.data,
-        projectsfocus:'forcelift'
+  //      projects: res.data,
+        projectsfocus:'forcelift',
+        focus: 'Force Lift'
     })
-})
-.catch(function(error){
-     console.log(error)
-})    
 }
 communityProjects=()=>{
-    axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/community')
-.then(res =>{
     this.setState({
-        projects: res.data,
-        projectsfocus:'community'
-    })
-})
-.catch(function(error){
-     console.log(error)
-})    
+//        projects: res.data,
+        projectsfocus:'community',
+        focus: 'Community Borehole'
+  })    
 }
 solarProjects=()=>{
-    axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/solar')
-.then(res =>{
     this.setState({
-        projects: res.data,
-        projectsfocus:'solar'
+     //   projects: res.data,
+        projectsfocus:'solar',
+        focus: 'Motorized Solar Borehole'
     })
-})
-.catch(function(error){
-     console.log(error)
-})    
-}
+}/*
 allProjects=()=>{
     axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/all')
 .then(res =>{
@@ -104,7 +85,7 @@ allProjects=()=>{
 .catch(function(error){
      console.log(error)
 })    
-}
+}*/
 gotoProjectstatus=()=>{
  //  alert(this.state.projectsfocus)
    if(this.state.acttype=='Projects Coverage')
@@ -121,6 +102,17 @@ gotoProjectstatus=()=>{
         })
     }
 }
+goToPhase6=()=>{
+    this.setState({
+        phase:6
+    })
+}
+
+goToPhase7=()=>{
+    this.setState({
+        phase:7
+    })
+}
 render(){
     
     return(
@@ -128,8 +120,10 @@ render(){
            <div className='row'>
              <div className='col-md-1'  ><Link to='/projectform'><button className='btn btn-default btn-info'>Add Project</button></Link></div>
             <div className='col-md-2' ><Link to='/home'><button className='btn btn-default btn-info'>Home</button></Link></div>
-            <div className='col-xs-2'  ><button onClick={this.allProjects} className='btn btn-default btn-info'>All Projects</button></div>
-            <div className='col-xs-2'  ><button onClick={this.sanitationProjects} className='btn btn-default btn-info'>Sanitation</button></div>
+            <div className='col-xs-2'  ><button onClick={this.goToPhase6} className='btn btn-default btn-info'>Phase 6c</button></div>
+            <div className='col-xs-2'  ><button onClick={this.goToPhase7} className='btn btn-default btn-info'>Phase 7</button></div>
+
+        <div className='col-xs-2'  ><button onClick={this.sanitationProjects} className='btn btn-default btn-info'>Sanitation</button></div>
             <div className='col-xs-2'  ><button onClick={this.solarProjects} className='btn btn-default btn-info'>Solar Boreholes</button></div>
             <div className='col-xs-2'  ><button onClick={this.forceProjects} className='btn btn-default btn-info'>Force Lift</button></div>
             <div className='col-xs-2'  ><button onClick={this.communityProjects} className='btn btn-default btn-info'>Community</button></div>
@@ -137,10 +131,10 @@ render(){
 
             </div>
             <div style={{display:this.state.projectdisplay}}>
-            <ProjectTable projects={this.state.projects} />
+            <ProjectTable focus={this.state.focus} phase={this.state.phase} projects={this.state.projects} />
             </div>
             <div style={{display:this.state.coveragedisplay}}>
-            <ProjectsStatus projecttype={this.state.projectsfocus} reports={this.state.projects}/>
+            <ProjectsStatus projecttype={this.state.projectsfocus} focus={this.state.focus} phase={this.state.phase} reports={this.state.projects}/>
             </div>
         </div>
     )

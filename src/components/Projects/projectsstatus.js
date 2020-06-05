@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 
 export default class ProjectsStatus extends React.Component {
@@ -60,8 +61,32 @@ export default class ProjectsStatus extends React.Component {
         }
     
     }
-    
+checkSup=(id)=>{
+    let gg=''
+    axios.get('https://ruwassa.herokuapp.com/api/v1/projects/'+id)
+    .then(res=>{
+        gg =res.data[0].local_id
+    })
+    return gg
+}    
     render(){
+
+        let row = []
+        Object.keys(this.props.reports).map((e,i)=>{
+            if(this.props.reports[e].phase == this.props.phase & this.props.reports[e].title==this.props.focus){
+            row.push(  <tr><td> <a target='_blank' href={`/#/projectdetails/${this.props.reports[e].id}`}>{i+1}</a></td>
+                <td>{this.props.reports[e].lot}</td>
+                <td>{this.props.reports[e].lga}</td>
+                <td>{this.props.reports[e].ward}</td>
+                <td>{this.props.reports[e].community}</td>
+                <td>{this.props.reports[e].gps}</td>
+                <td>{this.props.reports[e].facility}</td>
+                <td>{this.props.reports[e].company}</td>
+                <td>{this.checkSup(this.props.reports[e].id)}</td>
+               <td><a target='_blank' href={`/#/projectdetails/${this.props.reports[e].id}`}>
+               {this.checkStatus(this.props.reports[e].pstatus)}</a></td></tr>)
+            }   
+            })
         return (
 
             <div>
@@ -73,17 +98,7 @@ export default class ProjectsStatus extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                {Object.keys(this.props.reports).map((e,i)=>
-                <tr><td> <a target='_blank' href={`/#/projectdetails/${this.props.reports[e].id}`}>{i+1}</a></td>
-                <td>{this.props.reports[e].lot}</td>
-                <td>{this.props.reports[e].lga}</td>
-                <td>{this.props.reports[e].ward}</td>
-                <td>{this.props.reports[e].community}</td>
-                <td>{this.props.reports[e].gps}</td>
-                <td>{this.props.reports[e].facility}</td>
-                <td>{this.props.reports[e].company}</td>
-               <td><a target='_blank' href={`/#/projectdetails/${this.props.reports[e].id}`}>
-               {this.checkStatus(this.props.reports[e].pstatus)}</a></td></tr>)}
+                {row}
                 </tbody>
                 </table>
             </div>
