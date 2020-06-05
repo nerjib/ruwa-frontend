@@ -14,16 +14,16 @@ constructor(props){
         reportsPerPage: 100,
         allreports:'',
         reportfocus:''
-}
-
-   
+} 
 }
 componentDidMount=()=>{
     axios.get('https://ruwassa.herokuapp.com/api/v1/reports/weekly/completereports/all')
     .then(res=>{
         this.setState({
             weeklyreports: res.data,
-            reportfocus:'all'
+            reportfocus:'all',
+            title: 'Sanitation',
+            phase: 6
         })
     })
 }
@@ -37,6 +37,76 @@ handleClick = (event) => {
         currentPage: Number(event.target.id)
       });
 }
+
+sanitationReport=()=>{
+ 
+    this.setState({
+         //   allreports:res.data,
+            currentPage: 1,
+            reportfocus:'Sanitation',
+            title:'Sanitation'
+
+    })
+}
+forceReport=()=>{
+//  axios.get('https://ruwassa.herokuapp.com/api/v1/reports/completereports/forcelift')
+//.then(res => {
+    this.setState({
+          //  allreports:res.data,
+            currentPage: 1,
+            reportfocus:'forcelift',
+            title: 'Force Lift'
+
+    })
+//    }).catch( errors=>{console.log(errors.message)})
+}
+communityReport=()=>{
+this.setState({
+//              allreports:res.data,
+            currentPage: 1,
+            reportfocus:'community',
+            title: 'Community Borehole'
+
+    })
+//    }).catch( errors=>{console.log(errors.message)})
+}
+solarReport=()=>{
+//  axios.get('https://ruwassa.herokuapp.com/api/v1/reports/completereports/solar')
+//.then(res => {
+    this.setState({
+          //  allreports:res.data,
+            currentPage: 1,
+            reportfocus:'solar',
+            title: 'Motorized Solar Borehole'
+    })
+//}).catch( errors=>{console.log(errors.message)})
+}
+
+nextPage = () =>{
+    //    alert('hello')
+        this.setState({
+            currentPage: this.state.currentPage+1
+        })
+    
+    }
+    backPage =()=>{
+        this.setState({
+            currentPage: this.state.currentPage - 1
+        })
+    
+    }
+goToPhase6=()=>{
+    this.setState({
+        phase: 6
+    })
+}
+goToPhase7=()=>{
+    this.setState({
+        phase: 7
+    })
+}
+
+
 render(){
 
     let row =[];
@@ -54,18 +124,39 @@ render(){
     }
 
 
-    currentProjects.map((e,i)=>row.push(<WeeklyReportRows sn={i+1} id={this.state.weeklyreports[e].id} title={this.state.weeklyreports[e].title}
+    currentProjects.map((e,i)=>{
+        if(this.state.weeklyreports[e].phase==this.state.phase & this.state.weeklyreports[e].title==this.state.title){
+        row.push(<WeeklyReportRows sn={i+1} id={this.state.weeklyreports[e].id} title={this.state.weeklyreports[e].title}
         lga={this.state.weeklyreports[e].lga} ward={this.state.weeklyreports[e].ward} community={this.state.weeklyreports[e].community}
         gps={this.state.weeklyreports[e].gps} facility={this.state.weeklyreports[e].facility} lot={this.state.weeklyreports[e].lot}
         contractor={this.state.weeklyreports[e].company}  localsup={this.state.weeklyreports[e].last_name+' '+this.state.weeklyreports[e].first_name}
-         date={this.state.weeklyreports[e].date}/>))          
+         date={this.state.weeklyreports[e].date}/>)
+        }
+        })          
     
 
     return(
         <div>
                           
-
-           {pageNumbers}
+                          <div className='row'>
+          <div>
+                    </div>
+               <div> <button onClick={this.goToPhase6} >Phase 6C</button></div>
+               <div> <button onClick={this.goToPhase7} >Phase 7</button></div>
+                <div> <button onClick={this.sanitationReport} >Sanitation</button></div>
+                <div> <button onClick={this.forceReport} >Force Lift</button></div>
+                <div> <button onClick={this.solarReport} >Solar Motorized</button></div>
+                <div> <button onClick={this.communityReport} >Community</button></div>
+            </div>
+            <div>
+                {//this.state.day
+                }
+            </div>
+            <div> {//pages {pageNumbers}
+            }
+            <button onClick={this.backPage}>Back</button><button onClick={this.nextPage}>Next</button>
+            </div>
+     
             <table className='table'>
                 <thead>
                 <tr>   <th>S/N</th>

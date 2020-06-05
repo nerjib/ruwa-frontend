@@ -120,17 +120,26 @@ handleCalender=(day=new Date().getDate(),month=new Date().getMonth(),title='all'
 nextPage = () =>{
     //    alert('hello')
         this.setState({
-            currentPage: this.state.currentPage+10
+            currentPage: this.state.currentPage+1
         })
     
     }
     backPage =()=>{
         this.setState({
-            currentPage: this.state.currentPage - 10
+            currentPage: this.state.currentPage - 1
         })
     
     }
-
+goToPhase6=()=>{
+    this.setState({
+        phase: 6
+    })
+}
+goToPhase7=()=>{
+    this.setState({
+        phase: 7
+    })
+}
 render() {
     let row =[];
 
@@ -183,7 +192,8 @@ currentProjects.map((e,i)=>{
           <div>
                     <Calender onCalender={this.handleCalender}/>
                     </div>
-               <div> <button onClick={this.onLoad} >All Report</button></div>
+               <div> <button onClick={this.goToPhase6} >Phase 6C</button></div>
+               <div> <button onClick={this.goToPhase7} >Phase 7</button></div>
                 <div> <button onClick={this.sanitationReport} >Sanitation</button></div>
                 <div> <button onClick={this.forceReport} >Force Lift</button></div>
                 <div> <button onClick={this.solarReport} >Solar Motorized</button></div>
