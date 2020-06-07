@@ -56,6 +56,9 @@ export default class ProjectsStatus extends React.Component {
         else if(e=='Finishing'){
             return('80%')
         }
+        else if(e=='Platforming'){
+            return('80%')
+        }
         else if (e=='SuperS'){
             return('60%')
         }

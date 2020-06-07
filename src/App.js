@@ -29,6 +29,8 @@ import ReportsView from './components/reports/reportView'
 import AddProjectsSupervisor from './components/Projects/addProjectsSupervisor'
 import UpdateContractors from './components/contractors/updateContractors'
 import Performance from './components/supervisors/performance'
+import PhaseSupervisors from './components/supervisors/phaseSupervisors'
+import SupervisorDetails from './components/supervisors/supervisorDetails'
 function App() {
   return (
     <div className="App">
@@ -39,7 +41,8 @@ function App() {
         <Route path="/signout" exact component={(SignOut)} />
 
           <Route path="/projects" exact component={Projects} />
-          <Route path="/supervisors" exact component={Supervisors} />
+          <Route path="/allsupervisors" exact component={Supervisors} />
+          <Route path="/supervisors" exact component={PhaseSupervisors} />
           <Route path="/switch" exact component={ThemeSwitcher} />
           <Route path="/boot" exact component={Boot} />
           <Route path="/supervisors/add" exact component={AddSupervisor} />
@@ -62,6 +65,8 @@ function App() {
           <Route path='/addprojectssupervisor' exact component={AddProjectsSupervisor}/>
           <Route path='/updatecontractor/:id' exact component={UpdateContractors}/>
           <Route path='/performance' exact component={Performance}/>
+          <Route path='/supervisor/:id' exact component={SupervisorDetails}/>
+
 
 
 

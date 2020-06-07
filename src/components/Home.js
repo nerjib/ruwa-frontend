@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Supervisors from './supervisors/supervisors'
+import Supervisors from './supervisors/phaseSupervisors'
 import Projects from './Projects/projects'
 import Contractors from './contractors/contractors'
 import { Link, Route, Redirect } from 'react-router-dom';

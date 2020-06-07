@@ -75,12 +75,29 @@ export default class ProjectDetails extends React.Component{
                   <thead>
                       <tr>
                           <th>SN</th>
-                          <th>Summary From</th>
-                          <th>Summary to</th>
+                          <th>Date</th>
+                          <th>Activity</th>
+                          <th>Outcome</th>
                           <th>Supervisor</th>
+
                       </tr>
                   </thead>
                   <tbody>
+                      
+             {
+              
+               Object.keys(this.state.reports).map((e,i)=>
+               <tr key={e+1}>
+                   <td>{i+1}</td>
+                   <td>{this.state.reports[e].activitydate}</td>
+                   <td>{this.state.reports[e].activity}</td>
+                   <td>{this.state.reports[e].activityoutcome}</td>
+                   <td>{this.state.reports[e].first_name+' '+this.state.reports[e].last_name}</td>
+                   <td><a target='_blank' href={`/#/reports/${this.state.reports[e].id}`} ><button >view</button></a></td>
+
+               </tr> 
+               )
+             }
                       {
                              Object.keys(this.state.weeklyreport).map((e,i)=><tr><td>{i+1}</td><td>{this.state.weeklyreport[e].summaryfrom}</td>
                              <td>{this.state.weeklyreport[e].summaryto}</td>
@@ -88,20 +105,6 @@ export default class ProjectDetails extends React.Component{
                              <td><a target='_blank' href={`/#/weeklyreportdetails/${this.state.weeklyreport[e].id}`} ><button >view</button></a></td>
                              </tr>)
                       }
-                      
-             {
-              
-               Object.keys(this.state.reports).map((e,i)=>
-               <tr key={e+1}>
-                   <td>{i+1}</td>
-                   <td>{this.state.reports[e].summaryfrom}</td>
-                   <td>{this.state.reports[e].summaryto}</td>
-                   <td>{this.state.reports[e].first_name+' '+this.state.reports[e].last_name}</td>
-                   <td><button onClick={()=>this.gotoReport(this.state.reports[e].id)}>view</button></td>
-
-               </tr> 
-               )
-             }
              
              </tbody>
               </table>
