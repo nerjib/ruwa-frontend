@@ -11,7 +11,7 @@ export default class SupervisorsTable extends React.Component{
         this.state={
             supervisors:'',
             currentPage: 1,
-            supervisorsPerPage: 100
+            supervisorsPerPage: 1000
         }
     }
 
