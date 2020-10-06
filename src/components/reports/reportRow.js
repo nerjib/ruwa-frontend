@@ -127,18 +127,19 @@ render() {
 
     return (
    <tr> <td>{this.props.sn}</td>
-    <td >{this.props.lot}</td>
-   <td >{this.props.title}</td>
-   <td >{this.props.lga}</td>
-   <td >{this.props.ward}</td>
-   <td>{this.props.community}</td>
-   <td>{lat}</td>
-   <td>{lon}</td>
-   <td>{this.props.facility}</td>
-   <td>{this.props.contractor}</td>
-   <td>{this.props.statesuper}</td>
-   <td >{this.props.localsup}</td>
-   <td >{this.props.status}</td>
+  {//}  <td >{this.props.lot}</td>
+  // <td > <a target='_blank' href={`/#/projectdetails/${this.props.pid}`}> {this.props.title}</a></td>
+    }
+  <td ><a target='_blank' href={`/#/projectdetails/${this.props.pid}`}>{this.props.community+' , '+this.props.lga}</a></td>
+   <td >{this.props.activity}</td>
+   <td>{this.props.activityoutcome}</td>
+     <td>{this.props.conclusion}</td>
+     <td >{this.props.thirdparty}</td>
+      <td >{this.props.thirdremark}</td>
+         <td>{this.props.contractor}</td>
+      <td >{this.props.localsup}</td>
+     
+   <td >{this.props.stage}</td>
    <td >{new Date(this.props.date).getDate() +'-'+ (new Date(this.props.date).getMonth()+1)+' '+new Date(this.props.date).getFullYear()}</td>
    <td ><a target='_blank' href={`/#/reports/${this.props.id}`}><button className='btn btn-default btn-info' 
   >View</button></a></td>

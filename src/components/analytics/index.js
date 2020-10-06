@@ -6,6 +6,9 @@ import now from 'performance-now';
 import ProPie from './proPie'
 import Barcharts from './barcharts'
 import DailyMap from '../map/dailymap'
+import CompletePie from './coompletedProPie'
+import  Loader from 'react-loader-spinner'
+
 
 class Analytics extends React.Component{
     constructor(props){
@@ -45,26 +48,31 @@ class Analytics extends React.Component{
             marker:{},
             piddd:[],
             allprojects:'',
-            phase:6,
-            phaseSan:'',
-            phaseSolar:'',
-            phasefl:'',
-            phasecbh:'',
-            phaseAbandoned:'',
-            phaseComlpete: '',
-            phaseOngoing: '',            
-           phaseSolarReports:'',
-           phaseSanReports: '',
-           phaseflReports: '',
-           phasecbhReports: '',
-           phaseSolarWkReports:'',
-           phaseSanWkReports:'',
-           phaseflWkReports:'',
-           phasecbhWkReports: '',
+            phase:7,
+            phaseSan:0,
+            phaseSolar:0,
+            phasefl:0,
+            phasecbh:0,
+            phaseAbandoned:0,
+            phaseComlpete: 0,
+            phaseOngoing: 0,            
+           phaseSolarReports:0,
+           phaseSanReports: 0,
+           phaseflReports: 0,
+           phasecbhReports: 0,
+           phaseSolarWkReports:0,
+           phaseSanWkReports:0,
+           phaseflWkReports:0,
+           phasecbhWkReports: 0,
             dailysan:0,
             dailySol:0,
             dailyfl:0,
             dailycbh:0,
+            phaseComCbh: 0,
+            phaseComSan: 0,
+            phaseComFl: 0,
+            phaseComSolar: 0,
+            status: false
         }
     }
 
@@ -82,12 +90,13 @@ class Analytics extends React.Component{
     }
 
 onLoad(){
-
+this.setState({
+    status: true
+})
     axios.get('https://ruwassa.herokuapp.com/api/v1/projects')
     .then(res =>{
 
          this.setState({allprojects: res.data})
-
          let san=0
          let solar=0
          let fl = 0;
@@ -95,6 +104,10 @@ onLoad(){
          let completed = 0;
          let ongoing = 0;
          let abandoned = 0;
+         let comSan=0;
+         let comCbh=0;
+         let comSolar=0;
+         let comFl=0;
         Object.keys(res.data).map((e,i)=>{
             if(res.data[e].title=='Sanitation' & res.data[e].phase==this.state.phase ){
                 san = san + 1
@@ -108,7 +121,16 @@ onLoad(){
             }
 
             if( res.data[e].status=='completed' & res.data[e].phase==this.state.phase){
-                completed ++
+                                completed ++
+                                if(res.data[e].title=='Sanitation'){
+                                    comSan ++
+                                }else  if(res.data[e].title=='Force Lift'){
+                                    comFl ++
+                                }else  if(res.data[e].title=='Motorized Solar Borehole'){
+                                    comSolar ++
+                                }else  if(res.data[e].title=='Community Borehole'){
+                                    comCbh ++
+                                }
             }else if( res.data[e].status=='ongoing' & res.data[e].phase==this.state.phase){
                 ongoing ++
             } else if( res.data[e].status=='abandoned' & res.data[e].phase==this.state.phase){
@@ -123,8 +145,13 @@ onLoad(){
             phasecbh: cbh,
             phaseComlpete:completed,
             phaseAbandoned:abandoned,
-            phaseOngoing:ongoing
+            phaseOngoing:ongoing,
+            phaseComCbh: comCbh,
+            phaseComSan:comSan,
+            phaseComFl: comFl,
+            phaseComSolar: comSolar
     })
+      
     })
     .catch(error=>{
          console.log(error)
@@ -214,276 +241,15 @@ onLoad(){
             phaseSolarWkReports:solar,
             phaseSanWkReports:san,
             phaseflWkReports:fl,
-            phasecbhWkReports: cbh
+            phasecbhWkReports: cbh,
+            status: false
     })
  
     })
     .catch(error=>{
          console.log(error)
     })
-{/*}
-    axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/ongoing')
-        .then(res =>{
-            this.setState({ongoingProjects: res.data[0].count})
-        })
-        .catch(error=>{
-             console.log(error)
-        })
 
-        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics')
-        .then(res =>{
-            this.setState({totalProjects: res.data[0].count})
-        })
-        .catch(error=>{
-             console.log(error)
-        })
-
-   
-        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/abandoned')
-        .then(res =>{
-            this.setState({abandonedProjects: res.data[0].count})
-        })
-        .catch(error=>{
-             console.log(error)
-        })
-        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/completed')
-        .then(res =>{
-            this.setState({completedProjects: res.data[0].count})
-        })
-        .catch(error=>{
-             console.log(error)
-        })
-
-        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports')
-        .then(res =>{
-            this.setState({allReport: res.data[0].count})
-        })
-        .catch(error=>{
-             console.log(error)
-        })
-
-axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/forcelift')
-        .then(res =>{
-            this.setState({forcelift: res.data[0].count})
-        })
-        .catch(error=>{
-             console.log(error)
-        })
-
-        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/communitypump')
-        .then(res =>{
-            this.setState({communitypump: res.data[0].count})
-        })
-        .catch(error=>{
-             console.log(error)
-        })
-
-        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/solarpump')
-        .then(res =>{
-            this.setState({solarpump: res.data[0].count})
-        })
-        .catch(error=>{
-             console.log(error)
-        })
-        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/sanitations')
-        .then(res =>{
-            this.setState({sanitations: res.data[0].count})
-        })
-        .catch(error=>{
-             console.log(error)
-        })
-
-        
-        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/sanitations')
-        .then(res =>{
-            this.setState({SanitationsOnlyReports: res.data[0].count})
-        })
-        .catch(error=>{
-             console.log(error)
-        })
-
-        
-        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/forcelift')
-        .then(res =>{
-            this.setState({ForceliftOnlyReports: res.data[0].count})
-        })
-        .catch(error=>{
-             console.log(error)
-        })
-
-        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/communityboreholes')
-        .then(res =>{
-            this.setState({CommunityOnlyReports: res.data[0].count})
-        })
-        .catch(error=>{
-             console.log(error)
-        })
-
-        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/solarborehole')
-        .then(res =>{
-            this.setState({SolarOnlyReports: res.data[0].count})
-        })
-        .catch(error=>{
-             console.log(error)
-        })
-    */}
-        //montly report
-      /*  axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/date/all')
-        .then(res =>{
-            let mon=0; 
-            let tod=0;
-            let wk= 0;
-            
-           
-            Object.keys(res.data).map(e=>{
-                if (new Date(res.data[e].date).getMonth()== new Date().getMonth()){
-                    mon ++;
-                }
-            })
-
-            Object.keys(res.data).map(e=>{
-                if (new Date(res.data[e].date).getDate()== new Date().getDate() && new Date(res.data[e].date).getMonth()== new Date().getMonth()){
-                    tod ++;
-                 this.state.pidd.push(res.data[e].pid)
-                 
-                 //alert(res.data[e].pid)
-                /* axios.get('https://ruwassa.herokuapp.com/api/v1/projects/details/'+res.data[e].pid)
-                 .then(res3=>{
-                     let data={
-                        name : res3.data[0].title,
-                        lat: 10.15368509, 
-                        lng: 7.147864129
-                     }
-                 //    alert(res3.data[0].title)
-                  this.state.piddd.push(data)
-
-
-                     this.setState({
-                         marker: {...this.state.marker, ...data},
-                     })
-                 })
-                 */
-            /*    }
-            })
-            Object.keys(res.data).map(e=>{
-                if (new Date(res.data[e].date).getDate()== new Date().getWeek() && new Date(res.data[e].date).getMonth()== new Date().getMonth()){
-                    wk ++;
-                }
-            })
-
-            this.setState({
-               month:  mon,
-                today:tod,
-                week: new Date().getWeek(),
-            })
-        })
-        .catch(error=>{
-             console.log(error)
-        })
-        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/date/sanitation')
-        .then(res =>{
-            let monSan=0; 
-            let todSan=0
-           
-            Object.keys(res.data).map(e=>{
-                if (new Date(res.data[e].date).getMonth()== new Date().getMonth()){
-                    monSan ++;
-                }
-            })
-            Object.keys(res.data).map(e=>{
-                if (new Date(res.data[e].date).getDate()== new Date().getDate() && new Date(res.data[e].date).getMonth()== new Date().getMonth()){
-                    todSan ++;
-                }
-            })
-
-            this.setState({
-               monthSanitation:  monSan,
-               todaySanitation: todSan
-               
-            })
-        })
-        .catch(error=>{
-             console.log(error)
-        })
-
-        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/date/force')
-        .then(res =>{
-            let monForce=0;
-            let todForce=0;
-           
-            Object.keys(res.data).map(e=>{
-                if (new Date(res.data[e].date).getMonth()== new Date().getMonth()){
-                    monForce ++;
-                }
-            })
-
-            Object.keys(res.data).map(e=>{
-                if (new Date(res.data[e].date).getDate()== new Date().getDate() && new Date(res.data[e].date).getMonth()== new Date().getMonth()){
-                    todForce ++;
-                }
-            })
-
-            this.setState({
-               monthForcelift:  monForce,
-               todayForcelift: todForce
-            })
-        })
-        .catch(error=>{
-             console.log(error)
-        })
-
-        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/date/community')
-        .then(res =>{
-            let monCom=0;
-            let todCom=0
-           
-            Object.keys(res.data).map(e=>{
-                if (new Date(res.data[e].date).getMonth()== new Date().getMonth()){
-                    monCom ++;
-                }
-            })
-            Object.keys(res.data).map(e=>{
-                if (new Date(res.data[e].date).getDate()== new Date().getDate() && new Date(res.data[e].date).getMonth()== new Date().getMonth()){
-                    todCom ++;
-                }
-            })
-
-            this.setState({
-               monthCommunity:  monCom,
-               todayCommunity:todCom
-            })
-        })
-        .catch(error=>{
-             console.log(error)
-        })
-
-        axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/date/solar')
-        .then(res =>{
-            let monSolar=0;
-            let todSolar=0;
-           
-            Object.keys(res.data).map(e=>{
-                if (new Date(res.data[e].date).getMonth()== new Date().getMonth()){
-                    monSolar ++;
-                }
-            })
-            Object.keys(res.data).map(e=>{
-                if (new Date(res.data[e].date).getDate()== new Date().getDate() && new Date(res.data[e].date).getMonth()== new Date().getMonth()){
-                    todSolar ++;
-                }
-            })
-
-            this.setState({
-               monthSolar:  monSolar,
-               todaySolar:todSolar,
-            })
-        })
-        .catch(error=>{
-             console.log(error)
-        })
-        
-    }
-    */
             }
             
     componentDidMount(){
@@ -508,6 +274,12 @@ goToPhase6=()=>{
     })
     this.onLoad()
 }
+goToPhase6d=()=>{
+    this.setState({
+        phase:'6d'
+    })
+    this.onLoad()
+}
 goToPhase7=()=>{
     this.setState({
         phase:7
@@ -517,10 +289,10 @@ goToPhase7=()=>{
     render(){
         let phase6=0
         let phase7=0
-        let san = 0;
-        let fl =0;
+//        let san = 0;
+  //      let fl =0;
         let cb = 0;
-        let solar = 0
+    //    let solar = 0
         {/*
          <option value='Force Lift'>Force Lift Borehole</option>
                     <option value ='Community Borehole'>Community Borehole</option>
@@ -540,15 +312,59 @@ goToPhase7=()=>{
             }
         }
         })
-  
-        return(
+  //
+/*
+  let san=0
+  let solar=0
+  let fl = 0;
+  let cbh = 0
+  let completed = 0;
+  let ongoing = 0;
+  let abandoned = 0;
+ Object.keys(this.state.allprojects).map((e,i)=>{
+    if(this.state.allprojects[e].title=='Sanitation' & this.state.allprojects[e].phase==this.state.phase ){
+        san = san + 1
+    }else if(this.state.allprojects[e].title=='Motorized Solar Borehole' & this.state.allprojects[e].phase==this.state.phase){
+        solar ++
+    }
+    else if(this.state.allprojects[e].title=='Force Lift' & this.state.allprojects[e].phase==this.state.phase){
+        fl ++
+    }else if(this.state.allprojects[e].title=='Community Borehole' & this.state.allprojects[e].phase==this.state.phase){
+        cbh ++
+    }
+
+    if( this.state.allprojects[e].status=='completed' & this.state.allprojects[e].phase==this.state.phase){
+        completed ++
+    }else if( this.state.allprojects[e].status=='ongoing' & this.state.allprojects[e].phase==this.state.phase){
+        ongoing ++
+    } else if( this.state.allprojects[e].status=='abandoned' & this.state.allprojects[e].phase==this.state.phase){
+        abandoned ++
+    }
+
+ })
+ this.setState({
+     phaseSolar:solar,
+     phaseSan:san,
+     phasefl:fl,
+     phasecbh: cbh,
+     phaseComlpete:completed,
+     phaseAbandoned:abandoned,
+     phaseOngoing:ongoing
+})
+*/  
+return(
 
       
       <div  className="fluid-container">
           <br/>
           <div className='row'>
           <button onClick={this.goToPhase6} className='btn  '><h5 className='text-center text-primary'>Phase 6C</h5></button>
+          <button onClick={this.goToPhase6d} className='btn btn-defult '><h5 className='text-center text-primary'>Phase 6D</h5></button>
         <button onClick={this.goToPhase7} className='btn btn-defult '><h5 className='text-center text-primary'>Phase 7</h5></button>
+<div><h1>Phase {this.state.phase}</h1></div>
+
+{this.state.status &&
+          <Loader type="ThreeDots" color="Blue"/>     }
         </div>
         <hr/>
           <div className='row'>
@@ -571,13 +387,13 @@ goToPhase7=()=>{
           <br/>
           <hr/>
           <div className='row'>
-            <div className='col-md-6'>
+            <div style={{marginLeft:'50px', height:'300px'}} className='col-md-5 shadow p-3 mb-5 bg-white rounded' >
                 Overall Projects
                 <div id="piechart" ></div>
                 <MyPie forcelift={this.state.phasefl} communitypump={this.state.phasecbh} 
                     solarpump={this.state.phaseSolar} sanitations={this.state.phaseSan}/>    
             </div>
-            <div className='col-md-6'>
+            <div style={{marginRight:'50px', marginLeft:'25px',height:'300px'}} className='col-md-5 shadow p-3 mb-5 bg-white rounded'>
                 Status of Projects 
                 <div id="piechart"></div>
                 <ProPie ongoing={this.state.phaseOngoing} abandoned={this.state.phaseAbandoned} completed={this.state.phaseComlpete}/>    
@@ -585,10 +401,16 @@ goToPhase7=()=>{
             </div>
             <hr/>
 
-                <div>
+                
+            <div style={{marginLeft:'50px', marginRight:'50px', height:'500px'}} className='col-md-10 shadow p-3 mb-5 bg-white rounded'>
+            Completed Projects
+            <CompletePie sanitations={this.state.phaseComSan} solarpump={this.state.phaseComSolar}
+                communitypump={this.state.phaseComCbh} forcelift={this.state.phaseComFl}/>
+</div>
+<hr/>
+<div style={{marginLeft:'50px', marginRight:'50px', height:'350px'}} className='col-md-10 shadow p-3 mb-5 bg-white rounded'>
                 <Barcharts weeklyreports={this.state.phaseflWkReports+this.state.phasecbhWkReports+this.state.phaseSolarWkReports+this.state.phaseSanWkReports} dailyreports={this.state.phaseflReports+this.state.phasecbhReports+this.state.phaseSolarReports+this.state.phaseSanReports}/>
             </div>
-
             <div><h3 className='text-primary'>Reports Received</h3></div>
  {/*}           <div className='row'>
                 <div className='col-md-2'><h5>VIP:<h5 className='text-danger'>{this.state.SanitationsOnlyReports}</h5></h5></div>
@@ -601,6 +423,7 @@ goToPhase7=()=>{
             </div>
 */}
             <div className='row'>
+                {/*}
       {/*}          <div className='col-md-3'>
                     
                     <span><h5>Total no Reports Received</h5></span>
@@ -615,7 +438,7 @@ goToPhase7=()=>{
         
                 </div>
                 */
-                }
+/*}
                 <div className='col-md-4'>
                     <span><h5 className='text-info'>Weekly Reports Received</h5></span>
                     <div className='col-md-12'>
@@ -652,10 +475,37 @@ goToPhase7=()=>{
                 </div>
                 </div>
 
-
+*/}
             </div>
-
-         
+        
+{this.state.status &&
+          <Loader type="ThreeDots" color="Blue"/>     }
+         <table className='table table-striped'>
+             <thead className='thead-light'>
+                 <tr>
+                     <th></th><th>Weekly Reports Received</th><th>Daily Reports Received</th><th>Reports Received Today</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 <tr>
+            <td className='text-left'>VIP</td><td>{this.state.phaseSanWkReports}</td><td>{this.state.phaseSanReports}</td><td>{this.state.dailysan}</td>
+                 </tr>
+                 <tr>
+            <td className='text-left'>Force Lifts</td><td>{this.state.phaseflWkReports}</td><td>{this.state.phaseflReports}</td><td>{this.state.dailyfl}</td>
+                 </tr>
+                 <tr>
+                     <td className='text-left'>Community Handpump Borehole</td><td>{this.state.phasecbhWkReports}</td><td>{this.state.phasecbhReports}</td><td>{this.state.dailycbh}</td>
+                 </tr>
+                 <tr>
+                     <td className='text-left'>Motorized Solar Borehole</td><td>{this.state.phaseSolarWkReports}</td><td>{this.state.phaseSolarReports}</td><td>{this.state.dailySol}</td>
+                 </tr>
+                 <tr>
+                     <td>Total</td><td>{this.state.phaseSolarWkReports+this.state.phasecbhWkReports+ this.state.phaseflWkReports+this.state.phaseSanWkReports}</td>
+                     <td>{this.state.phaseSolarReports+this.state.phasecbhReports+ this.state.phaseflReports+this.state.phaseSanReports}</td>
+                     <td>{this.state.dailysan+this.state.dailyfl+this.state.dailycbh+this.state.dailySol}</td>
+                 </tr>
+             </tbody>
+         </table>
          
 
         </div>

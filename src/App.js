@@ -18,6 +18,7 @@ import Contractors from './components/contractors/contractors'
 import AddContractor from './components/contractors/addcontractor';
 import Paginat from './components/Projects/pagination';
 import Login from './Login'
+import Login2 from './login2'
 import SignOut from './signout';
 import ProjectDetails from './components/Projects/projectdeails'
 import WeeklyReports from './components/reports/weeklyreports';
@@ -31,6 +32,15 @@ import UpdateContractors from './components/contractors/updateContractors'
 import Performance from './components/supervisors/performance'
 import PhaseSupervisors from './components/supervisors/phaseSupervisors'
 import SupervisorDetails from './components/supervisors/supervisorDetails'
+import PhaseSupervisors7 from './components/supervisors/phase7sup'
+import Monitors from './components/reports/monitors';
+import Print from './components/reports/Monitoring/watreports'
+import ProjectsMap from './components/map/projectsMap'
+import WatReports from './components/reports/Monitoring/watreports';
+import SolarEvalReports from './components/reports/Monitoring/solarreports';
+import SanEvalReports from './components/reports/Monitoring/sanreports';
+import HomePage from './components/home2';
+
 function App() {
   return (
     <div className="App">
@@ -66,12 +76,14 @@ function App() {
           <Route path='/updatecontractor/:id' exact component={UpdateContractors}/>
           <Route path='/performance' exact component={Performance}/>
           <Route path='/supervisor/:id' exact component={SupervisorDetails}/>
-
-
-
-
-
-
+          <Route path="/supervisors7" exact component={PhaseSupervisors7} />
+          <Route path="/monitors" exact component={Monitors} />
+          <Route path="/print/:id" exact component={Print} />
+          <Route path="/pmap" exact component={ProjectsMap} />
+          <Route path="/waterevalreport/:id" exact component={WatReports} />
+          <Route path="/solarevalreport/:id" exact component={SolarEvalReports} />
+          <Route path="/sanevalreport/:id" exact component={SanEvalReports} />
+          <Route path="/hom"  component={HomePage}/>
 
      </Switch>
 

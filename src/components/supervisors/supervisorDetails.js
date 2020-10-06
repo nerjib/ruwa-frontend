@@ -19,7 +19,9 @@ export default class SupervisorDetails extends React.Component{
             phone:'',
             email:'',
             tasks:'',
-            tasks2:''
+            tasks2:'',
+            accno:'',
+            bank:''
         }
     }
     load=()=>{
@@ -30,7 +32,10 @@ export default class SupervisorDetails extends React.Component{
             this.setState({
                 name: res.data[0].last_name +' '+res.data[0].first_name+' '+res.data[0].other_name,
                 phone: res.data[0].phone,
-                email: res.data[0].email
+                email: res.data[0].email,
+                accno: res.data[0].actno,
+                bank: res.data[0].bank,
+
             })
         })
         .catch(function(error){
@@ -115,12 +120,12 @@ Object.keys(this.state.stages).map((e,i)=>{row1.push(<tr>
         </tr>)
             })
 Object.keys(this.state.tasks).map((e,i)=>{row.push(<tr>
-            <td>{i+1}</td><td>{this.state.tasks[e].title}</td><td>{this.state.tasks[e].lot}</td><td>{this.state.tasks[e].phase}</td>
+            <td>{i+1}</td><td><a  href={`/#/projectdetails/${this.state.tasks[e].id}`}>{this.state.tasks[e].title}</a></td><td>{this.state.tasks[e].lot}</td><td>{this.state.tasks[e].phase}</td>
             <td>{this.state.tasks[e].lga}</td><td>{this.state.tasks[e].community}</td>  <td>{this.state.tasks[e].pstatus}</td><td>{this.state.tasks[e].status}</td>
         </tr>)
             })
             Object.keys(this.state.tasks2).map((e,i)=>{row.push(<tr>
-                <td>{i+1}</td><td>{this.state.tasks2[e].title}</td><td>{this.state.tasks2[e].lot}</td><td>{this.state.tasks2[e].phase}</td>
+                <td>{i+1}</td><td><a  href={`/#/projectdetails/${this.state.tasks2[e].id}`}>{this.state.tasks2[e].title}</a></td><td>{this.state.tasks2[e].lot}</td><td>{this.state.tasks2[e].phase}</td>
                 <td>{this.state.tasks2[e].lga}</td><td>{this.state.tasks2[e].community}</td>  <td>{this.state.tasks2[e].pstatus}</td><td>{this.state.tasks2[e].status}</td>
             </tr>)
                 })
@@ -134,9 +139,25 @@ Object.keys(this.state.tasks).map((e,i)=>{row.push(<tr>
                 <img src='https://monitoring.kadruwassa.ng/img/profilepic.png'></img>
                 </div>
                 <div className='col-md-4'>
-                Name: {this.state.name}<br/>
-                Phone: {this.state.phone}<br/>
-                Email: {this.state.email}<br/>
+                    <table className='table bordered'>
+                        <tbody  className='text-left'>
+                            <tr>
+            <td  className='text-left'>Name</td><td  className='text-left'>{this.state.name}</td>
+                            </tr>
+                            <tr>
+            <td  className='text-left'>Phone</td><td  className='text-left'>{this.state.phone}</td>
+                            </tr>
+                            <tr>
+            <td  className='text-left'>Email</td><td  className='text-left'>{this.state.email}</td>
+                            </tr>
+                            <tr>
+            <td  className='text-left'>Account No</td><td>{this.state.accno}</td>
+                            </tr>
+                            <tr>
+            <td>Bank</td><td>{ this.state.bank}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 </div>
@@ -162,10 +183,10 @@ Object.keys(this.state.tasks).map((e,i)=>{row.push(<tr>
                         <thead>
                             <tr>
                                 <th>SN</th>
-                                <th>facility</th>
+                                <th>Facility</th>
                                 <th>Phase</th>
                                 <th>Stage</th>
-                                <th>nober of reports</th>
+                                <th>No. of reports</th>
                             </tr>
                         </thead>
                     {row1}
@@ -177,10 +198,10 @@ Object.keys(this.state.tasks).map((e,i)=>{row.push(<tr>
                         <thead>
                             <tr>
                                 <th>SN</th>
-                                <th>facility</th>
+                                <th>Facility</th>
                                 <th>Phase</th>
                                 <th>Stage</th>
-                                <th>nober of reports</th>
+                                <th>No. of reports</th>
                             </tr>
                         </thead>
                     {row3}

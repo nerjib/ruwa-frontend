@@ -1,0 +1,59 @@
+.container{
+    display: grid;
+    grid-area: content;
+    grid-gap: 10px;
+    grid-template-columns:  repeat(auto-fit, minmax(90px,500px));
+    justify-content: center;
+    margin-top: 50px;
+
+}
+
+.mainContainer{
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas: 'header header header'
+                        'menu content  content'
+                        'menu footer  footer';
+}
+
+.Menu{
+    grid-area: menu;
+    grid-gap: 10px;
+
+}
+
+
+.item{
+    grid-area: header;
+    grid-gap: 10px;
+
+}
+.item1{
+    grid-area: content;
+    grid-gap: 10px;
+
+}
+.item2{
+    grid-area: footer;
+    grid-gap: 10px;
+
+}
+
+
+.box{
+    background-color: blueviolet;
+    height: 250px;
+    border-radius: 10px;
+    box-shadow: rgba(24, 24, 27, 0.157);
+    
+    
+}
+.box:hover{
+    background-color:greenyellow;
+}
+
+.box2{
+    background-color:gray;
+    height: 250px;
+    border-radius: 10px;
+}

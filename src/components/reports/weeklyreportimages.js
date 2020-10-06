@@ -20,7 +20,8 @@ export default class WeeklyReportImages extends React.Component {
     render (){
         return(
             <div>
-          <div className='col-md-4' style={{margin:20}}> <img style={{width:250, heigth:400}} 
+          <div className='col-md-4' style={{margin:20, marginTop:40}}> 
+          <img style={{width:300, heigth:300}} 
           src={this.imgCompress(this.props.imgurl)}/></div>
 
             </div>

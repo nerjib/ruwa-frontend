@@ -9,6 +9,8 @@ export default class SignOut extends Component {
     componentDidMount(){
         localStorage.removeItem('login');
         localStorage.removeItem('token');
+        localStorage.removeItem('acttype');
+
         // return <Redirect to = "/login"/>
     }
 

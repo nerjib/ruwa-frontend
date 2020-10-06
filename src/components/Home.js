@@ -30,7 +30,8 @@ constructor(props){
         title:'ANALYTICS',
        time:'',
         login: access,
-        mapView:'none'
+        mapView:'none',
+        view1:'analytics'
 
     }
 
@@ -52,7 +53,7 @@ handleProjects=()=>{
         contractorsView: this.state.display='none',
         analyticsView: this.state.display='none',
         mapView: this.state.display='none',
-
+        view1: 'projects',
         title: 'PROJECTS'
     })
 }
@@ -66,7 +67,7 @@ handleSupervisors=()=>{
         contractorsView: this.state.display='none',
         analyticsView: this.state.display='none',
         mapView: this.state.display='none',
-
+        view2:'supervisors',
         title:'SUPERVISORS'
     })
 }
@@ -79,7 +80,7 @@ handleReports=()=>{
         contractorsView: this.state.display='none',
         analyticsView: this.state.display='none',
         mapView: this.state.display='none',
-
+        view1:'reports',
         title:'Reports'
     })
 }
@@ -92,6 +93,7 @@ handleContractors=()=>{
         contractorsView: this.state.display='',
         analyticsView: this.state.display='none',
         mapView: this.state.display='none',
+        view1: 'contractors',
         title:'CONTRACTORS'
     })
 }
@@ -104,7 +106,7 @@ handleAnalyticts=()=>{
         contractorsView: this.state.display='none',
         analyticsView: this.state.display='',
         mapView: this.state.display='none',
-
+        view1:'analytics',
         title:'ANALYTICS'
     })
 }
@@ -117,7 +119,7 @@ handleHome=()=>{
         contractorsView: this.state.display='none',
         analyticsView: this.state.display='none',
         mapView: this.state.display='none',
-
+        view1: 'about',
         title:'ABOUT'
     })
 }
@@ -131,7 +133,8 @@ handleMap=()=>{
         contractorsView: this.state.display='none',
         analyticsView: this.state.display='none',
         mapView: this.state.display='',
-        title:'MAP'
+        title:'MAP',
+        view1: 'map'
     })
 
 }
@@ -183,7 +186,7 @@ render(){
         }
                 <div className='col-md-2' style={{backgroundColor:'#00a9f9'}} id='menu'  >
                 <div className='block' style={{backgroundColor:'#00a9f9', height:50, alignItems:'center', marginBottom:10, display:'block'}}><h3 className='text-center'>Dashboard</h3></div>
-                <Menu onMap={this.handleMap} onSignOut={this.handleSignOut} onContractors={this.handleContractors} onHome={this.handleHome} onProjects={this.handleProjects} onReports={this.handleReports} onSupervisors={this.handleSupervisors} onAnalytics={this.handleAnalyticts} />
+                <Menu onMap={this.handleMap} onSignOut={this.handleSignOut} onContractors={this.handleContractors} onHome={this.handleHome} onProjects={this.handleProjects} onReports={this.handleReports} /*onSupervisors={this.handleSupervisors}*/ onAnalytics={this.handleAnalyticts} />
                 </div>
        
                 <div  className='col-md-10' id='viewcontent' style={{ float:'right' }} >
@@ -232,25 +235,34 @@ render(){
                             </div>
                             </span>
 
-
-                            <div style={{display: this.state.display}}>
-                            <Projects />                            
-                            </div>
-                            <div style={{display: this.state.reportView}}>
-                            <Reports />                            
-                            </div>
-                            <div style={{display: this.state.supervisorView}}>
-                            <Supervisors />                            
-                            </div>
+                            {this.state.view1=='analytics' &&
                             <div style={{display: this.state.analyticsView}}>
                             <Analytics />                            
                             </div>
+}
+{this.state.view1=='projects' &&
+                            <div style={{display: this.state.display}}>
+                            <Projects />                            
+                            </div>
+}
+{this.state.view1=='reports' &&
+                            <div style={{display: this.state.reportView}}>
+                            <Reports />                            
+                            </div>
+}
+                         {/*}   <div style={{display: this.state.supervisorView}}>
+                            <Supervisors />                            
+                            </div>*/}
+   {this.state.view1=='contrctors' &&                          
                             <div style={{display: this.state.contractorsView}}>
                             <Contractors />                            
                             </div>
+}
+{this.state.view1=='map' &&
                             <div style={{display: this.state.mapView}}>
                                <DailyMap/>
                           </div>
+}
                 </div>
 
             </div>

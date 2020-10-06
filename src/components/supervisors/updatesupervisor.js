@@ -60,12 +60,12 @@ onSubmit = () => {
     axios.put('https://ruwassa.herokuapp.com/api/v1/users/updateuser/'+params.id,obj)
     .then((res)=>{
       //  console.log(res.data)
-    this.props.history.push('/supervisors')
+    this.props.history.push('/allsupervisors')
     
     }).catch((error)=>{
         console.log(error)
     })
-    this.props.history.push('/supervisors')
+    this.props.history.push('/allsupervisors')
 
 }
 

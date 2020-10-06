@@ -6,7 +6,7 @@ import ReportPie from './reportpie';
 import uncef from '../../../src/img/uncef.jpg'
 import ruwassa from '../../../src/img/ruwasa.jpg'
 import unicef from '../../../src/img/unicef.png'
-import ukaid from '../../../src/img/ukaid.png';
+import ukaid from '../../../src/img/ukaidd.jpg';
 
 
 var geocoding = new require('reverse-geocoding')
@@ -50,7 +50,11 @@ constructor(props){
         activityoutcome:'',
         imgurl:'',
         lot:'',
-        projectstage:''
+        projectstage:'',
+        thirdremark:'',
+        thirdparty: '',
+        thirdimg: '',
+        thirdname:''
     }
 }
 
@@ -76,7 +80,11 @@ constructor(props){
                 activitydate: res.data[0].activitydate,
                 activityoutcome: res.data[0].activityoutcome,
                 imgurl: this.imgCompress(res.data[0].imgurl),
-                projectstage: res.data[0].pstatus
+                projectstage: res.data[0].pstatus,
+                thirdparty: res.data[0].thirdparty,
+                thirdremark: res.data[0].thirdremark,
+                thirdimg: res.data[0].imgurl2,
+                thirdname: res.data[0].thirdname
               })
               axios.get('https://ruwassa.herokuapp.com/api/v1/reports/activity/'+params.id)
             .then(res=>{
@@ -204,27 +212,43 @@ return (<div>
     
                   <div className='fluid-container col-md-12'ref={ref}>
                 <br/><br/>
-                <div className='col-md-7 row'>
+                <div className='col-md-12 row'>
     
  
-<div className='col-md-2' style={{marginLeft:30}}>
-<img style={{zIndex:3 }}  className='responsive-image' id='img'  src={unicef}
-alt='Logo'  />
-</div>
-<div className='col-md-3'>
- <img style={{zIndex:3, width:'50%', marginLeft:40}} className='responsive-image' id='img'  src={ruwassa}
+
+
+
+                <div className='col-md-2'>
+  {  <img style={{zIndex:3}} className='responsive-image' id='img'  src={ukaid}
+   alt='Logo'  />
+/*<div className='col-md-3'>
+ <img style={{zIndex:3, width:'50%', height:'50%', marginLeft:40}} className='responsive-image' id='img'  src={ruwassa}
 alt='Logo'  /></div>
 <div className='col-md-4'>
 <img style={{zIndex:3, width:'50%'}} className='responsive-image' id='img'  src={ukaid}
 alt='Logo'  />
 </div>
+*/
+      }
+      </div>
+    <div className='col-md-2'>
+     <img style={{zIndex:3, width:'50px',height:'50px', marginLeft:0}} className='responsive-image' id='img'  src={ruwassa}
+    alt='Logo'  /></div>
+
+<div className='col-md-2' style={{marginLeft:0}}>
+  {}  <img style={{zIndex:3, height:'50px' }}  className='responsive-image' id='img'  src={unicef}
+   alt='Logo'  />
 
     </div>
+
+        
+    </div>
+
     <br/>
 <br/>
                 <div className=' col-md-7' style={{display:this.state.reportdisplay }}>
                 <div ><span><h5><strong>KADUNA FIELD OFFICE: WASH DAILY PROGRESS REPORT</strong></h5></span></div>
-                <table className='table table-bordered ' style={{border: '1px inset black'}}>
+                <table className='table table-bordered table-sm ' style={{border: '1px inset black'}}>
                     <thead>
                         
                         <tr>
@@ -249,12 +273,13 @@ alt='Logo'  />
                        }
                        </tr>
                       
-                     
+                     {/*}
                         <tr>
                             <td colSpan='4'>
                             <strong> DETAILS OF ACTIVITIES CARRIED OUT WITH DATES: (attach photographs)</strong>
                             </td>
-                        </tr>
+                        </tr>*/
+                        }
                         <tr>
                             <td><strong>DATE</strong></td>
                             <td colSpan="2"><strong>ACTIVITY</strong></td>
@@ -264,18 +289,18 @@ alt='Logo'  />
                        <tr> <td>{this.state.activitydate}</td><td colSpan='2'>{this.state.activity1}</td><td>{this.state.activityoutcome}</td></tr>
                         <tr><td colSpan='5'>
                         <div className='row'>
-                        <div className='col-xd-2' style={{margin:20}}> <img style={{width:250, heigth:400}} src={this.state.imgurl}/>
+                        <div className='col-xd-2' style={{margin:20}}> <img className='responsive-image' style={{width:200, height:200}} src={this.state.imgurl}/>
                       <div> {this.state.projectstage}</div>
                         </div>
-                          {//
-                        //    <ReportPie pstatus={this.state.projectstage} stage={90}/>
-                          }
+      {  this.state.thirdimg !='' &&                <div className='col-xd-2' style={{margin:20}}> <img className='responsive-image' style={{width:200, height:200}} src={this.state.thirdimg}/>
+</div>}
                         </div>
                             </td></tr>
                             <tr>
                             <td colSpan="4" className='text-left'>
-                            <strong> IS WORK PROGRESSING ACCORDING TI SUBMITED PLAN?</strong> {(this.state.compliance).toUpperCase()}<br/><br/>
-
+                            <strong> IS WORK PROGRESSING ACCORDING TO SUBMITED PLAN?</strong> {(this.state.compliance).toUpperCase()}<br/><br/>
+                           <strong>Is third party on site</strong>{this.state.thirdparty +', '+this.state.thirdname}
+                            <strong>Remark by third party</strong> { this.state.thirdremark}
                             </td>
                         </tr>
                         
@@ -299,6 +324,7 @@ alt='Logo'  />
                     </tbody>
 
                 </table>
+                </div>
               </div>
              
             
@@ -306,7 +332,6 @@ alt='Logo'  />
                      </div>
                      </div>
 
-            </div>            
         )
     }
 }

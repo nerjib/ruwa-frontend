@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import GoogleMapReact from 'google-map-react';
 //import './style.css';
-import ruwasa from '../map/ruwasa.jpg'
+import ruwasa from '../map/ruwasa.jpg';
 import axios from 'axios';
 
 
-
-
-
-export default class DailyMap extends Component {
+export default class ProjectsMap extends Component {
 
   
 
@@ -17,8 +14,8 @@ export default class DailyMap extends Component {
     super(props);
 
     this.state = {
-
-      //This is where the center of map is going to be10.5368909,7.4786129
+        phase:'7',
+        //This is where the center of map is going to be10.5368909,7.4786129
       center : {
         lat: 10.5368909, 
         lng: 7.4786129
@@ -111,7 +108,7 @@ export default class DailyMap extends Component {
   }
 
   loader=()=>{
-    axios.get('https://ruwassa.herokuapp.com/api/v1/analytics/reports/date/all')
+    axios.get('https://ruwassa.herokuapp.com/api/v1/projects/completeprojects/all')
     .then(res =>{
         let mon=0; 
         let tod=0;
@@ -120,22 +117,19 @@ export default class DailyMap extends Component {
         let pidd=[1,2,3]
        
         Object.keys(res.data).map(e=>{
-            if (new Date(res.data[e].date).getDate()== new Date().getDate() && new Date(res.data[e].date).getMonth()== new Date().getMonth()){
-            
+            if(res.data[e].phase==this.state.phase){
             // this.state.pidd.push(res.data[e].pid)
              
              //alert(res.data[e].pid)
-             axios.get('https://ruwassa.herokuapp.com/api/v1/projects/details/'+res.data[e].pid)
-             .then(res3=>{
                // alert((res3.data[0].gps.split(','))[0])
                let lat=0;
                let long=0;
-               if (res3.data[0].gps){
-                 lat=(res3.data[0].gps.split(','))[0];
-                 long=(res3.data[0].gps.split(','))[1]
+               if (res.data[e].gps){
+                 lat=(res.data[e].gps.split(','))[0];
+                 long=(res.data[e].gps.split(','))[1]
                }
                  let data={
-                    name : res3.data[0].title,
+                    name : res.data[e].title,
                     lat: lat, 
                     lng: long,
                     id:  Number(res.data[e].id)
@@ -145,8 +139,8 @@ export default class DailyMap extends Component {
              //    alert(res3.data[0].title)
             // markerlist={...markerlist,...data}
            this.state.myMarkers.push(data);
-                })
-            }
+                }
+            
         })
 
     })
@@ -169,26 +163,42 @@ componentWillUnmount=()=>{
 
     //Marker Component
     const Marker = ({text, id}) => {
+        let colorr='green'
+        let name='';
+        if(text=='Community Borehole'){
+            colorr='blue'
+            name='CHPBH'
+        }else  if(text=='Motorized Solar Borehole'){
+            colorr='green'
+            name='SMBH'
+        } else  if(text=='Sanitation'){
+            colorr='red'
+            name='VIP'
+        }else if(text=='Force Lift'){
+          name='FLBH'
+        }
         return (
               <div>         
-              <a target='_blank' href={`/#/reports/${id}`}> <b style={{color:'green'}}>{text}</b><img style={{width:20}} className='responsive-image' id='img'  src={ruwasa}
+              <a target='_blank' href={`/#/projectdetails/${id}`}> <b style={{color:colorr}}>{name}</b><img style={{width:20}} className='responsive-image' id='img'  src={ruwasa}
               alt='Logo'  /></a></div>
         );
     }
 
+   // key1: 'AI zaSyAVT4-Uzdp9LaBGtIFlw7iGEKbPQ8fZxHI',
 
 //apikey AIzaSyAVT4-Uzdp9LaBGtIFlw7iGEKbPQ8fZxHI
     return (
       <div>
         <center>
-            <div>Daily Reports </div>
+            <div>Sites Location </div>
         <div style={{ height: '100vh', width: '90%' }}>
 
           <GoogleMapReact
-            bootstrapURLKeys={{
-               key1: 'AI zaSyAVT4-Uzdp9LaBGtIFlw7iGEKbPQ8fZxHI',
-               key:'AI zaSyC8wjDwqKGAhfCUmMRJGPYutiKE7aI5Crw',
-              }}
+            bootstrapURLKeys={{ 
+              key1: 'AI zaSyAVT4-Uzdp9LaBGtIFlw7iGEKbPQ8fZxHI',
+              key:'AI zaSyC8wjDwqKGAhfCUmMRJGPYutiKE7aI5Crw',
+              region: 'NG'
+             }}
           
             defaultCenter={this.state.center}
             defaultZoom={this.state.zoom} 

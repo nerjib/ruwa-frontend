@@ -4,7 +4,7 @@ import  SupervisorsTableRow from './supervisorsTableRow'
 import { Link, Route, Redirect } from 'react-router-dom';
 
 
-export default class PhaseSupervisors extends React.Component{
+export default class PhaseSupervisors7 extends React.Component{
     constructor(props){
         super(props);
 
@@ -12,8 +12,8 @@ export default class PhaseSupervisors extends React.Component{
             supervisors:'',
             currentPage: 1,
             supervisorsPerPage: 100,
-            phase:6,
-            title: 'Phase 6C'
+            phase:7,
+            title: 'Phase 7'
         }
     }
     load=()=>{
@@ -72,18 +72,16 @@ goToPhase6=()=>{
     this.load()
 
     this.setState({
-      //  phase:6,
-        title: 'Phase 6C',
+    //    title: 'Phase 6C',
     })
-   // this.load()
+    
 }
 
 goToPhase7=()=>{
     this.setState({
-   //     phase:7,
-    //    title: 'Phase 7'
+      //  title: 'Phase 7'
     })
-   // this.load()
+ //   this.load()
 }
 
     render(){
@@ -92,8 +90,14 @@ goToPhase7=()=>{
    Object.keys(this.state.supervisors).map((e,i)=>{
    //    if(this.state.supervisors[e].title=='Sanitation'){
        row.push(<tr>
-        <td>{i+1}</td><td>{this.state.supervisors[e].id}</td><td className='text-left'><a target='_blank' href={`/#/supervisor/${this.state.supervisors[e].id}`}>{this.state.supervisors[e].last_name+' ' +this.state.supervisors[e].first_name+' '+this.state.supervisors[e].other_name}</a></td>
-        <td className='text-left'>{this.state.supervisors[e].title}</td><td><FFF phase={this.state.phase} id={this.state.supervisors[e].id}/></td>
+        <td>{i+1}</td>{//<td>{this.state.supervisors[e].id}</td>
+   }
+        <td className='text-left'><a target='_blank' href={`/#/supervisor/${this.state.supervisors[e].id}`}>{this.state.supervisors[e].last_name+' ' +this.state.supervisors[e].first_name+' '+this.state.supervisors[e].other_name}</a></td>
+        <td className='text-left'>{this.state.supervisors[e].title}</td>
+        <td>{this.state.supervisors[e].actno}</td><td>{this.state.supervisors[e].bank}</td>
+     {//   <td><FFF phase={this.state.phase} id={this.state.supervisors[e].id}/></td>
+     }
+       
     </tr>)
  //     }
         })
@@ -102,17 +106,21 @@ goToPhase7=()=>{
                 <div>
                     <div className='row'>
                 <Link to='/home'>    <button>Home</button></Link>
-                <div className='col-xs-2'  ><button onClick={this.goToPhase6} className='btn btn-default btn-info'>Phase 6c</button></div>
-            <div className='col-xs-2'  ><a target='_blank' href='/#/supervisors7'><button onClick={this.goToPhase7} className='btn btn-default btn-info'>Phase 7</button></a></div>
+                <div className='col-xs-2'  ><a target='_blank' href='/#/supervisors7'><button onClick={this.goToPhase6} className='btn btn-default btn-info'>Phase 6c</button></a></div>
+            <div className='col-xs-2'  ><button onClick={this.goToPhase7} className='btn btn-default btn-info'>Phase 7</button></div>
             <div>{this.state.title}</div>
                 </div>
-                    <table className='table table-striped'>
-                        <thead className='thead-ligth'>
+                    <table className='table'>
+                        <thead>
                             <tr>
                                 <th>SN</th>
-                                <th>Supervisor Id</th>
+                               {//} <th>Supervisor Id</th>
+    }
                                 <th>Name</th>
                                 <th>Facility</th>
+                                <th>Account No.</th>
+                                <th>Bank</th>
+
                             </tr>
                         </thead>
                     {row}
@@ -123,7 +131,7 @@ goToPhase7=()=>{
         }
     }
 
-
+/*
     class FFF extends React.Component{
         constructor(props){
             super(props)
@@ -219,7 +227,7 @@ goToPhase7=()=>{
             })
         }).catch(error=>{console.log(error.message)})
 */
-        }
+ /*/       }
 
         checkStatus=(e)=>{
             if (e=='TOS'){
@@ -290,7 +298,7 @@ goToPhase7=()=>{
           
          */
 //        let dailyr=[]
-            axios.get('https://ruwassa.herokuapp.com/api/v1/projects/statesupervisors/donephases/'+this.props.id)
+ /*/           axios.get('https://ruwassa.herokuapp.com/api/v1/projects/statesupervisors/donephases/'+this.props.id)
             .then(res=>{
             //    alert(this._isMounted)
            //     if(this._isMounted){
@@ -312,3 +320,4 @@ goToPhase7=()=>{
         )
         }
     }
+*/

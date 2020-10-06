@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import ruwasa from './img/ruwasa.jpg'
+import  Loader from 'react-loader-spinner'
+
 //import './Login.css'
 
 export default class Login extends Component {
@@ -11,7 +13,9 @@ export default class Login extends Component {
     this.state = {
       email : '',
       phone: '',
+      acttype:'',
       login,
+      loading: false,
       token: {
         status: 'dd',
         data:{
@@ -30,6 +34,9 @@ export default class Login extends Component {
   }
 
   onSubmit = (event) => {
+    this.setState({
+      loading: true
+    })
     event.preventDefault();
     axios.get('https://ruwassa.herokuapp.com/api/v1/users/admin/'+this.state.email)
     .then(res => {
@@ -42,9 +49,13 @@ export default class Login extends Component {
        this.setState({
          login: 'pass',
          token:  res,
+         loading: false
+
         });
         localStorage.setItem('login', this.state.login);
+        localStorage.setItem('acttype', res.data[0].acttype);
         localStorage.setItem('token', 'res.data.token');
+        return <Redirect to='/home'> </Redirect>
 
        // return < Redirect to="/home"/>
               // this.props.history.push('/home');
@@ -64,7 +75,14 @@ export default class Login extends Component {
     });
     
   }
-
+componentDidMount = ()=>{
+ const acc = localStorage.getItem('login')
+ if (acc == 'pass'){
+   this.setState({
+     login: 'pass'
+   })
+ }
+}
   render() {
    
     if (this.state.login === 'pass'){
@@ -80,7 +98,7 @@ export default class Login extends Component {
       <div >
       <form className="Container border col-md-3 mx-auto border-primary" style={{margin:20}} onSubmit={this.onSubmit}>
         <div>
-        <div >  <img className='  responsive-image' style={{width:'70%'}}
+                    <div >  <img className='  responsive-image' style={{width:'70%'}}
                                                         src={ruwasa}
 
                     alt='Logo'
@@ -88,6 +106,8 @@ export default class Login extends Component {
                                     </div>
         </div>
         <h1>Login Below!</h1>
+        {this.state.loading &&
+        <Loader type="Circles" color="Blue"/> }
         <div className="table">
 <table align="center" ><tr><td>        <input
           type="email"
@@ -101,7 +121,7 @@ export default class Login extends Component {
        <tr><td> <input
           type="password"
           name="phone"
-          placeholder="Phone no."
+          placeholder="Password"
           value={this.state.phone}
           onChange={this.handleInputChange}
           required

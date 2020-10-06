@@ -12,7 +12,9 @@ export default class InsertProject extends React.Component{
             status: 'ongoing',
             supervisor:'',
             supervisorName:'',
-            phase: ''        
+            phase: '',
+            email:'',
+            emailname:''       
 
         }
     }
@@ -38,6 +40,27 @@ export default class InsertProject extends React.Component{
               }
 
 
+              handleEmailChange=(e)=>{
+                const { value, name } = e.target;
+                this.setState({
+                    [name]: value
+                });
+
+                if (name=='supervisor'){
+                    this.checkSupervisor(value)
+                }
+        
+                if (name=='email'){
+                    this.gotoCheckLocalemail(value)
+                  }
+                  else if(name=='email1'){
+                    this.gototCheckState(value)
+                  }
+                  else if (name=='contractor_id'){
+                    this.checkcontractor(value);
+                  }
+                      }
+
    
      
       gotoCheckLocal(id){
@@ -55,6 +78,34 @@ export default class InsertProject extends React.Component{
             }
         })
       }
+
+      gotoCheckLocalemail(e){
+          let mail=''
+          if(e.length>3){
+                mail=e
+          }
+          else{
+            mail=e
+          }
+
+        axios.get('https://ruwassa.herokuapp.com/api/v1/users/email/'+mail)
+        .then(req=>{
+            if(req.data[0])(
+         //       alert(JSON.stringify(req.data[0]))
+         /*   this.setState(prevState=>{
+              return prevState.emailname= req.data[0]
+            })*/
+           this.setState({
+                emailname:req.data[0]
+            })
+            )
+            else{
+                this.setState({
+                    emailname: 'is not Found' 
+            })
+          }
+      })
+   }
       
       gototCheckState(id){
         axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+id)
@@ -252,6 +303,10 @@ export default class InsertProject extends React.Component{
                   </div>
                   <br/>
 
+           
+
+
+
                   <div className='row'>            
           <div class='col-md-2'> <label className='text-left text-primary'> Facility Name </label> </div>  
             <div className='col-md-5'> 
@@ -285,6 +340,17 @@ export default class InsertProject extends React.Component{
                   </div>
                   </div>
                   <br/>
+
+                <div>
+                  <div class='col-md-2'> <label className='text-left text-primary'> Local$$$ </label> </div>  
+            <div className='col-md-5'> 
+                <input className='form-control' name='email' value={this.state.email}
+                        onChange={this.handleEmailChange}/>
+                         <div>{this.state.emailname.length}</div>
+                  </div>
+                  </div>
+                  <br/>
+
                 
                   <div className='row'>            
           <div class='col-md-2'> <label className='text-left text-primary'> Contractor ID </label>

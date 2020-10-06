@@ -5,6 +5,7 @@ import ReportTable from './reportTable'
 import StatusReports from './statusreports';
 import Calender from './calender'
 import {Link} from 'react-router-dom'
+import  Loader from 'react-loader-spinner'
 class Reports extends React.Component{
 constructor(props){
     super(props)
@@ -17,25 +18,31 @@ constructor(props){
             reportfocus:'',
             day:new Date().getDate(),
             month:new Date().getMonth(),
-            title:'Sanitation',
-            phase:6
+            title:'Community Borehole',
+            phase:7,
+                status:''
     }
 }
 
 onLoad=()=>{
-   
+    this.setState({
+        status: 'Loadinng ...'
+    })
+  /* 
+
         axios.get('https://ruwassa.herokuapp.com/api/v1/reports')
                 .then(res => {
                     this.setState({
                             reports:res.data
                     })
                 }).catch( errors=>{console.log(errors.message)})
-
-                axios.get('https://ruwassa.herokuapp.com/api/v1/reports/completereports/all')
+*/
+                axios.get(`https://ruwassa.herokuapp.com/api/v1/reports/completereports/all/${this.state.phase}`)
                 .then(res => {
                     this.setState({
                             allreports:res.data,
-                            reportfocus:'all'
+                            reportfocus:'all',
+                            status:''
                     })
                 }).catch( errors=>{console.log(errors.message)})
  
@@ -43,8 +50,8 @@ onLoad=()=>{
 }
 
 componentDidMount(){
-    this.inTerval=setInterval(()=>this.onLoad(),60000)
     this.onLoad();
+  //  this.inTerval=setInterval(()=>this.onLoad(),60000)
 }
 componentWillMount(){
     clearInterval(this.inTerval)
@@ -130,15 +137,24 @@ nextPage = () =>{
         })
     
     }
-goToPhase6=()=>{
-    this.setState({
+goToPhase6=async()=>{
+await    this.setState({
         phase: 6
     })
+    this.onLoad()
 }
-goToPhase7=()=>{
-    this.setState({
+goToPhase6d=async()=>{
+    await    this.setState({
+            phase: '6d'
+        })
+        this.onLoad()
+    }
+goToPhase7= async()=>{
+ await   this.setState({
         phase: 7
     })
+    this.onLoad()
+
 }
 render() {
     let row =[];
@@ -171,16 +187,20 @@ currentProjects.map((e,i)=>{row.push(
 */
 }
 //(new Date(this.props.date).getMonth()+1)
-
+let kk=0
 currentProjects.map((e,i)=>{
     //if(new Date(this.state.allreports[e].date).getDate()==this.state.day & new Date(this.state.allreports[e].date).getMonth()==this.state.month &this.state.allreports[e].title==this.state.title){
     if(this.state.allreports[e].phase== this.state.phase & this.state.allreports[e].title==this.state.title){
-    row.push(<ReportRow sn={i+1} id={this.state.allreports[e].id} title={this.state.allreports[e].title}
+   kk ++;
+        row.push(<ReportRow sn={kk} id={this.state.allreports[e].id} title={this.state.allreports[e].title}
     lga={this.state.allreports[e].lga} ward={this.state.allreports[e].ward} community={this.state.allreports[e].community}
     gps={this.state.allreports[e].gps} facility={this.state.allreports[e].facility} lot={this.state.allreports[e].lot}
-    geo={(this.state.allreports[e].gps)}
+    geo={(this.state.allreports[e].gps)}     activity={(this.state.allreports[e].activity)}
+    stage={(this.state.allreports[e].pstatus)} pid={this.state.allreports[e].pid}
+    activityoutcome={(this.state.allreports[e].activityoutcome)}     conclusion={(this.state.allreports[e].conclusion)}
     contractor={this.state.allreports[e].company}  localsup={this.state.allreports[e].last_name+' '+this.state.allreports[e].first_name}
-     date={this.state.allreports[e].date}  status={this.state.allreports[e].status}/>)
+     date={this.state.allreports[e].date}  status={this.state.allreports[e].status}
+     thirdparty={this.state.allreports[e].thirdparty} thirdremark={this.state.allreports[e].thirdremark}/>)
   //  }
     }
     })          
@@ -190,46 +210,58 @@ currentProjects.map((e,i)=>{
       <div>
       <div className='row'>
           <div>
-                    <Calender onCalender={this.handleCalender}/>
+      {//}              <Calender onCalender={this.handleCalender}/>
+}
                     </div>
-               <div> <button onClick={this.goToPhase6} >Phase 6C</button></div>
-               <div> <button onClick={this.goToPhase7} >Phase 7</button></div>
-                <div> <button onClick={this.sanitationReport} >Sanitation</button></div>
-                <div> <button onClick={this.forceReport} >Force Lift</button></div>
-                <div> <button onClick={this.solarReport} >Solar Motorized</button></div>
-                <div> <button onClick={this.communityReport} >Community</button></div>
-                <div> <button onClick={this.gotoReportstatus} >Status Reports</button></div>
-                <div> <Link to='/weeklyreports'><button  >Weekly Reports</button></Link></div>
+               <div style={{margin:3}}> <button className='btn btn-defult btn-primary' onClick={this.goToPhase6} >Phase 6C</button></div>
+               <div style={{margin:3}}> <button className='btn btn-defult btn-primary' onClick={this.goToPhase6d} >Phase 6D</button></div>
+
+               <div  style={{margin:3}}> <button className='btn btn-defult btn-primary' onClick={this.goToPhase7} >Phase 7</button></div>
+                <div  style={{margin:3}}> <button className='btn btn-defult btn-primary' onClick={this.sanitationReport} >Sanitation</button></div>
+                <div  style={{margin:3}}> <button className='btn btn-defult btn-primary' onClick={this.forceReport} >Force Lift</button></div>
+                <div  style={{margin:3}}> <button className='btn btn-defult btn-primary' onClick={this.solarReport} >Solar Motorized</button></div>
+                <div  style={{margin:3}}> <button className='btn btn-defult btn-primary' onClick={this.communityReport} >Community</button></div>
+                <div  style={{margin:3}}> <Link to='/weeklyreports'><button className='btn btn-defult btn-primary'  >Weekly Reports</button></Link></div>
 
             </div>
             <div>
                 {//this.state.day
                 }
             </div>
+            <h1>Phase {this.state.phase +' '+this.state.title} Reports</h1>
             <div> {//pages {pageNumbers}
             }
             <button onClick={this.backPage}>Back</button><button onClick={this.nextPage}>Next</button>
             </div>
-            <table  className='table table-hover'>      
+
+            <table  className='table table-hover text-left'>      
                 <thead>
                     <tr><th>S/N</th>
-                        <th>LOTS</th>
-                        <th>Title</th>
-                        <th>LGA</th>
-                        <th>Council Ward</th>
+                {//}        <th>LOTS</th>
+                   //     <th>Title</th>
+             }     <th>LGA</th>
+                        <th>Activity</th>
+                        <th>Activity Outcome</th>
+                        <th>Conclusion</th>
+                        <th>Third Party</th>
+                        <th>Remark by ThirdParty</th>
+
+                  {/*}      <th>Council Ward</th>
                         <th>COMM. NAME</th>
                         <th>LATITUDE</th>
                         <th>LONGITUDE</th>
-                        <th>FACILITY</th>
+                        <th>FACILITY</th>        */}
                         <th>CONTRACTOR</th>
-                       <th>STATE SUPERVISOR</th> 
+{//                    <th>STATE SUPERVISOR</th> 
+}
                        <th>LGA SUPERVISOR</th>
+                       <th>Stage</th>
+
                        <th>Date Submitted</th>
-                       <th>Status</th>
 
                     </tr>
                 </thead>
-                <tbody >
+                <tbody style={{fontWeight:"bold"}}>
                    {row}
                 </tbody>
               {// <ReportTable reports={this.state.reports}/>
@@ -241,8 +273,8 @@ currentProjects.map((e,i)=>{
             }
             <button onClick={this.backPage}>Back</button><button onClick={this.nextPage}>Next</button>
             </div>
-            
-            </div>
+          {this.state.status &&
+          <Loader type="ThreeDots" color="Blue"/>     }       </div>
        {//     <StatusReports reports={this.state.allreports}/>
        }
         </div>

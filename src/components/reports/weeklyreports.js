@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import {  Redirect, withRouter } from 'react-router-dom';
 import WeeklyReportRows from './weeklyReportRow'
+import  Loader from 'react-loader-spinner'
+
 
  class WeeklyReports extends React.Component{
 constructor(props){
@@ -13,17 +15,22 @@ constructor(props){
         currentPage: 1,
         reportsPerPage: 100,
         allreports:'',
-        reportfocus:''
+        reportfocus:'',
+        status: false
 } 
 }
 componentDidMount=()=>{
+    this.setState({
+        status: true
+    })
     axios.get('https://ruwassa.herokuapp.com/api/v1/reports/weekly/completereports/all')
     .then(res=>{
         this.setState({
             weeklyreports: res.data,
             reportfocus:'all',
             title: 'Sanitation',
-            phase: 6
+            phase: 7,
+            status: false
         })
     })
 }
@@ -198,6 +205,8 @@ render(){
                 </tbody>
             
             </table>
+            {this.state.status &&
+          <Loader type="ThreeDots" color="Blue"/>     }
         </div>
 
     )
