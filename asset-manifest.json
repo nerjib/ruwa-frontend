@@ -1,25 +1,28 @@
 {
   "files": {
-    "main.css": "/ruwasa-frontend/static/css/main.8ab6f918.chunk.css",
-    "main.js": "/ruwasa-frontend/static/js/main.b14e2786.chunk.js",
-    "main.js.map": "/ruwasa-frontend/static/js/main.b14e2786.chunk.js.map",
+    "main.css": "/ruwasa-frontend/static/css/main.a40a80fd.chunk.css",
+    "main.js": "/ruwasa-frontend/static/js/main.af3bb7e6.chunk.js",
+    "main.js.map": "/ruwasa-frontend/static/js/main.af3bb7e6.chunk.js.map",
     "runtime-main.js": "/ruwasa-frontend/static/js/runtime-main.77fe379a.js",
     "runtime-main.js.map": "/ruwasa-frontend/static/js/runtime-main.77fe379a.js.map",
-    "static/js/2.88f97a06.chunk.js": "/ruwasa-frontend/static/js/2.88f97a06.chunk.js",
-    "static/js/2.88f97a06.chunk.js.map": "/ruwasa-frontend/static/js/2.88f97a06.chunk.js.map",
+    "static/js/2.207ed9c6.chunk.js": "/ruwasa-frontend/static/js/2.207ed9c6.chunk.js",
+    "static/js/2.207ed9c6.chunk.js.map": "/ruwasa-frontend/static/js/2.207ed9c6.chunk.js.map",
     "index.html": "/ruwasa-frontend/index.html",
-    "precache-manifest.e1fb1156f8e0301ffd0b7de9e416096e.js": "/ruwasa-frontend/precache-manifest.e1fb1156f8e0301ffd0b7de9e416096e.js",
+    "precache-manifest.61a8d1f06191fe5f0c61c4fe7be094e6.js": "/ruwasa-frontend/precache-manifest.61a8d1f06191fe5f0c61c4fe7be094e6.js",
     "service-worker.js": "/ruwasa-frontend/service-worker.js",
-    "static/css/main.8ab6f918.chunk.css.map": "/ruwasa-frontend/static/css/main.8ab6f918.chunk.css.map",
-    "static/js/2.88f97a06.chunk.js.LICENSE.txt": "/ruwasa-frontend/static/js/2.88f97a06.chunk.js.LICENSE.txt",
+    "static/css/main.a40a80fd.chunk.css.map": "/ruwasa-frontend/static/css/main.a40a80fd.chunk.css.map",
+    "static/js/2.207ed9c6.chunk.js.LICENSE.txt": "/ruwasa-frontend/static/js/2.207ed9c6.chunk.js.LICENSE.txt",
     "static/media/logo.svg": "/ruwasa-frontend/static/media/logo.ee7cd8ed.svg",
     "static/media/ruwasa.jpg": "/ruwasa-frontend/static/media/ruwasa.02437f3f.jpg",
+    "static/media/ukaidd.jpg": "/ruwasa-frontend/static/media/ukaidd.ed6e184d.jpg",
+    "static/media/uncef.jpg": "/ruwasa-frontend/static/media/uncef.b07308d7.jpg",
+    "static/media/unicef.png": "/ruwasa-frontend/static/media/unicef.d9796521.png",
     "static/media/wassh1.jpg": "/ruwasa-frontend/static/media/wassh1.4888c157.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.77fe379a.js",
-    "static/js/2.88f97a06.chunk.js",
-    "static/css/main.8ab6f918.chunk.css",
-    "static/js/main.b14e2786.chunk.js"
+    "static/js/2.207ed9c6.chunk.js",
+    "static/css/main.a40a80fd.chunk.css",
+    "static/js/main.af3bb7e6.chunk.js"
   ]
 }
