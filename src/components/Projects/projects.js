@@ -13,11 +13,11 @@ constructor(props){
     this.state={
         projects:'',
         projectsfocus:'',
-        acttype:'Projects Coverage',
-        projectdisplay:'',
-        coveragedisplay:'none',
+        acttype:'Projects',
+        projectdisplay:'none',
+        coveragedisplay:'',
         focus: 'Community Borehole',
-        phase: 7,
+        phase: '6d',
         status: false,
         pstatus: 'all',
         usertype:''
@@ -67,6 +67,7 @@ componentWillUnmount(){
     clearInterval(this.inTerval);
 }
 
+
 sanitationProjects=()=>{
     this.setState({
         //projects: res.data,
@@ -109,17 +110,17 @@ allProjects=()=>{
 }*/
 gotoProjectstatus=()=>{
  //  alert(this.state.projectsfocus)
-   if(this.state.acttype=='Projects Coverage')
+   if(this.state.acttype=='Projects')
     this.setState({
-        acttype: 'Projects',
-        coveragedisplay:'',
-        projectdisplay:'none'
+        acttype: 'Projects Coverage',
+        coveragedisplay:'none',
+        projectdisplay:''
     })
-    else if (this.state.acttype=='Projects'){
+    else if (this.state.acttype=='Projects Coverage'){
         this.setState({
-            acttype: 'Projects Coverage',
-            projectdisplay:'',
-            coveragedisplay:'none',
+            acttype: 'Projects',
+            projectdisplay:'none',
+            coveragedisplay:'',
         })
     }
 }
@@ -147,6 +148,19 @@ handleChange=(e)=>{
     })
 
 }
+handleChangePhase=(e)=> {
+    const { value, name } = e.target;
+    this.setState({
+      //  project:'',
+        phase: value,    
+    })
+    if(value=='Covid-19 Response'){
+        this.setState({
+            focus: 'Motorized Solar Borehole',
+            projectsfocus: 'Motorized Solar'
+        })
+    }
+}
 render(){
     
     return(
@@ -155,16 +169,29 @@ render(){
             {this.state.usertype=='superadmin' && <div className='col-md-1' style={{margin:3}}  ><Link to='/projectform'><button className='btn btn-default btn-info'>Add Project</button></Link></div>
 }
             <div className='col-md-2' style={{margin:3}} ><Link to='/home'><button className='btn btn-default btn-info'>Home</button></Link></div>
-            <div className='col-xs-2' style={{margin:3}}  ><button onClick={this.goToPhase6} className='btn btn-default btn-info'>Phase 6C</button></div>
+   {/*}         <div className='col-xs-2' style={{margin:3}}  ><button onClick={this.goToPhase6} className='btn btn-default btn-info'>Phase 6C</button></div>
             <div className='col-xs-2' style={{margin:3}} ><button onClick={this.goToPhase6d} className='btn btn-default btn-info'>Phase 6D</button></div>
 
             <div className='col-xs-2' style={{margin:3}} ><button onClick={this.goToPhase7} className='btn btn-default btn-info'>Phase 7</button></div>
-
+*/}
         <div className='col-xs-2' style={{margin:3}}> <button onClick={this.sanitationProjects} className='btn btn-default btn-info'>Sanitation</button></div>
             <div className='col-xs-2'  style={{margin:3}}> <button onClick={this.solarProjects} className='btn btn-default btn-info'>Solar Boreholes</button></div>
             <div className='col-xs-2' style={{margin:3}}> <button onClick={this.forceProjects} className='btn btn-default btn-info'>Force Lift</button></div>
             <div className='col-xs-2' style={{margin:3}}> <button  onClick={this.communityProjects} className='btn btn-default btn-info'>Community</button></div>
             <div className='col-xs-2'  style={{margin:3}}> <button  onClick={this.gotoProjectstatus} className='btn btn-default btn-primary'>{this.state.acttype}</button></div>
+           
+            <div className='col-xs-2'  style={{margin:3}}>
+            <select className='form-control' id='pstatus'  onChange={this.handleChangePhase}>
+                <option >Select Phase</option>
+                <option value='6'>Phase 6C projects</option>
+                <option value='6d'> Phase 6D projects</option>
+                <option value='7'> Phase 7 projects</option>
+                <option value='Covid-19 Response'> Covid-19 Response</option>
+
+                </select>
+            </div>
+
+           
             <div className='col-xs-2'  style={{margin:3}}>
             <select className='form-control' id='pstatus' name='pstatus' onChange={this.handleChange}>
                 <option >Sort by projects by status</option>

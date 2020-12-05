@@ -39,7 +39,11 @@ import ProjectsMap from './components/map/projectsMap'
 import WatReports from './components/reports/Monitoring/watreports';
 import SolarEvalReports from './components/reports/Monitoring/solarreports';
 import SanEvalReports from './components/reports/Monitoring/sanreports';
-import HomePage from './components/home2';
+import HomePage from './components/homepage';
+import Maps from './components/map/maps';
+import SiteMap from './components/map/sitemap';
+import FunctionalityReports from './components/reports/functionality/functionality';
+import FunctionalityDetails from './components/reports/functionality/functionalitydetails';
 
 function App() {
   return (
@@ -84,6 +88,14 @@ function App() {
           <Route path="/solarevalreport/:id" exact component={SolarEvalReports} />
           <Route path="/sanevalreport/:id" exact component={SanEvalReports} />
           <Route path="/hom"  component={HomePage}/>
+          <Route path="/mapp"  component={Maps}/>
+          <Route path="/sitemap/:id"  component={SiteMap}/>
+          <Route path="/functionality"  component={FunctionalityReports}/>
+          <Route path="/functionalitydetails/:id"  component={FunctionalityDetails}/>
+
+
+
+
 
      </Switch>
 

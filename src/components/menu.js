@@ -32,6 +32,10 @@ import { Link, Route, Redirect, withRouter } from 'react-router-dom';
         this.props.onSignOut()
         this.props.history.push('/signout')
     }
+
+    goToCovid=()=>{
+        this.props.onCovid('Covid-19 Response')
+    }
     
   render(){
     return(
@@ -40,11 +44,13 @@ import { Link, Route, Redirect, withRouter } from 'react-router-dom';
       {/*}  <button onClick={this.goToSupervisors} className='btn btn-defult btn-block'><h5 className='text-center text-primary'>Supervisors</h5></button>
        */}
     <a href='/#/reports'>     <button style={{marginBottom:30}}  onClick={this.goToReports} className='btn btn-defult btn-block'><h5 className='text-center text-primary'>Reports</h5></button></a>
-      
+    <a href='/#/functionality'>    <button style={{marginBottom:30}}  onClick={this.goToAnalytics} className='btn btn-defult btn-block'><h5 className='text-center text-primary'>Functionality</h5></button></a>
+ 
     <a href='/#/analytics'>    <button style={{marginBottom:30}}  onClick={this.goToAnalytics} className='btn btn-defult btn-block'><h5 className='text-center text-primary'>Analytics</h5></button></a>
        {/*} <button onClick={this.goToContractors} className='btn btn-defult btn-block'><h5 className='text-center text-primary'>Contractors</h5></button>
 */}
     <a href='/#/pmap'> <button style={{marginBottom:30}} onClick={this.goToMap} className='btn btn-defult btn-block'><h5 className='text-center text-primary'>Map</h5></button></a>
+  
     {//    <button onClick={this.goToHome} className='btn btn-defult btn-block'><h5 className='text-center text-primary'>About</h5></button>
         }
         <button onClick={this.goToSignOut} className='btn btn-defult btn-block' style={{marginBottom:5}}><h5 className='text-center text-primary'>Sign Out</h5></button>

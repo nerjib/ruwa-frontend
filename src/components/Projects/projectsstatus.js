@@ -179,17 +179,33 @@ checkVip=  (id)=>{
 
 }
 
+componentDidUpdate=()=>{
+
+}
 
 
-
+checkWardNullity=(e)=>{
+    this.componentDidUpdate()
+    if(e){
+        return(e)
+    }
+    return ''
+}
 
     render(){
+
+         
+    let day1 = 1000 * 3600 * 24;
+    let today = new Date();
+
         let rrr=[]
 Object.keys(this.state.jd).map(e=>{rrr.push(this.state.jd[e].pstatus)})
         let row = []
         let row6=[]
         let kkk = 0
         let kk=0;
+        let kk2=0;
+
         Object.keys(this.props.reports).map((e,i)=>{
             if(this.props.pstatus=='all'){
 
@@ -197,22 +213,33 @@ Object.keys(this.state.jd).map(e=>{rrr.push(this.state.jd[e].pstatus)})
                    kk ++
                    row.push(  <tr style={{fontWeight:"bold", backgroundColor: this.checkColor(this.props.reports[e].valuation)}}><td> <a target='_blank' href={`/#/projectdetails/${this.props.reports[e].id}`}>{kk}</a></td>
                         <td>{this.props.reports[e].lot}</td>
-                        <td>{this.props.reports[e].lga}</td>
+                                                
                 {//}    <td><ThirdParty id={this.props.reports[e].id}/></td>
                     }
                {//}        <td>{this.props.reports[e].ward}</td>
                        }       <td>{this.props.reports[e].community}</td>
-                        <td>{this.props.reports[e].first_name+' '+this.props.reports[e].last_name+' '+this.props.reports[e].other_name }</td>
-              {//}          <td>{this.props.reports[e].actno}</td>
+                       <td>{this.props.reports[e].ward}</td>
+                       <td>{this.props.reports[e].lga}</td>
+          {this.props.phase !=='Covid-19 Response' &&               <td>{this.checkWardNullity(this.props.reports[e].first_name)+' '+this.checkWardNullity(this.props.reports[e].last_name)+' '+this.checkWardNullity(this.props.reports[e].other_name) }</td>
+               } {//}          <td>{this.props.reports[e].actno}</td>
                 //        <td>{this.props.reports[e].bank}</td>
                     }
-                        <td>{this.props.reports[e].fn+' '+this.props.reports[e].ln+' '+this.props.reports[e].on}</td>
-                    {//}    <td>{this.props.reports[e].bnk}</td>
+              {this.props.phase !=='Covid-19 Response' &&           <td>{this.checkWardNullity(this.props.reports[e].fn)+' '+this.checkWardNullity(this.props.reports[e].ln)+' '+this.checkWardNullity(this.props.reports[e].on)}</td>
+                }    {//}    <td>{this.props.reports[e].bnk}</td>
                 }
                     
             {//}            <td>{this.props.reports[e].gps}</td>
                        //           <td>{this.props.reports[e].facility}</td>
                               }          <td>{this.props.reports[e].company}</td>
+                                  <td>{this.props.reports[e].functionality}</td>
+                     {(this.props.reports[e].lastdate && (this.state.acttype === 'superadmin' || this.state.acttype==='director')) &&
+                      <td>{  Math.round((today.getTime() - (new Date(this.props.reports[e].lastdate)).getTime())/day1).toFixed(0)
+                        }</td>}
+
+{ (!this.props.reports[e].lastdate && (this.state.acttype === 'superadmin' || this.state.acttype==='director')) &&
+                      <td>-</td>}
+
+                     
                   {this.state.acttype == 'superadmin' &&     <td>{this.props.reports[e].started}</td>}
                {//}          <td>{this.checkSup(this.props.reports[e].id)}</td>
                //         <td>{this.checkSup(this.props.reports[e].id)}</td>
@@ -223,17 +250,18 @@ Object.keys(this.state.jd).map(e=>{rrr.push(this.state.jd[e].pstatus)})
                      
                 {this.state.acttype == 'superadmin' && <td><a target='_blank' href={`/#/projectdetails/${this.props.reports[e].id}`}>
                      { this.checkStatus(this.props.reports[e].pstatus)}</a></td> }
+                 
                      </tr>)
              {/**/       row6.push(<PstatusRow lot={this.props.reports[e].lot}   id={this.props.reports[e].id} lga={this.props.reports[e].lga}
                     community={this.props.reports[e].community} lid={this.props.reports[e].local_id}
                     sidname={this.props.reports[e].first_name+' '+this.props.reports[e].last_name+' '+this.props.reports[e].other_name}
                         company={this.props.reports[e].company}
+                        
                         pstatus={this.props.reports[e].pstatus}
                     />)  
                 /**/  }
                 } 
             }else{
-                let kk2=0;
 
                 if(this.props.reports[e].phase == this.props.phase & this.props.reports[e].status==this.props.pstatus & this.props.reports[e].title==this.props.focus){
                    kk2 ++;
@@ -244,17 +272,26 @@ Object.keys(this.state.jd).map(e=>{rrr.push(this.state.jd[e].pstatus)})
                     }
                {//}        <td>{this.props.reports[e].ward}</td>
                        }       <td>{this.props.reports[e].community}</td>
-                        <td>{this.props.reports[e].first_name+' '+this.props.reports[e].last_name+' '+this.props.reports[e].other_name }</td>
-              {//}                  <td>{this.props.reports[e].actno}</td>
+        {this.props.phase !=='Covid-19 Response' &&             <td>{this.props.reports[e].first_name+' '+this.props.reports[e].last_name+' '+this.props.reports[e].other_name }</td>
+             } {//}                  <td>{this.props.reports[e].actno}</td>
              //                   <td>{this.props.reports[e].bank}</td>
                     }
-                                 <td>{this.props.reports[e].fn+' '+this.props.reports[e].ln+' '+this.props.reports[e].on }</td>
-        {//}                        <td>{this.props.reports[e].ac}</td>
+                        {this.props.phase !=='Covid-19 Response' &&          <td>{this.props.reports[e].fn+' '+this.props.reports[e].ln+' '+this.props.reports[e].on }</td>
+       } {//}                        <td>{this.props.reports[e].ac}</td>
         //                        <td>{this.props.reports[e].bnk}</td>
                 }
             {//}            <td>{this.props.reports[e].gps}</td>
                        //           <td>{this.props.reports[e].facility}</td>
                               }          <td>{this.props.reports[e].company}</td>
+                                 <td>{this.props.reports[e].functionality}</td>
+                     { (this.props.reports[e].lastdate && (this.state.acttype === 'superadmin' || this.state.acttype==='director')) &&
+                      <td>{  Math.round((today.getTime() - (new Date(this.props.reports[e].lastdate)).getTime())/day1).toFixed(0)
+                      }</td>}
+            { (!this.props.reports[e].lastdate && (this.state.acttype === 'superadmin' || this.state.acttype==='director')) &&
+                      <td>-</td>}
+
+
+                     
                       {this.state.acttype == 'superadmin' &&   <td>{this.props.reports[e].started}</td>}
 
                {//}          <td>{this.checkSup(this.props.reports[e].id)}</td>
@@ -302,12 +339,37 @@ Object.keys(this.state.jd).map(e=>{rrr.push(this.state.jd[e].pstatus)})
                 {//Math.max(...[...row5])
                 }
                 <table class='table'>
-                    <thead className="text-left">
+                {this.props.phase=='Covid-19 Response'?
+        <thead className="text-left">
                         <tr><th colSpan='8'>{this.props.projecttype}</th></tr>
+                        { this.state.acttype===('superadmin' || 'director')?
+                        
                         <tr>
-                            <th>S/N</th><th>LOTS</th><th>LGA</th><th>Community Name</th><th>State Supervisor</th><th>Local Supervisor</th><th>Name of Contractor</th><th>%</th>
-                        </tr>
-                    </thead>
+                             <th>S/N</th><th>LOTS</th><th>LGA</th><th>Community Name</th><th>Name of Contractor</th><th>Functional</th><th>Report last seen (days)</th><th>Started on</th><th>%</th>
+                       
+              
+                            </tr>:
+                        
+                        <tr>
+                             <th>S/N</th><th>LOTS</th><th>LGA</th><th>Community Name</th><th>Name of Contractor</th><th>Functional</th><th>%</th>
+                       
+              
+                            </tr>}
+                    </thead>:
+                      <thead className="text-left">
+                      <tr><th colSpan='8'>{this.props.projecttype}</th></tr>
+                      { this.state.acttype===('superadmin' || 'director')?
+                      <tr>
+                          <th>S/N</th><th>LOTS</th><th>Community</th><th>Ward</th><th>LGA</th><th>State Supervisor</th><th>Local Supervisor</th><th>Name of Contractor</th><th>Functional</th><th>ReportLast seen (days)</th><th>started on</th><th>%</th>
+                     
+                                          </tr>:
+                       <tr>
+                          <th>S/N</th><th>LOTS</th><th>Community</th><th>Ward</th><th>LGA</th><th>State Supervisor</th><th>Local Supervisor</th><th>Name of Contractor</th><th>Functional</th><th>%</th>
+                                 
+                                           </tr>}
+                  </thead>
+
+            }
                     <tbody className="text-left">
                 {row}
                 {//row6

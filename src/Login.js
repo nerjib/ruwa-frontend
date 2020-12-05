@@ -9,13 +9,13 @@ import  Loader from 'react-loader-spinner'
 export default class Login extends Component {
   constructor(props) {
     super(props)
-    let login = 'stop';
+   // let login = 'stop';
     this.state = {
       email : '',
       phone: '',
       acttype:'',
-      login,
       loading: false,
+      login: 'stop',
       token: {
         status: 'dd',
         data:{
@@ -56,7 +56,6 @@ export default class Login extends Component {
         localStorage.setItem('acttype', res.data[0].acttype);
         localStorage.setItem('token', 'res.data.token');
         return <Redirect to='/home'> </Redirect>
-
        // return < Redirect to="/home"/>
               // this.props.history.push('/home');
       } else {

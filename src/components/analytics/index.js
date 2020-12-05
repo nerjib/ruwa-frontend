@@ -48,7 +48,7 @@ class Analytics extends React.Component{
             marker:{},
             piddd:[],
             allprojects:'',
-            phase:7,
+            phase:'6d',
             phaseSan:0,
             phaseSolar:0,
             phasefl:0,
@@ -273,18 +273,31 @@ goToPhase6=()=>{
         phase:6
     })
     this.onLoad()
+   //this.componentDidUpdate()
 }
 goToPhase6d=()=>{
     this.setState({
         phase:'6d'
     })
-    this.onLoad()
+   this.onLoad()
+  //this.componentDidUpdate()
 }
 goToPhase7=()=>{
     this.setState({
         phase:7
     })
     this.onLoad()
+   // this.componentDidUpdate()
+}
+goToCovid=()=>{
+    this.setState({
+        phase:'Covid-19 Response'
+    })
+    this.onLoad()
+  //  this.componentDidUpdate()
+}
+componentDidUpdate=()=>{
+
 }
     render(){
         let phase6=0
@@ -361,6 +374,8 @@ return(
           <button onClick={this.goToPhase6} className='btn  '><h5 className='text-center text-primary'>Phase 6C</h5></button>
           <button onClick={this.goToPhase6d} className='btn btn-defult '><h5 className='text-center text-primary'>Phase 6D</h5></button>
         <button onClick={this.goToPhase7} className='btn btn-defult '><h5 className='text-center text-primary'>Phase 7</h5></button>
+        <button onClick={this.goToCovid} className='btn btn-defult '><h5 className='text-center text-primary'>Covid-19 Response</h5></button>
+
 <div><h1>Phase {this.state.phase}</h1></div>
 
 {this.state.status &&

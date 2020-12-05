@@ -161,7 +161,7 @@ Object.keys(this.state.tasks).map((e,i)=>{row.push(<tr>
                 </div>
 
                 </div>
-                TASkS Detatails
+                Task Details
                 <table className='table'>
                         <thead>
                             <tr>

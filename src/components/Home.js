@@ -11,11 +11,13 @@ import Menu from './menu'
 import Reports from './reports/reports'
 import Analytics from './analytics'
 import './home.css'
+//import './homee.css'
+
 
 
 export default class Home extends React.Component{
 constructor(props){
-    super(props)
+   super(props)
     const access = localStorage.getItem('login');
 
     this.state={
@@ -31,7 +33,8 @@ constructor(props){
        time:'',
         login: access,
         mapView:'none',
-        view1:'analytics'
+        view1:'analytics',
+        covidPhase:''
 
     }
 
@@ -84,6 +87,12 @@ handleReports=()=>{
         title:'Reports'
     })
 }
+handleCovid=(e)=>{
+ //   return alert(e)
+    this.setState({
+        covidPhase: e
+    })
+  }
 handleContractors=()=>{
     this.setState({
         display: this.state.display='none',
@@ -185,8 +194,8 @@ render(){
         {//--menu--
         }
                 <div className='col-md-2' style={{backgroundColor:'#00a9f9'}} id='menu'  >
-                <div className='block' style={{backgroundColor:'#00a9f9', height:50, alignItems:'center', marginBottom:10, display:'block'}}><h3 className='text-center'>Dashboard</h3></div>
-                <Menu onMap={this.handleMap} onSignOut={this.handleSignOut} onContractors={this.handleContractors} onHome={this.handleHome} onProjects={this.handleProjects} onReports={this.handleReports} /*onSupervisors={this.handleSupervisors}*/ onAnalytics={this.handleAnalyticts} />
+                <div className='block' style={{backgroundColor:'#00a9f9', height:30, alignItems:'center', marginBottom:10, display:'block'}}><h3 className='text-center'>Dashboard</h3></div>
+                <Menu onCovid={this.handleCovid} onMap={this.handleMap} onSignOut={this.handleSignOut} onContractors={this.handleContractors} onHome={this.handleHome} onProjects={this.handleProjects} onReports={this.handleReports} /*onSupervisors={this.handleSupervisors}*/ onAnalytics={this.handleAnalyticts} />
                 </div>
        
                 <div  className='col-md-10' id='viewcontent' style={{ float:'right' }} >
@@ -237,7 +246,7 @@ render(){
 
                             {this.state.view1=='analytics' &&
                             <div style={{display: this.state.analyticsView}}>
-                            <Analytics />                            
+                            <Analytics covid={this.state.covidPhase}/>                            
                             </div>
 }
 {this.state.view1=='projects' &&

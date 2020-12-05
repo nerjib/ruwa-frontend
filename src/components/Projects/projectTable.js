@@ -75,8 +75,10 @@ export default class Supervisors extends React.Component{
                             <th>SN</th>
                             <th>Lots</th>
                             <th>Title</th>
-                            <th>location</th>
                             <th>Community</th>
+                            <th>Ward</th>
+                            <th>LGA</th>
+
                      {//*       <th>Facility</th>
                             }       <th>Status</th>
                             <th>State Supervisor</th>

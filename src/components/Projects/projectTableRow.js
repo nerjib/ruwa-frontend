@@ -28,6 +28,17 @@ class ProjectTableRow extends React.Component{
         })
         
     }
+    componentDidUpdate=()=>{
+
+    }
+
+    checkWardNullity=(e)=>{
+        this.componentDidUpdate()
+        if(e){
+            return(e)
+        }
+        return ''
+    }
     render(){
         return(
             
@@ -35,12 +46,14 @@ class ProjectTableRow extends React.Component{
                         <td>{this.props.sn}</td>
                         <td>{this.props.lot}</td>
                         <td>{this.props.title}</td>
-                        <td>{this.checkWard(this.props.ward) +', '+this.props.lga}</td>
                         <td>{this.props.community}</td>
+                        <td>{this.checkWard(this.props.ward)}</td>
+                        <td>{this.props.lga}</td>
+
                     {//}    <td>{this.props.facility}</td>
                      } <td>{this.props.status}</td>
                         <td>{this.props.supervisor }</td>
-                        <td>{this.props.fn+' '+this.props.ln+' '+this.props.on}</td>
+                        <td>{this.checkWardNullity(this.props.fn)+' '+this.checkWardNullity(this.props.ln)+' '+this.checkWardNullity(this.props.on)}</td>
                         <td>{this.props.contractor}</td>
                     {this.state.acttype == 'superadmin' &&        <td>{this.props.started}</td> }
 
