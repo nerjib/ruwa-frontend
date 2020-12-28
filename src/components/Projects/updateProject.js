@@ -24,11 +24,21 @@ export default class UpdateProject extends React.Component{
         CompanyName:'',
         localIdname:'',
         stateIdname:'',
+        localUsers:'',
+        stateUsers:'',
+        contractorList:''
         }
     }
 
 componentDidMount(){
     const { params } = this.props.match;
+
+    axios.get(`https://ruwassa.herokuapp.com/api/v1/contractors`)
+      .then(res=>{
+        this.setState({
+          contractorList: res.data
+        })
+      }).catch(e=>{console.log(e)})
 
    // console.log(params.id)
     axios.get('https://ruwassa.herokuapp.com/api/v1/projects/'+params.id)
@@ -61,6 +71,15 @@ componentDidMount(){
 
 }
 
+handlechangeContractor=(e)=>{
+  const { value, name } = e.target;
+  this.setState({
+      [name]: value
+  });
+//   alert(name + ' '+ value)
+}
+
+
 handleChange=(e)=>{
 
     const { value, name } = e.target;
@@ -70,15 +89,48 @@ this.setState({
 
 })
 if (name=='local_id'){
-  this.gotoCheckLocal(value)
+ // this.gotoCheckLocal(value)
+  this.gotoCheckLocalName(value)
+
 }
 else if(name=='state_id'){
-  this.gototCheckState(value)
+ // this.gototCheckState(value)
+ this.gotoCheckStateName(value)
+
 }
 else if (name=='contractor_id'){
   this.checkcontractor(value);
 }
 }
+
+gotoCheckLocalName(phone){
+  if (phone.length<4){
+   // alert(phone.length)
+   this.setState({localUsers:''})
+  }else{
+      axios.get(`https://ruwassa.herokuapp.com/api/v1/users/searchuser/${phone}`)
+      .then(res=>{
+        this.setState({
+          localUsers: res.data
+        })
+      }).catch(e=>{console.log(e)})
+    }
+     }
+    
+     gotoCheckStateName(phone){
+      if (phone.length<4){
+       // alert(phone.length)
+       this.setState({stateUsers:''})
+      }else{
+          axios.get(`https://ruwassa.herokuapp.com/api/v1/users/searchuser/${phone}`)
+          .then(res=>{
+            this.setState({
+              stateUsers: res.data
+            })
+          }).catch(e=>{console.log(e)})
+        }
+         }
+    
 
 gotoCheckLocal(id){
   axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+id)
@@ -161,6 +213,24 @@ change=()=>{
 
 }
 
+handlechangeUser=(e)=>{
+  const { value, name } = e.target;
+  this.setState({
+      [name]: value
+  });
+  this.gotoCheckLocal(value)
+//  alert(name+ ' ' +value)
+}
+
+handlechangeStateUser=(e)=>{
+  const { value, name } = e.target;
+  this.setState({
+      [name]: value
+  });
+  this.gototCheckState(value)
+//     alert(name+ ' ' +value)
+}
+
     render() {
         return(
                 <div>
@@ -168,13 +238,13 @@ change=()=>{
                 <form>
                 <br/>
                   <div className='row'>            
-          <div class='col-md-2'> <label className='text-left text-primary'>Type </label> </div>  
-            <div className='col-md-5'> 
-                <input className='form-control' name='title' value={this.state.title}
-                         required/>
-
-                  </div>
-                  </div>
+       {//   <div class='col-md-2'> <label className='text-left text-primary'>Type </label> </div>  
+          //  <div className='col-md-5'> 
+            //    <input className='form-control' name='title' value={this.state.title}
+               //          required/>
+        
+             //     </div>
+           }   </div>
                   <br/>
                   <div className='row' style={{display:this.state.compartmentdisplay}}>            
           <div class='col-md-2'> <label className='text-left text-primary'>Compartment</label> </div>  
@@ -192,7 +262,7 @@ change=()=>{
   
               <div className='col-md-5'> 
              
-              <select className='form-control' id='lga' name='lga' onChange={this.handleChange}>
+              <select className='form-control' id='lga' name='lga' value={this.state.lga} onChange={this.handleChange}>
                 <option >...select</option>
                 <option value='Birnin Gwari'> Birnin Gwari</option>
                     <option value='Chikun'>Chikun</option>
@@ -257,6 +327,15 @@ change=()=>{
                     <input className='form-control' name='local_id' value={this.state.local_id} 
                         onChange={this.handleChange} />
                         <div>{this.state.localIdname}</div>
+
+                        <select className='form-control' id='local_id' name='local_id' onChange={this.handlechangeUser}>
+                    {Object.keys(this.state.localUsers).map(e=>
+                        <option value={this.state.localUsers[e].id}>{this.state.localUsers[e].first_name+ ' '+
+                        this.state.localUsers[e].last_name+ ' '+this.state.localUsers[e].other_name
+                        }</option>
+                    )}
+                    </select> 
+                      
                          </div>
                   </div>
                   <br/>
@@ -269,6 +348,14 @@ change=()=>{
                 <input className='form-control' name='state_id' value={this.state.state_id}
                         onChange={this.handleChange}/>
                          <div>{this.state.stateIdname}</div>
+
+                         <select className='form-control' id='state_id' name='state_id' onChange={this.handlechangeStateUser}>
+                    {Object.keys(this.state.stateUsers).map(e=>
+                        <option value={this.state.stateUsers[e].id}>{this.state.stateUsers[e].first_name+ ' '+
+                        this.state.stateUsers[e].last_name+ ' '+this.state.stateUsers[e].other_name
+                        }</option>
+                    )}
+                    </select>
                   </div>
                   </div>
                   <br/>
@@ -281,11 +368,19 @@ change=()=>{
                   </div>
                   <br/>
 
-                  <div className='row'>            
+                  <div className='row'> 
+
           <div class='col-md-2'> <label className='text-left text-primary'> Contractor ID </label>
              
            </div>  
             <div className='col-md-5'> 
+            <select className='form-control' id='contractor_id' name='contractor_id' value={this.state.contractor_id} onChange={this.handlechangeContractor}>
+                    {Object.keys(this.state.contractorList).map(e=>
+                        <option value={this.state.contractorList[e].id}>{this.state.contractorList[e].company                       
+                        }</option>
+                    )}
+                    </select> 
+           
                 <input className='form-control' name='contractor_id' value={this.state.contractor_id}
                         onChange={this.handleChange} />
                            <div>{this.state.CompanyName}</div>
@@ -293,13 +388,13 @@ change=()=>{
                   </div>
                   <br/>
 
-                  <div className='row'>            
+      { /*          <div className='row'>            
           <div class='col-md-2'> <label className='text-left text-primary'> Ward Head Phone. No </label> </div>  
             <div className='col-md-5'> 
                 <input className='form-control' name='wardheadphone' value={this.state.wardheadphone}
                         onChange={this.handleChange} />
                   </div>
-                  </div>
+                  </div>*/}
                   <br/>
 
                   <div className='row'>            

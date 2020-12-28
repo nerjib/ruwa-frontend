@@ -18,7 +18,7 @@ import Contractors from './components/contractors/contractors'
 import AddContractor from './components/contractors/addcontractor';
 import Paginat from './components/Projects/pagination';
 import Login from './Login'
-import Login2 from './login2'
+//import Login2 from './login2'
 import SignOut from './signout';
 import ProjectDetails from './components/Projects/projectdeails'
 import WeeklyReports from './components/reports/weeklyreports';

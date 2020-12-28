@@ -14,9 +14,30 @@ export default class InsertProject extends React.Component{
             supervisorName:'',
             phase: '',
             email:'',
-            emailname:''       
+            emailname:'',
+            localUsers:'',
+            stateUsers:'' , 
+            contractorList: '',
+            phases:''     
+      
 
         }
+    }
+
+    componentDidMount=()=>{
+      axios.get(`https://ruwassa.herokuapp.com/api/v1/contractors`)
+      .then(res=>{
+        this.setState({
+          contractorList: res.data
+        })
+      }).catch(e=>{console.log(e)})
+
+      axios.get(`https://ruwassa.herokuapp.com/api/v1/phases`)
+      .then(res=>{
+        this.setState({
+          phases: res.data
+        })
+      }).catch(e=>{console.log(e)})
     }
 
     handleChange=(e)=>{
@@ -29,16 +50,33 @@ export default class InsertProject extends React.Component{
         }
 
         if (name=='local_id'){
-            this.gotoCheckLocal(value)
+          //  this.gotoCheckLocal(value)
+            this.gotoCheckLocalName(value)
           }
           else if(name=='state_id'){
-            this.gototCheckState(value)
+         //   this.gototCheckState(value)
+            this.gotoCheckStateName(value)
+
           }
           else if (name=='contractor_id'){
             this.checkcontractor(value);
           }
               }
 
+              handlechangePhase=(e)=>{
+                const { value, name } = e.target;
+                this.setState({
+                    [name]: value
+                });
+            //    alert(name + ' '+ value)
+              }
+              handlechangeContractor=(e)=>{
+                const { value, name } = e.target;
+                this.setState({
+                    [name]: value
+                });
+             //   alert(name + ' '+ value)
+              }
 
               handleEmailChange=(e)=>{
                 const { value, name } = e.target;
@@ -61,10 +99,37 @@ export default class InsertProject extends React.Component{
                   }
                       }
 
-   
-     
+   gotoCheckLocalName(phone){
+if (phone.length<4){
+ // alert(phone.length)
+ this.setState({localUsers:''})
+}else{
+    axios.get(`https://ruwassa.herokuapp.com/api/v1/users/searchuser/${phone}`)
+    .then(res=>{
+      this.setState({
+        localUsers: res.data
+      })
+    }).catch(e=>{console.log(e)})
+  }
+   }
+  
+   gotoCheckStateName(phone){
+    if (phone.length<4){
+     // alert(phone.length)
+     this.setState({stateUsers:''})
+    }else{
+        axios.get(`https://ruwassa.herokuapp.com/api/v1/users/searchuser/${phone}`)
+        .then(res=>{
+          this.setState({
+            stateUsers: res.data
+          })
+        }).catch(e=>{console.log(e)})
+      }
+       }
+      
       gotoCheckLocal(id){
-        axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+id)
+
+             axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+id)
         .then(req=>{
             if(req.data[0])(
             this.setState(prevState=>{
@@ -79,6 +144,23 @@ export default class InsertProject extends React.Component{
         })
       }
 
+      handlechangeUser=(e)=>{
+        const { value, name } = e.target;
+        this.setState({
+            [name]: value
+        });
+        this.gotoCheckLocal(value)
+      //  alert(name+ ' ' +value)
+      }
+
+      handlechangeStateUser=(e)=>{
+        const { value, name } = e.target;
+        this.setState({
+            [name]: value
+        });
+        this.gotoCheckState(value)
+   //     alert(name+ ' ' +value)
+      }
       gotoCheckLocalemail(e){
           let mail=''
           if(e.length>3){
@@ -107,7 +189,7 @@ export default class InsertProject extends React.Component{
       })
    }
       
-      gototCheckState(id){
+      gotoCheckState(id){
         axios.get('https://ruwassa.herokuapp.com/api/v1/users/'+id)
         .then(req=>{
             if(req.data[0])(
@@ -171,8 +253,7 @@ export default class InsertProject extends React.Component{
         type:this.state.type,
         lot:this.state.lot,
         phase:this.state.phase,
-        facility: this.state.facility,
-        
+        facility: this.state.facility,        
 
        }
         axios.post('https://ruwassa.herokuapp.com/api/v1/projects',obj)
@@ -234,9 +315,16 @@ export default class InsertProject extends React.Component{
           <div class='col-md-2'>      <label className='text-left text-primary'>     Phase   </label> </div>  
 
             <div className='col-md-5'> 
-                <input className='form-control' name='phase' value={this.state.phase}
-                        onChange={this.handleChange} required/>
-                  </div>
+            <select className='form-control' id='phase' name='phase' onChange={this.handlechangePhase}>
+                    {Object.keys(this.state.phases).map(e=>
+                        <option value={this.state.phases[e].phase}>{this.state.phases[e].phase                       
+                        }</option>
+                    )}
+                    </select> 
+
+            {//}    <input className='form-control' name='phase' value={this.state.phase}
+               //         onChange={this.handleChange} required/>
+                       } </div>
                   </div>
                   <br/>
                   <div className='row'>
@@ -324,32 +412,39 @@ export default class InsertProject extends React.Component{
              
                     <input className='form-control' name='local_id' value={this.state.local_id} 
                         onChange={this.handleChange} />
-                        <div>{this.state.localIdname}</div>
+                 {//}       <div>{this.state.localIdname}</div>
+    }
+                        <select className='form-control' id='local_id' name='local_id' onChange={this.handlechangeUser}>
+                    {Object.keys(this.state.localUsers).map(e=>
+                        <option value={this.state.localUsers[e].id}>{this.state.localUsers[e].first_name+ ' '+
+                        this.state.localUsers[e].last_name+ ' '+this.state.localUsers[e].other_name
+                        }</option>
+                    )}
+                    </select> 
                          </div>
                   </div>
                   <br/>
-
-                  <div className='row'>    
                   <div>Pstatus:{this.state.pstatus}</div>
+                  <div className='row'>    
         
           <div class='col-md-2'> <label className='text-left text-primary'> State Project Supervisor Id </label> </div>  
             <div className='col-md-5'> 
                 <input className='form-control' name='state_id' value={this.state.state_id}
                         onChange={this.handleChange}/>
-                         <div>{this.state.stateIdname}</div>
+                  {//}       <div>{this.state.stateIdname}</div>
+    }
+                         <select className='form-control' id='state_id' name='state_id' onChange={this.handlechangeStateUser}>
+                    {Object.keys(this.state.stateUsers).map(e=>
+                        <option value={this.state.stateUsers[e].id}>{this.state.stateUsers[e].first_name+ ' '+
+                        this.state.stateUsers[e].last_name+ ' '+this.state.stateUsers[e].other_name
+                        }</option>
+                    )}
+                    </select> 
                   </div>
                   </div>
                   <br/>
-
-                <div>
-                  <div class='col-md-2'> <label className='text-left text-primary'> Local$$$ </label> </div>  
-            <div className='col-md-5'> 
-                <input className='form-control' name='email' value={this.state.email}
-                        onChange={this.handleEmailChange}/>
-                         <div>{this.state.emailname.length}</div>
-                  </div>
-                  </div>
-                  <br/>
+                  
+        
 
                 
                   <div className='row'>            
@@ -357,10 +452,19 @@ export default class InsertProject extends React.Component{
              
            </div>  
             <div className='col-md-5'> 
+            <select className='form-control' id='contractor_id' name='contractor_id' onChange={this.handlechangeContractor}>
+                    {Object.keys(this.state.contractorList).map(e=>
+                        <option value={this.state.contractorList[e].id}>{this.state.contractorList[e].company                       
+                        }</option>
+                    )}
+                    </select> 
                 <input className='form-control' name='contractor_id' value={this.state.contractor_id}
                         onChange={this.handleChange} />
                            <div>{this.state.CompanyName}</div>
+                  
                   </div>
+
+                 
                   </div>
      
          <div className='col-md-8'> 

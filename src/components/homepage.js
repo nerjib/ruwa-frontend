@@ -293,8 +293,8 @@ const Phaseanalytic = ({phasedata,phase}) => {
 
     const handleChangePhase=(e)=>{
         const { value } = e.target;
-        phaseSelect(value)
-        setPhase(value)
+    //    phaseSelect(value)
+      //  setPhase(value)
       //  ddd()
     //    alert(value)
       //      setPhase(value)
