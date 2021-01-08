@@ -12,7 +12,7 @@ export default class InsertProject extends React.Component{
             status: 'ongoing',
             supervisor:'',
             supervisorName:'',
-            phase: '',
+            phase: '6d',
             email:'',
             emailname:'',
             localUsers:'',
@@ -276,7 +276,8 @@ if (phone.length<4){
             contractor_id:'',
             community:'',
             ward:'',
-            facility:''
+            facility:'',
+            phase: ''
            })
     this.props.history.push('/projects')
     }
@@ -315,7 +316,7 @@ if (phone.length<4){
           <div class='col-md-2'>      <label className='text-left text-primary'>     Phase   </label> </div>  
 
             <div className='col-md-5'> 
-            <select className='form-control' id='phase' name='phase' onChange={this.handlechangePhase}>
+            <select className='form-control' value={this.state.phase} id='phase' name='phase' onChange={this.handlechangePhase}>
                     {Object.keys(this.state.phases).map(e=>
                         <option value={this.state.phases[e].phase}>{this.state.phases[e].phase                       
                         }</option>
@@ -415,6 +416,8 @@ if (phone.length<4){
                  {//}       <div>{this.state.localIdname}</div>
     }
                         <select className='form-control' id='local_id' name='local_id' onChange={this.handlechangeUser}>
+                        {this.state.localUsers.length>0&& <option value='1'>....        </option>}
+
                     {Object.keys(this.state.localUsers).map(e=>
                         <option value={this.state.localUsers[e].id}>{this.state.localUsers[e].first_name+ ' '+
                         this.state.localUsers[e].last_name+ ' '+this.state.localUsers[e].other_name
@@ -434,6 +437,7 @@ if (phone.length<4){
                   {//}       <div>{this.state.stateIdname}</div>
     }
                          <select className='form-control' id='state_id' name='state_id' onChange={this.handlechangeStateUser}>
+                         {this.state.stateUsers.length>0&& <option value='1'>....        </option>}
                     {Object.keys(this.state.stateUsers).map(e=>
                         <option value={this.state.stateUsers[e].id}>{this.state.stateUsers[e].first_name+ ' '+
                         this.state.stateUsers[e].last_name+ ' '+this.state.stateUsers[e].other_name
@@ -453,6 +457,7 @@ if (phone.length<4){
            </div>  
             <div className='col-md-5'> 
             <select className='form-control' id='contractor_id' name='contractor_id' onChange={this.handlechangeContractor}>
+            {this.state.contractorList.length>0&& <option value='1'>....        </option>}
                     {Object.keys(this.state.contractorList).map(e=>
                         <option value={this.state.contractorList[e].id}>{this.state.contractorList[e].company                       
                         }</option>

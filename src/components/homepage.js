@@ -1,17 +1,5 @@
 import React, {useState, useEffect} from 'react';
-/*import axios from 'axios';
-import Supervisors from './supervisors/phaseSupervisors'
-import Projects from './Projects/projects'
-import Contractors from './contractors/contractors'
-import { Link, Route, Redirect } from 'react-router-dom';
-import wassh from '../img/wassh1.jpg'
-import ruwasa from '../img/ruwasa.jpg'
-import DailyMap from './map/dailymap'
-import Menu from './menu'
-import Reports from './reports/reports'
-import Analytics from './analytics'
-import './home.css'
-*/
+
 import axios from 'axios';
 import Supervisors from './supervisors/phaseSupervisors'
 import Projects from './Projects/projects'
@@ -22,10 +10,8 @@ import ruwasa from '../img/ruwasa.jpg'
 import DailyMap from './map/dailymap'
 import Reports from './reports/reports'
 import Analytics from './analytics'
-//import Sema from '../../src/semaLogo.jpg'
 import Sema from '../img/ruwasa.jpg'
 import AllPie from './analytics/allPies'
-//import './home.css'
 import './homee.css'
 
 
@@ -47,23 +33,6 @@ const [phasedata, setPhaseData   ] = useState(0)
 const [data, setData  ] = useState(0)
 
 
-/*
-completed: Completed[0].count,
-ongoing: Ongoing[0].count,
-abandoned: Abandoned[0].count,
-completedhpbh: completedHPBH[0].count,
-ongoinghpbh: OngoingHPBH[0].count,
-abandonedhpbh: AbandonedHPBH[0].count,
-completedflbh: completedFLBH[0].count,
-ongoingflbh: OngoingFLBH[0].count,
-abandonedflbh: AbandonedFLBH[0].count,
-completedsmbh: completedSMBH[0].count,
-ongoingsmbh: OngoingSMBH[0].count,
-abandonedsmbh: AbandonedSMBH[0].count,
-completedvip: completedVIP[0].count,
-ongoingvip: OngoingVIP[0].count,
-abandonedvip: AbandonedVIP[0].count,
-*/
 
 let day1 = 1000 * 3600 * 24;
 let today = new Date();
@@ -84,6 +53,7 @@ const handleTimer = () =>{
 
 
     const Loader=()=>{
+      //  alert(phase)
         axios.get('https://ruwassa.herokuapp.com/api/v2/analytics')
         .then(res=>{
           //  alert(res.data)
@@ -94,6 +64,17 @@ const handleTimer = () =>{
         .then(res=>{
           //  alert(res.data)
             setPhaseData(res.data)
+        }).catch(e=>{alert(e)})
+     //   alert('a')
+    }
+    const Loader2=(e)=>{
+        alert(e)
+      
+       
+        axios.get(' https://ruwassa.herokuapp.com/api/v2/analytics/byphase/'+e)
+        .then(async res=>{
+          //  alert(res.data)
+            await setPhaseData(res.data)
         }).catch(e=>{alert(e)})
      //   alert('a')
     }
@@ -109,9 +90,12 @@ useEffect(()=>{
 const handlel=()=> <Link to='/homp'/>
 
 const handlechangephase =async(e)=>{
-    
+  //  alert(e)
 await    setPhase(e) 
 //useEffect
+await Loader2(e)
+
+await Loader()
    await hh()
 }
 
@@ -125,7 +109,7 @@ const  hh= async ()=>{
            <Menu  diffdate= {diffdate}/>
            <button onClick={handlel}>jjj</button>
           <Body data={data}/>
-          <PhaseOption  phaseSelect={handlechangephase}/>
+          <PhaseOption  phaseSelect={handlechangephase} onLoader={Loader}/>
 <Phaseanalytic phasedata={phasedata} phase={phase}/>
             
         </div>
@@ -330,7 +314,7 @@ const Phaseanalytic = ({phasedata,phase}) => {
 
             </div>
         <div className='box2'>
-           <h3> Community Borehole</h3>
+           <h3> Community Borehole {phase}</h3>
            hhfhhf {kk.length}
            <hr/>
            <AllPie  labels={statuslabel} backgroundColor={statusColor} data={hpbhdata} />
@@ -386,14 +370,15 @@ const Phaseanalytic = ({phasedata,phase}) => {
 
 
 
-const PhaseOption =({phaseSelect}) => {
+const PhaseOption =({phaseSelect, onLoader}) => {
 let [kk, setKK] = useState('')
-let [phase, setPhase] = useState(7)
+let [phase, setPhase] = useState('6d')
 
     const handleChangePhase=(e)=>{
         const { value } = e.target;
         phaseSelect(value)
         setPhase(value)
+        onLoader()
       //  ddd()
     //    alert(value)
       //      setPhase(value)
@@ -412,7 +397,7 @@ let [phase, setPhase] = useState(7)
 <div className='phaseOption' >
     
         <select className='phaseOption' id='pstatus'  onChange={handleChangePhase}>
-                <option >Select Phase+{kk.length}</option>
+                <option >Select Phase</option>
                 <option value='6'>Phase 6C projects</option>
                 <option value='6d'> Phase 6D projects</option>
                 <option value='7'> Phase 7 projects</option>
@@ -427,10 +412,9 @@ const Menu = (         {diffdate}
     return (
 <div className='Menu'>
                 <button className='button'>
-                Home        {diffdate}
-
+                Home    
             </button>
-            <a href={`#/kdmap`}>
+            <a href={`#/projects`}>
  <button className='button'>
                Projects 
             </button></a>
@@ -441,17 +425,27 @@ const Menu = (         {diffdate}
             </button>
             </Link>
     */}
-            <Link to="/drafts">
+            <Link to="/reports">
             <button className='button'>
                 Reports
             </button>
             </Link>
-            <Link to="/followup">
+            <Link to="/functionality">
+            <button className='button'>
+                Functionality
+            </button>
+            </Link>
+            <Link to="/pmap">
             <button className='button'>
                 Map
             </button>
             </Link>
-            <Link to="/followup">
+            <Link to="/settings">
+            <button className='button'>
+                Settings
+            </button>
+            </Link>
+            <Link to="/signout">
             <button className='button'>
                 Sign Out
             </button>

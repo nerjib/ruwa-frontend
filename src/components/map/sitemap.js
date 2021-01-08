@@ -11,9 +11,9 @@ import axios from 'axios';
 
 
 
-const SiteMap =({match})=>{
+const SiteMap =({match}) => {
 const [center, setCenter]= useState({lat:10.5368909,lng:7.4786129})
-const [zoom, setZoom]=useState(10)
+const [zoom, setZoom]=useState(8)
 const [myMarkers, setMarkers] = useState([])
 
 
@@ -33,7 +33,7 @@ return (
       <div style={{ height: '100vh', width: '90%' }}>
 
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AI zaSyAVT4-Uzdp9LaBGtIFlw7iGEKbPQ8fZxHI' }}        
+          bootstrapURLKeys={{ key: 'AI zaSyC8wjDwqKGAhfCUmMRJGPYutiKE7aI5Crw' }}        
           defaultCenter={center}
           defaultZoom={zoom} 
         >

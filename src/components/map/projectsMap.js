@@ -252,8 +252,9 @@ this.loader()
 
           <GoogleMapReact
             bootstrapURLKeys={{ 
-              key1: 'AI zaSyAVT4-Uzdp9LaBGtIFlw7iGEKbPQ8fZxHI',
               key:'AI zaSyC8wjDwqKGAhfCUmMRJGPYutiKE7aI5Crw',
+
+              key1:'AI zaSyC8wjDwqKGAhfCUmMRJGPYutiKE7aI5Crw',
               region: 'NG'
              }}
           

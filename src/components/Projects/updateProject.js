@@ -7,7 +7,7 @@ export default class UpdateProject extends React.Component{
         this.state={
             title:'',
             state_id: '',
-        local_id: "1",
+        local_id: "",
         location: "",
         lga: "",
         status: "",
@@ -65,7 +65,8 @@ componentDidMount(){
             ward:res.data[0].ward,
             facility:res.data[0].facility,
             community:res.data[0].community,
-            pstatus:res.data[0].pstatus
+            pstatus:res.data[0].pstatus,
+            ggg:''
         })
     }).then(error=>{console.log(error)})
 
@@ -231,12 +232,23 @@ handlechangeStateUser=(e)=>{
 //     alert(name+ ' ' +value)
 }
 
+handlechange1=(e)=>{
+  const {value, name} = e.target;
+  this.setState((k)=>{
+    alert(JSON.stringify(k))
+    let gggs= k.ggg
+          return gggs
+  
+  })
+  alert(value)
+}
     render() {
         return(
                 <div>
                 Update
                 <form>
                 <br/>
+         
                   <div className='row'>            
        {//   <div class='col-md-2'> <label className='text-left text-primary'>Type </label> </div>  
           //  <div className='col-md-5'> 
@@ -258,7 +270,7 @@ handlechangeStateUser=(e)=>{
                  
                   <div className='row'>
             
-            <div class='col-md-2'>      <label className='text-left text-primary'>      LGA    </label> </div>  
+            <div class='col-md-2'><label className='text-left text-primary'>      LGA    </label> </div>  
   
               <div className='col-md-5'> 
              
@@ -329,6 +341,8 @@ handlechangeStateUser=(e)=>{
                         <div>{this.state.localIdname}</div>
 
                         <select className='form-control' id='local_id' name='local_id' onChange={this.handlechangeUser}>
+                        {this.state.localUsers.length>0&& <option value='1'>....        </option>}
+
                     {Object.keys(this.state.localUsers).map(e=>
                         <option value={this.state.localUsers[e].id}>{this.state.localUsers[e].first_name+ ' '+
                         this.state.localUsers[e].last_name+ ' '+this.state.localUsers[e].other_name
@@ -350,6 +364,8 @@ handlechangeStateUser=(e)=>{
                          <div>{this.state.stateIdname}</div>
 
                          <select className='form-control' id='state_id' name='state_id' onChange={this.handlechangeStateUser}>
+                         {this.state.stateUsers.length>0&& <option value='1'>....        </option>}
+
                     {Object.keys(this.state.stateUsers).map(e=>
                         <option value={this.state.stateUsers[e].id}>{this.state.stateUsers[e].first_name+ ' '+
                         this.state.stateUsers[e].last_name+ ' '+this.state.stateUsers[e].other_name
@@ -375,6 +391,8 @@ handlechangeStateUser=(e)=>{
            </div>  
             <div className='col-md-5'> 
             <select className='form-control' id='contractor_id' name='contractor_id' value={this.state.contractor_id} onChange={this.handlechangeContractor}>
+            {this.state.contractorList.length>0&& <option value='1'>....        </option>}
+
                     {Object.keys(this.state.contractorList).map(e=>
                         <option value={this.state.contractorList[e].id}>{this.state.contractorList[e].company                       
                         }</option>

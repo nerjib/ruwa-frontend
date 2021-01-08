@@ -87,7 +87,7 @@ function App() {
           <Route path="/waterevalreport/:id" exact component={WatReports} />
           <Route path="/solarevalreport/:id" exact component={SolarEvalReports} />
           <Route path="/sanevalreport/:id" exact component={SanEvalReports} />
-          <Route path="/hom"  component={HomePage}/>
+          <Route path="/newhome"  component={HomePage}/>
           <Route path="/mapp"  component={Maps}/>
           <Route path="/sitemap/:id"  component={SiteMap}/>
           <Route path="/functionality"  component={FunctionalityReports}/>
