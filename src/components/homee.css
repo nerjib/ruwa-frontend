@@ -25,6 +25,7 @@ h2{
         grid-gap: 10px;
         grid-template-areas:'header header header header header '
                              'menu content content content content' 
+                             'menu option1 option1 option1 option1'
                              'menu option option option option' 
                              'menu footer footer footer footer' ;
 
@@ -48,7 +49,7 @@ h2{
 
 .phasediv{
     display: grid;
-    grid-area: footer;
+    grid-area: option;
     grid-template-columns:  repeat(auto-fit, minmax(300px,500fr));
     margin: 100px;
     grid-gap: 10px;   
@@ -56,7 +57,7 @@ h2{
 }
 .phaseOption{
     display: grid;
-    grid-area: option;
+    grid-area: option1;
     grid-template-columns:  repeat(auto-fit, minmax(300px,500fr));
     margin-top: 20px;
     margin-left: 100px;
@@ -125,19 +126,45 @@ h2{
     grid-gap: 10px;
     grid-template-areas:'header  '
                         'menu '
-                        'content' ;
+                        'content' 
+                        'option1'
+                        'option';
 
  }
+ .box2{
+    background-color: white;
+    height: fit-content;
+    border-radius: 10px;
+   border-bottom: 3px solid #3a3d34;
+   border-right: 3px solid #3a3d34;
 
+}
     .container{
         display: grid;
         grid-area: content;
         grid-gap: 10px;
-        grid-template-columns:  repeat(auto-fit, minmax(200px,300fr));
+        grid-template-columns:  repeat(auto-fit, minmax(250px,400fr));
         margin-top: 100px;
-        background-color: lightblue;
     
     }
+
+    .phasediv{
+    display: grid;
+    grid-area: option;
+    grid-template-columns:  repeat(auto-fit, minmax(300px,500fr));
+    margin: 100px;
+    grid-gap: 10px;   
+
+}
+.phaseOption{
+    display: grid;
+    grid-area: option1;
+    grid-template-columns:  repeat(auto-fit, minmax(300px,500fr));
+    margin-top: 20px;
+    margin-left: 100px;
+    grid-gap: 10px;   
+
+}
     
 .Menu{
     display:grid; 

@@ -28,7 +28,7 @@ const [allhpbh, setAllhpbh  ] = useState(0)
 const [allsmbh, setAllsmbh  ] = useState(0)
 const [allflbh, setAllflbh  ] = useState(0)
 const [allvip, setAllvip   ] = useState(0)
-const [phase, setPhase   ] = useState('6d')
+const [phase, setPhase   ] = useState('')
 const [phasedata, setPhaseData   ] = useState(0)
 const [data, setData  ] = useState(0)
 
@@ -58,24 +58,25 @@ const handleTimer = () =>{
         .then(res=>{
           //  alert(res.data)
             setData(res.data)
-        }).catch(e=>{alert(e)})
+        }).catch(e=>{console.log(e)})
        
-        axios.get(' https://ruwassa.herokuapp.com/api/v2/analytics/byphase/'+phase)
+        axios.get('https://ruwassa.herokuapp.com/api/v2/analytics/byphase/'+phase)
         .then(res=>{
           //  alert(res.data)
             setPhaseData(res.data)
-        }).catch(e=>{alert(e)})
+        }).catch(e=>{console.log(e)})
      //   alert('a')
     }
     const Loader2=(e)=>{
-        alert(e)
+      //  alert(e)
       
        
         axios.get(' https://ruwassa.herokuapp.com/api/v2/analytics/byphase/'+e)
         .then(async res=>{
           //  alert(res.data)
+
             await setPhaseData(res.data)
-        }).catch(e=>{alert(e)})
+        }).catch(e=>{console.log(e)})
      //   alert('a')
     }
 
@@ -90,13 +91,18 @@ useEffect(()=>{
 const handlel=()=> <Link to='/homp'/>
 
 const handlechangephase =async(e)=>{
+ //  e.preventDefault()
   //  alert(e)
+
 await    setPhase(e) 
+
 //useEffect
 await Loader2(e)
 
 await Loader()
    await hh()
+   setPhase('')
+
 }
 
 const  hh= async ()=>{
@@ -105,19 +111,17 @@ const  hh= async ()=>{
     return(
         <div className='mainContainer' >
             <Header time={timer}/> 
-       
+            
            <Menu  diffdate= {diffdate}/>
-           <button onClick={handlel}>jjj</button>
           <Body data={data}/>
           <PhaseOption  phaseSelect={handlechangephase} onLoader={Loader}/>
-<Phaseanalytic phasedata={phasedata} phase={phase}/>
-            
+<Phaseanalytic phasedata={phasedata} phase={phase}/>            
         </div>
-
     )
 }
 const Text =()=> <div><h3>SEMA</h3></div>
 const Body = ({data}) => {
+
     const  facilitylabel = ['Community Borehole','Solar Motorized Borehole','Force Lift Borehole', 'VIP']
     const  statuslabel = ['Ongoing','Completed','Abandoned']
     const facilitycolor = ['red','blue','green','orange']
@@ -308,11 +312,7 @@ const Phaseanalytic = ({phasedata,phase}) => {
 
     return(
         <div className='phasediv'>
-            <div>
-                <button onClick={()=>ddd('6c')}>6</button>
-                <button onClick={()=>ddd('7')}>7</button>
-
-            </div>
+       
         <div className='box2'>
            <h3> Community Borehole {phase}</h3>
            hhfhhf {kk.length}
@@ -375,6 +375,7 @@ let [kk, setKK] = useState('')
 let [phase, setPhase] = useState('6d')
 
     const handleChangePhase=(e)=>{
+      //  e.preventDefault()
         const { value } = e.target;
         phaseSelect(value)
         setPhase(value)
@@ -396,7 +397,7 @@ let [phase, setPhase] = useState('6d')
     return(
 <div className='phaseOption' >
     
-        <select className='phaseOption' id='pstatus'  onChange={handleChangePhase}>
+        <select id='pstatus'  onChange={handleChangePhase}>
                 <option >Select Phase</option>
                 <option value='6'>Phase 6C projects</option>
                 <option value='6d'> Phase 6D projects</option>
